@@ -74,3 +74,13 @@ Generated assets are written under `sumo/thesis_ch4_ch5/`. The route files encod
 ## QPLF terminology correction
 
 In this repository, QPLF should be read according to the thesis definition: **Q-learning with piecewise-linear/action-block function approximation**. It is not a separate reward function. The piecewise-linear QPLF agent is implemented in `src/agents/pwl_q_learning.py`. Any queue-pressure reward used in fallback scripts is a documented reward assumption because the supplied Chapter 4/5 excerpt does not fully specify the RL reward.
+
+## Eta sweep for cyclic queue backpressure
+
+Run the fallback eta sweep with:
+
+```bash
+python scripts/run_eta_sweep.py
+```
+
+This evaluates eta values `[0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1.0]` and writes `results/raw/eta_sweep_summary.csv`, `results/raw/eta_sweep_best.csv`, and `results/raw/eta_sweep_summary.json`. These are fallback queue-simulator results; repeat this sweep in real SUMO for thesis-quality "best eta" results.

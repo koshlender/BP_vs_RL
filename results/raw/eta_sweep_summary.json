@@ -1,0 +1,198 @@
+{
+  "rows": [
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 0.001,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.415765,
+      "mean_mean_delay_seconds": 1.415765,
+      "mean_average_travel_time_seconds": 121.0,
+      "mean_completed_vehicles": 314.0,
+      "mean_total_stop_events": 79.4,
+      "mean_average_stops_per_observed_vehicle": 19.85,
+      "mean_mean_queue": 0.741667
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 0.005,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.415802,
+      "mean_mean_delay_seconds": 1.415803,
+      "mean_average_travel_time_seconds": 121.25,
+      "mean_completed_vehicles": 313.9,
+      "mean_total_stop_events": 73.6,
+      "mean_average_stops_per_observed_vehicle": 18.4,
+      "mean_mean_queue": 0.738
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 0.01,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.342002,
+      "mean_mean_delay_seconds": 1.342001,
+      "mean_average_travel_time_seconds": 121.25,
+      "mean_completed_vehicles": 313.9,
+      "mean_total_stop_events": 75.7,
+      "mean_average_stops_per_observed_vehicle": 18.925,
+      "mean_mean_queue": 0.704167
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 0.05,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.285909,
+      "mean_mean_delay_seconds": 1.285909,
+      "mean_average_travel_time_seconds": 122.25,
+      "mean_completed_vehicles": 313.5,
+      "mean_total_stop_events": 75.5,
+      "mean_average_stops_per_observed_vehicle": 18.875,
+      "mean_mean_queue": 0.671667
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 0.1,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.249111,
+      "mean_mean_delay_seconds": 1.249111,
+      "mean_average_travel_time_seconds": 121.0,
+      "mean_completed_vehicles": 314.0,
+      "mean_total_stop_events": 72.9,
+      "mean_average_stops_per_observed_vehicle": 18.225,
+      "mean_mean_queue": 0.656167
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 0.5,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 120.938122,
+      "mean_mean_delay_seconds": 0.938122,
+      "mean_average_travel_time_seconds": 121.0,
+      "mean_completed_vehicles": 314.0,
+      "mean_total_stop_events": 63.7,
+      "mean_average_stops_per_observed_vehicle": 15.925,
+      "mean_mean_queue": 0.4925
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 1.0,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 120.818327,
+      "mean_mean_delay_seconds": 0.818327,
+      "mean_average_travel_time_seconds": 120.75,
+      "mean_completed_vehicles": 314.1,
+      "mean_total_stop_events": 52.7,
+      "mean_average_stops_per_observed_vehicle": 13.175,
+      "mean_mean_queue": 0.429
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 0.001,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 123.40291,
+      "mean_mean_delay_seconds": 3.40291,
+      "mean_average_travel_time_seconds": 131.5,
+      "mean_completed_vehicles": 823.4,
+      "mean_total_stop_events": 133.1,
+      "mean_average_stops_per_observed_vehicle": 33.275,
+      "mean_mean_queue": 4.670333
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 0.005,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 123.476214,
+      "mean_mean_delay_seconds": 3.476214,
+      "mean_average_travel_time_seconds": 134.0,
+      "mean_completed_vehicles": 822.4,
+      "mean_total_stop_events": 128.8,
+      "mean_average_stops_per_observed_vehicle": 32.2,
+      "mean_mean_queue": 4.764
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 0.01,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 123.288106,
+      "mean_mean_delay_seconds": 3.288106,
+      "mean_average_travel_time_seconds": 130.25,
+      "mean_completed_vehicles": 823.9,
+      "mean_total_stop_events": 128.8,
+      "mean_average_stops_per_observed_vehicle": 32.2,
+      "mean_mean_queue": 4.520833
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 0.05,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 122.928901,
+      "mean_mean_delay_seconds": 2.928901,
+      "mean_average_travel_time_seconds": 131.75,
+      "mean_completed_vehicles": 823.3,
+      "mean_total_stop_events": 138.3,
+      "mean_average_stops_per_observed_vehicle": 34.575,
+      "mean_mean_queue": 4.024833
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 0.1,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 122.596932,
+      "mean_mean_delay_seconds": 2.596932,
+      "mean_average_travel_time_seconds": 129.25,
+      "mean_completed_vehicles": 824.3,
+      "mean_total_stop_events": 140.3,
+      "mean_average_stops_per_observed_vehicle": 35.075,
+      "mean_mean_queue": 3.570333
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 0.5,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.768026,
+      "mean_mean_delay_seconds": 1.768026,
+      "mean_average_travel_time_seconds": 126.0,
+      "mean_completed_vehicles": 825.6,
+      "mean_total_stop_events": 161.2,
+      "mean_average_stops_per_observed_vehicle": 40.3,
+      "mean_mean_queue": 2.4355
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 1.0,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.546099,
+      "mean_mean_delay_seconds": 1.546099,
+      "mean_average_travel_time_seconds": 126.75,
+      "mean_completed_vehicles": 825.3,
+      "mean_total_stop_events": 158.4,
+      "mean_average_stops_per_observed_vehicle": 39.6,
+      "mean_mean_queue": 2.128667
+    }
+  ],
+  "best_by_scenario": [
+    {
+      "scenario": "scenario1_low_demand",
+      "eta": 1.0,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 120.818327,
+      "mean_mean_delay_seconds": 0.818327,
+      "mean_average_travel_time_seconds": 120.75,
+      "mean_completed_vehicles": 314.1,
+      "mean_total_stop_events": 52.7,
+      "mean_average_stops_per_observed_vehicle": 13.175,
+      "mean_mean_queue": 0.429
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "eta": 1.0,
+      "eval_episodes": 10,
+      "mean_travel_time_proxy_seconds": 121.546099,
+      "mean_mean_delay_seconds": 1.546099,
+      "mean_average_travel_time_seconds": 126.75,
+      "mean_completed_vehicles": 825.3,
+      "mean_total_stop_events": 158.4,
+      "mean_average_stops_per_observed_vehicle": 39.6,
+      "mean_mean_queue": 2.128667
+    }
+  ]
+}

@@ -61,3 +61,9 @@ Result: the fallback experiment now includes `independent_rl_local`, which is a 
 ## Real SUMO platoon progression support
 
 The real SUMO runner now includes a TraCI vehicle-ID platoon progression tracker. In a SUMO-enabled environment such as Google Colab, `python scripts/run_sumo_experiments.py` will output `platoon_eligible_vehicles`, `platoon_progressed_vehicles`, and `platoon_progression_percentage`. This cannot be computed in the current container because SUMO/TraCI are missing.
+
+## Eta sweep follow-up
+
+Command: `python scripts/run_eta_sweep.py`
+
+Result: completed fallback cyclic queue backpressure eta sweep over `[0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1.0]`. In this deterministic fallback run, eta `1.0` minimized mean delay for both low- and high-demand scenarios. Raw outputs were written to `results/raw/eta_sweep_summary.csv`, `results/raw/eta_sweep_best.csv`, and `results/raw/eta_sweep_summary.json`.

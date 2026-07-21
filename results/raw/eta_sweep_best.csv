@@ -1,0 +1,3 @@
+scenario,eta,eval_episodes,mean_travel_time_proxy_seconds,mean_mean_delay_seconds,mean_average_travel_time_seconds,mean_completed_vehicles,mean_total_stop_events,mean_average_stops_per_observed_vehicle,mean_mean_queue
+scenario1_low_demand,1.0,10,120.818327,0.818327,120.75,314.1,52.7,13.175,0.429
+scenario2_high_demand,1.0,10,121.546099,1.546099,126.75,825.3,158.4,39.6,2.128667

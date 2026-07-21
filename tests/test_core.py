@@ -72,3 +72,7 @@ def test_generate_thesis_sumo_assets():
     assert Path('sumo/thesis_ch4_ch5/two_intersection/two_intersection.rou.xml').exists()
     nine = Path('sumo/thesis_ch4_ch5/nine_intersection/scenario1.rou.xml').read_text()
     assert 'period="40"' in nine and 'period="700"' in nine and 'W3_E3' in nine
+
+def test_eta_sweep_script_outputs_best_eta():
+    subprocess.check_call([sys.executable, 'scripts/run_eta_sweep.py'])
+    assert Path('results/raw/eta_sweep_best.csv').exists()
