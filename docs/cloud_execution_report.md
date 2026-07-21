@@ -51,3 +51,9 @@ Observation: the previous fallback `average_travel_time_seconds` came from the t
 Command: `python scripts/run_sumo_experiments.py`
 
 Status: blocked in this container. The command intentionally avoids the deterministic fallback and requires real SUMO/TraCI dependencies. The observed missing components were: `sumo`, `netgenerate`, Python `traci`, and Python `sumolib`. An attempt to install `sumo sumo-tools` with `apt-get` was blocked by HTTP 403 responses from the Ubuntu package repositories.
+
+## Independent learner RL fallback correction
+
+Command: `python scripts/run_experiments.py`
+
+Result: the fallback experiment now includes `independent_rl_local`, which is a tabular RL controller trained with only its own local queue state and no neighbouring action/state field. This replaces using only `independent_fixed_ns` when comparing learned controllers. The fixed controller is retained only as a starvation sanity baseline.

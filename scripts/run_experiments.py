@@ -25,27 +25,39 @@ def choose_backpressure_action(state: list[float]) -> int:
     return 0 if weights[0] >= weights[1] else 1
 
 
+def policy_state(policy: str, queues: list[float], previous_action: int = 0) -> list[float]:
+    if policy == "independent_rl_local":
+        return [queues[0], queues[1], queues[2], queues[3]]
+    if policy == "semi_coordinated_rl":
+        return list(queues) + [float(previous_action)]
+    return list(queues)
+
+
 def run_episode(policy: str, demand: list[float], seed: int, agent: TabularQLearningAgent | None = None, train: bool = False, duration: int = 600) -> dict:
     env = QueueNetworkEnv(duration=duration, seed=seed, demand=demand)
-    state = env.reset()
+    queues = env.reset()
+    previous_action = 0
     done = False
     total_reward = 0.0
     total_queue = 0.0
     steps = 0
     while not done:
-        if policy == "semi_coordinated_rl":
+        state = policy_state(policy, queues, previous_action)
+        if policy in {"semi_coordinated_rl", "independent_rl_local"}:
             assert agent is not None
             action = agent.act(state, evaluate=not train)
         elif policy == "independent_fixed_ns":
             action = 0
         elif policy == "cyclic_queue_backpressure":
-            action = choose_backpressure_action(state)
+            action = choose_backpressure_action(queues)
         else:
             raise ValueError(policy)
-        next_state, reward, done, info = env.step(action)
+        next_queues, reward, done, info = env.step(action)
         if train and agent is not None:
+            next_state = policy_state(policy, next_queues, action)
             agent.update(state, action, reward, next_state, done)
-        state = next_state
+        queues = next_queues
+        previous_action = action
         total_reward += reward
         total_queue += info["queue_sum"]
         steps += 1
@@ -72,15 +84,20 @@ def main() -> None:
     training_rows = []
     for scenario, demand in SCENARIOS.items():
         random.seed(base_seed)
-        agent = TabularQLearningAgent(alpha=0.12, gamma=0.95, epsilon=0.35)
-        for ep in range(episodes):
-            row = run_episode("semi_coordinated_rl", demand, base_seed + ep, agent=agent, train=True)
-            row["scenario"] = scenario
-            row["episode"] = ep
-            training_rows.append(row)
-            agent.epsilon = max(0.03, agent.epsilon * 0.94)
-        for policy in ["semi_coordinated_rl", "independent_fixed_ns", "cyclic_queue_backpressure"]:
-            eval_rows = [run_episode(policy, demand, seed, agent=agent, train=False) for seed in eval_seeds]
+        agents = {
+            "semi_coordinated_rl": TabularQLearningAgent(alpha=0.12, gamma=0.95, epsilon=0.35),
+            "independent_rl_local": TabularQLearningAgent(alpha=0.12, gamma=0.95, epsilon=0.35),
+        }
+        for policy, agent in agents.items():
+            for ep in range(episodes):
+                row = run_episode(policy, demand, base_seed + ep, agent=agent, train=True)
+                row["scenario"] = scenario
+                row["episode"] = ep
+                training_rows.append(row)
+                agent.epsilon=max(0.03, agent.epsilon * 0.94)
+        for policy in ["semi_coordinated_rl", "independent_rl_local", "independent_fixed_ns", "cyclic_queue_backpressure"]:
+            eval_agent = agents.get(policy)
+            eval_rows = [run_episode(policy, demand, seed, agent=eval_agent, train=False) for seed in eval_seeds]
             keys = ["average_travel_time_seconds", "total_stop_events", "observed_vehicles", "completed_vehicles", "average_stops_per_observed_vehicle", "reward", "mean_queue"]
             summary = {"scenario": scenario, "policy": policy, "eval_episodes": len(eval_rows), "platoon_progression_percentage": None, "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"}
             for key in keys:
