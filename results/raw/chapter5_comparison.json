@@ -1,0 +1,50 @@
+{
+  "reproduced_short_run": [
+    {
+      "average_stops_per_completed_vehicle": null,
+      "average_stops_per_observed_vehicle": 2.5,
+      "average_travel_time_seconds": 120.0,
+      "completed_vehicles": 104,
+      "observed_vehicles": 4,
+      "policy": "semi_coordinated_rl_short",
+      "reward": -76.0,
+      "total_stop_events": 10
+    },
+    {
+      "average_stops_per_completed_vehicle": null,
+      "average_stops_per_observed_vehicle": 0.5,
+      "average_travel_time_seconds": 237.5,
+      "completed_vehicles": 57,
+      "observed_vehicles": 4,
+      "policy": "independent_fixed",
+      "reward": -3082.0,
+      "total_stop_events": 2
+    },
+    {
+      "average_stops_per_completed_vehicle": null,
+      "average_stops_per_observed_vehicle": 2.25,
+      "average_travel_time_seconds": 120.0,
+      "completed_vehicles": 104,
+      "observed_vehicles": 4,
+      "policy": "backpressure",
+      "reward": -71.0,
+      "total_stop_events": 9
+    }
+  ],
+  "thesis_table_5_2_seconds": {
+    "average_travel_time_seconds": {
+      "independent_rl_200_episodes": {
+        "scenario1": 395,
+        "scenario2": 397
+      },
+      "queue_backpressure_best_eta": {
+        "scenario1": 280,
+        "scenario2": 345
+      },
+      "semi_coordinated_rl_200_episodes": {
+        "scenario1": 262,
+        "scenario2": 335
+      }
+    }
+  }
+}

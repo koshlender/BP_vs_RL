@@ -1,0 +1,71 @@
+{
+  "seed": 7,
+  "simulation": {
+    "duration_seconds": 600,
+    "warmup_seconds": 0,
+    "action_duration_seconds": 10
+  },
+  "signals": {
+    "yellow_duration_seconds": 3,
+    "min_green_seconds": 10,
+    "max_green_seconds": 60,
+    "actions": {
+      "0": "north_south",
+      "1": "east_west"
+    },
+    "cooperative_nine": [
+      "J11",
+      "J01",
+      "J10",
+      "J12",
+      "J21"
+    ],
+    "non_cooperative_nine": [
+      "J00",
+      "J02",
+      "J20",
+      "J22"
+    ]
+  },
+  "rl": {
+    "episodes": 2,
+    "gamma": 0.95,
+    "learning_rate": 0.1,
+    "epsilon_start": 0.3,
+    "epsilon_end": 0.05,
+    "epsilon_decay": 0.98,
+    "state_bins": [
+      0,
+      2,
+      5,
+      10,
+      20,
+      40
+    ]
+  },
+  "backpressure": {
+    "eta": 0.05,
+    "cycle_time_seconds": 60
+  },
+  "metrics": {
+    "stop_speed_threshold": 0.1,
+    "minimum_stop_duration": 2.0,
+    "reset_speed_threshold": 1.0
+  },
+  "thesis_reported": {
+    "average_travel_time_seconds": {
+      "queue_backpressure_best_eta": {
+        "scenario1": 280,
+        "scenario2": 345
+      },
+      "semi_coordinated_rl_200_episodes": {
+        "scenario1": 262,
+        "scenario2": 335
+      },
+      "independent_rl_200_episodes": {
+        "scenario1": 395,
+        "scenario2": 397
+      }
+    }
+  }
+}

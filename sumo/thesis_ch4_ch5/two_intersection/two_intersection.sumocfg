@@ -1,0 +1,7 @@
+<configuration>
+  <input>
+    <net-file value="two_intersection.net.xml"/>
+    <route-files value="two_intersection.rou.xml"/>
+  </input>
+  <time><begin value="0"/><end value="10800"/><step-length value="1"/></time>
+</configuration>

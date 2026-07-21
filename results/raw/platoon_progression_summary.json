@@ -1,0 +1,38 @@
+[
+  {
+    "scenario": "scenario1_low_demand",
+    "policy": "semi_coordinated_rl",
+    "platoon_progression_percentage": null,
+    "note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+  },
+  {
+    "scenario": "scenario1_low_demand",
+    "policy": "independent_fixed_ns",
+    "platoon_progression_percentage": null,
+    "note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+  },
+  {
+    "scenario": "scenario1_low_demand",
+    "policy": "cyclic_queue_backpressure",
+    "platoon_progression_percentage": null,
+    "note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+  },
+  {
+    "scenario": "scenario2_high_demand",
+    "policy": "semi_coordinated_rl",
+    "platoon_progression_percentage": null,
+    "note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+  },
+  {
+    "scenario": "scenario2_high_demand",
+    "policy": "independent_fixed_ns",
+    "platoon_progression_percentage": null,
+    "note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+  },
+  {
+    "scenario": "scenario2_high_demand",
+    "policy": "cyclic_queue_backpressure",
+    "platoon_progression_percentage": null,
+    "note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+  }
+]
