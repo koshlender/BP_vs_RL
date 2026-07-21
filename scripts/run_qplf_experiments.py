@@ -3,9 +3,8 @@
 
 In the thesis excerpt, QPLF means Q-learning with piecewise-linear function
 approximation: action-wise blocks f'(x,a), not a separate reward function. This
-fallback script therefore labels QPLF as the Q-function approximator. The reward used
-for learning remains configurable/assumed from queue-pressure reduction because the
-provided excerpt does not define the exact Chapter-4 reward.
+fallback script therefore labels QPLF as the Q-function approximator. Chapter 4
+reinforcement-learning policies use the thesis inverse-next-queue reward.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -14,6 +13,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.agents.pwl_q_learning import PiecewiseLinearQAgent
 from src.environment.simulated_env import QueueNetworkEnv
 from src.rewards.qplf import backpressure_weights, queue_pressure_lyapunov_function
+from src.rewards.chapter4 import chapter4_queue_reward
+from src.state.state_builder import StateBuilder, StateSpec
 from src.utils.config import load_config, set_seed
 
 SCENARIOS = {
@@ -28,20 +29,30 @@ def qplf_score(queues: list[float]) -> float:
 def queue_pressure_reward(previous: list[float], current: list[float]) -> float:
     return qplf_score(previous) - qplf_score(current)
 
+def chapter4_rl_reward(current: list[float]) -> float:
+    # Thesis Chapter 4, Reward: R(t)=1/sum_i Q_i(t+1).
+    return chapter4_queue_reward(current)
+
 def backpressure_action(state: list[float]) -> int:
     weights = backpressure_weights(state, [0, 0, 0, 0], PHASES)
     return 0 if weights[0] >= weights[1] else 1
 
 def policy_state(policy: str, queues: list[float], previous_action: int) -> list[float]:
     if policy == "independent_pwl_qplf":
-        # Independent learner sees only the two queues served by its current local phase family.
-        return [queues[0] + queues[1], queues[2] + queues[3]]
+        # Thesis Chapter 4, Independent Learner: local traffic information only.
+        return list(queues)
     if policy == "semi_coordinated_pwl_qplf":
-        # Semi-coordinated learner sees local queues plus a neighbouring/previous action signal.
-        return list(queues) + [float(previous_action)]
+        # Thesis Chapter 4, Eq. (4.1): S(t)=[Q(t),Q'(t),a'(t)].
+        # In this compact fallback, q0/q1 are local incoming roads, q2/q3 are
+        # neighbouring incoming roads, and previous_action is neighbouring a'(t).
+        builder = StateBuilder(StateSpec(("q0", "q1"), ("q2", "q3"), ("connecting_green",)))
+        return builder.build(
+            {"q0": queues[0], "q1": queues[1], "q2": queues[2], "q3": queues[3]},
+            {"connecting_green": previous_action if isinstance(previous_action, (int, float)) else 0},
+        )
     if policy == "centralized_pwl_qplf":
-        # Centralized learner sees the full network queue state and previous network action.
-        return list(queues) + [float(previous_action), float(sum(queues)), float(max(queues) if queues else 0.0)]
+        # Not a Chapter 4 thesis controller; retained only as a documented comparison baseline.
+        return list(queues) + [float(previous_action if isinstance(previous_action, (int, float)) else 0), float(sum(queues)), float(max(queues) if queues else 0.0)]
     raise ValueError(policy)
 
 def run_episode(policy: str, demand: list[float], seed: int, agent: PiecewiseLinearQAgent | None, train: bool, duration: int = 600) -> dict:
@@ -65,7 +76,7 @@ def run_episode(policy: str, demand: list[float], seed: int, agent: PiecewiseLin
             state = policy_state(policy, queues, previous_action)
             action = agent.act(state, evaluate=not train)
         queues, env_reward, done, info = env.step(action)
-        shaped_reward = queue_pressure_reward(prev, queues)
+        shaped_reward = queue_pressure_reward(prev, queues) if policy == "cyclic_queue_backpressure" else chapter4_rl_reward(queues)
         if policy != "cyclic_queue_backpressure":
             next_state = policy_state(policy, queues, action)
             if train:
@@ -102,7 +113,7 @@ def main() -> None:
     outdir = Path("results/raw")
     outdir.mkdir(parents=True, exist_ok=True)
     for scenario, demand in SCENARIOS.items():
-        agents = {policy: PiecewiseLinearQAgent(alpha=0.05, epsilon=0.35) for policy in policies if policy != "cyclic_queue_backpressure"}
+        agents = {policy: PiecewiseLinearQAgent(actions=(0, 1), alpha=0.05, epsilon=0.35) for policy in policies if policy != "cyclic_queue_backpressure"}
         for policy, agent in agents.items():
             random.seed(base_seed)
             for episode in range(train_episodes):
@@ -113,7 +124,7 @@ def main() -> None:
         for policy in policies:
             agent = agents.get(policy)
             eval_rows = [run_episode(policy, demand, seed, agent, train=False) for seed in eval_seeds]
-            summary = {"scenario": scenario, "policy": policy, "eval_episodes": len(eval_rows), "uses_qplf_piecewise_linear_approximation": policy != "cyclic_queue_backpressure", "uses_backpressure_action": policy == "cyclic_queue_backpressure", "reward_signal": "queue_pressure_reduction_assumption" if policy != "cyclic_queue_backpressure" else "not_learned"}
+            summary = {"scenario": scenario, "policy": policy, "eval_episodes": len(eval_rows), "uses_qplf_piecewise_linear_approximation": policy != "cyclic_queue_backpressure", "uses_backpressure_action": policy == "cyclic_queue_backpressure", "reward_signal": "chapter4_inverse_next_queue" if policy != "cyclic_queue_backpressure" else "not_learned"}
             for key in ["travel_time_proxy_seconds", "mean_delay_seconds", "average_travel_time_seconds", "completed_vehicles", "total_stop_events", "average_stops_per_observed_vehicle", "env_reward", "qplf_reward", "mean_qplf", "mean_queue"]:
                 vals = [row[key] for row in eval_rows if row[key] is not None]
                 summary[f"mean_{key}"] = round(sum(vals) / len(vals), 6) if vals else None
@@ -125,7 +136,7 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=summary_rows[0].keys())
         writer.writeheader(); writer.writerows(summary_rows)
     with open(outdir / "qplf_summary.json", "w") as handle:
-        json.dump({"note": "QPLF here means thesis piecewise-linear Q-function approximation; reward is a documented queue-pressure reduction assumption; not SUMO thesis reproduction.", "train_episodes": train_episodes, "summaries": summary_rows}, handle, indent=2)
+        json.dump({"note": "QPLF here means thesis piecewise-linear Q-function approximation; Chapter 4 RL reward is inverse next local queue; this compact fallback is not a full SUMO thesis reproduction.", "train_episodes": train_episodes, "summaries": summary_rows}, handle, indent=2)
     print(json.dumps(summary_rows, indent=2))
 
 if __name__ == "__main__":
