@@ -52,6 +52,10 @@ def policy_state(policy: str, queues: list[float], previous_action: int) -> list
         )
     if policy == "centralized_pwl_qplf":
         # Not a Chapter 4 thesis controller; retained only as a documented comparison baseline.
+        # Semi-coordinated learner sees local queues plus a neighbouring/previous action signal.
+        return list(queues) + [float(previous_action if isinstance(previous_action, (int, float)) else 0)]
+    if policy == "centralized_pwl_qplf":
+        # Centralized learner sees the full network queue state and previous network action.
         return list(queues) + [float(previous_action if isinstance(previous_action, (int, float)) else 0), float(sum(queues)), float(max(queues) if queues else 0.0)]
     raise ValueError(policy)
 
