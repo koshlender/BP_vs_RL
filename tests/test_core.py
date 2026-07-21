@@ -6,6 +6,7 @@ from src.environment.actions import PhasePlan, action_to_phase, transition_phase
 from src.rewards.qlf import queue_length_function, reward_from_qlf
 from src.rewards.chapter4 import chapter4_queue_reward, chapter4_queue_reward_result
 from src.rewards.qplf import queue_pressure_lyapunov_function, backpressure_weights, cyclic_green_times
+from src.rewards.backpressure import queue_dynamics, phase_weight, cyclic_backpressure_decision, cyclic_backpressure_proportions, deterministic_integer_durations
 from src.metrics.stops import StopCounter
 from src.metrics.platoon import PlatoonProgressionTracker
 from src.agents.q_learning import TabularQLearningAgent
@@ -56,6 +57,32 @@ def test_qlf_qplf():
     assert backpressure_weights([5,1],[2,2],[[1,0],[0,1]])==[3,-1]
     assert math.isclose(sum(cyclic_green_times([1,2],60,6,.1)),54)
 
+def test_chapter5_cyclic_backpressure_equations():
+    turns = [[0.8, 0.2], [0.1, 0.9]]
+    assert queue_dynamics([10, 5], [2, 3], turns) == [10 - 2 + 0.8 * 2 + 0.1 * 3, 5 - 3 + 0.2 * 2 + 0.9 * 3]
+    weight = phase_weight([1, 0], [10, 4], [3, 2], turns)
+    assert math.isclose(weight, 1 * (10 - (0.8 * 3 + 0.2 * 2)))
+    decision = cyclic_backpressure_decision([[1, 0], [0, 1]], [10, 4], [3, 2], turns, eta=0.1, available_green_time=64)
+    assert len(decision.weights) == 2 and decision.max_pressure_phase == 0
+    assert math.isclose(sum(decision.proportions), 1.0)
+    assert math.isclose(sum(decision.green_times), 64.0)
+    assert sum(decision.executable_green_times) == 64
+    assert deterministic_integer_durations([10.2, 10.2, 10.2, 33.4], 64) == [10, 10, 10, 34]
+    for weights in ([5, 5, 5, 5], [10000, 10001, 9999], [-10000, -10001, -9999]):
+        proportions = cyclic_backpressure_proportions(weights, eta=1.0)
+        assert all(math.isfinite(p) for p in proportions)
+        assert math.isclose(sum(proportions), 1.0)
+
+def test_chapter5_backpressure_schedule_executes_all_phases():
+    from src.environment.simulated_env import QueueNetworkEnv
+    env = QueueNetworkEnv(duration=100, seed=1, demand=[0,0,0,0])
+    env.reset(); env.queues = [2.0, 2.0, 2.0, 2.0]
+    phases = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]
+    queues, reward, done, info = env.step_phase_schedule(phases, [1,1,1,1], yellow_duration_per_phase=1)
+    assert queues == [1.0, 1.0, 1.0, 1.0]
+    assert info['departed'] == 4
+    assert env.t == 8
+
 def test_stop_counter_cases():
     c=StopCounter(minimum_stop_duration=2)
     c.update('v',5); c.update('v',0); c.update('v',0); assert c.summary()['total_stop_events']==1
@@ -91,6 +118,12 @@ def test_piecewise_linear_agent_and_qplf_script(tmp_path):
     assert agent.q_value(state, action) != 0.0
     subprocess.check_call([sys.executable, 'scripts/run_qplf_experiments.py'])
     assert Path('results/raw/qplf_summary.csv').exists()
+    summary = Path('results/raw/qplf_summary.csv').read_text()
+    assert 'full_state_independent_rl' in summary
+    assert 'independent_pwl_qplf' in summary
+    assert 'semi_coordinated_pwl_qplf' in summary
+    assert 'centralized_full_state_rl' in summary
+    assert 'cyclic_queue_backpressure' in summary
 
 def test_real_sumo_availability_check_reports_status():
     from src.environment.sumo_env import check_sumo_availability
