@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="white"/>
+  <text x="24" y="40" font-family="sans-serif" font-size="20">Short training reward</text>
+  <line x1="60" y1="300" x2="600" y2="300" stroke="black"/>
+  <line x1="60" y1="300" x2="60" y2="70" stroke="black"/>
+  <text x="70" y="335" font-family="sans-serif" font-size="14">Generated text/SVG plot placeholder from raw CSV data</text>
+</svg>

@@ -1,0 +1,15 @@
+scenario,eta,eval_episodes,mean_travel_time_proxy_seconds,mean_mean_delay_seconds,mean_average_travel_time_seconds,mean_completed_vehicles,mean_total_stop_events,mean_average_stops_per_observed_vehicle,mean_mean_queue
+scenario1_low_demand,0.001,10,121.415765,1.415765,121.0,314.0,79.4,19.85,0.741667
+scenario1_low_demand,0.005,10,121.415802,1.415803,121.25,313.9,73.6,18.4,0.738
+scenario1_low_demand,0.01,10,121.342002,1.342001,121.25,313.9,75.7,18.925,0.704167
+scenario1_low_demand,0.05,10,121.285909,1.285909,122.25,313.5,75.5,18.875,0.671667
+scenario1_low_demand,0.1,10,121.249111,1.249111,121.0,314.0,72.9,18.225,0.656167
+scenario1_low_demand,0.5,10,120.938122,0.938122,121.0,314.0,63.7,15.925,0.4925
+scenario1_low_demand,1.0,10,120.818327,0.818327,120.75,314.1,52.7,13.175,0.429
+scenario2_high_demand,0.001,10,123.40291,3.40291,131.5,823.4,133.1,33.275,4.670333
+scenario2_high_demand,0.005,10,123.476214,3.476214,134.0,822.4,128.8,32.2,4.764
+scenario2_high_demand,0.01,10,123.288106,3.288106,130.25,823.9,128.8,32.2,4.520833
+scenario2_high_demand,0.05,10,122.928901,2.928901,131.75,823.3,138.3,34.575,4.024833
+scenario2_high_demand,0.1,10,122.596932,2.596932,129.25,824.3,140.3,35.075,3.570333
+scenario2_high_demand,0.5,10,121.768026,1.768026,126.0,825.6,161.2,40.3,2.4355
+scenario2_high_demand,1.0,10,121.546099,1.546099,126.75,825.3,158.4,39.6,2.128667
