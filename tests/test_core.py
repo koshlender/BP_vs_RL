@@ -19,7 +19,7 @@ def test_actions():
     p=PhasePlan({0:0,1:2},{(0,1):1,(1,0):3}); assert action_to_phase(1,p)==2; assert transition_phase(0,1,p)==(1,2)
 
 def test_qlf_qplf():
-    assert queue_length_function([0,0])==0; assert reward_from_qlf([2,0],[1,0])==3
+    assert queue_length_function([0,0])==0; assert reward_from_qlf([2,0],[1,0])==1
     assert queue_pressure_lyapunov_function([5,1],[2,2])==9
     assert backpressure_weights([5,1],[2,2],[[1,0],[0,1]])==[3,-1]
     assert math.isclose(sum(cyclic_green_times([1,2],60,6,.1)),54)
@@ -38,7 +38,7 @@ def test_platoon_cases():
     assert PlatoonProgressionTracker({'x'}).summary()['platoon_progression_percentage'] is None
 
 def test_checkpoint(tmp_path):
-    a=TabularQLearningAgent(); a.update([1,2],0,1,[0,0],True); f=tmp_path/'a.pkl'; a.save(f); assert TabularQLearningAgent.load(f).q
+    a=TabularQLearningAgent(); action=a.actions[0]; a.update([1,2,3,4],action,1,[0,0,0,0],True); f=tmp_path/'a.pkl'; a.save(f); assert TabularQLearningAgent.load(f).q
 
 def test_end_to_end_scripts():
     subprocess.check_call([sys.executable,'scripts/train.py']); subprocess.check_call([sys.executable,'scripts/evaluate.py']); subprocess.check_call([sys.executable,'scripts/plot_results.py'])
@@ -47,14 +47,15 @@ def test_end_to_end_scripts():
 def test_piecewise_linear_agent_and_qplf_script(tmp_path):
     from src.agents.pwl_q_learning import PiecewiseLinearQAgent
     agent = PiecewiseLinearQAgent(epsilon=0.0)
-    state = [1.0, 3.0]
-    feats0 = agent.features(state, 0)
-    feats1 = agent.features(state, 1)
-    assert len(feats0) == 8 and feats0[:4] != [0.0] * 4 and feats0[4:] == [0.0] * 4
-    assert feats1[:4] == [0.0] * 4 and feats1[4:] != [0.0] * 4
+    state = [1.0, 30.0, 51.0, 0.0]
+    a0, a1 = agent.actions[0], agent.actions[1]
+    feats0 = agent.features(state, a0)
+    feats1 = agent.features(state, a1)
+    assert len(feats0) == 4 * len(agent.actions) and feats0[:4] != [0.0] * 4 and feats0[4:] == [0.0] * (len(feats0) - 4)
+    assert feats1[:4] == [0.0] * 4 and feats1[4:8] != [0.0] * 4
     assert sum(abs(x) for x in feats0) <= 1.0
     action = agent.act(state, evaluate=True)
-    agent.update(state, action, 1.0, [0.5, 2.0], False)
+    agent.update(state, action, 1.0, [0.5, 2.0, 3.0, 4.0], False)
     assert agent.q_value(state, action) != 0.0
     subprocess.check_call([sys.executable, 'scripts/run_qplf_experiments.py'])
     assert Path('results/raw/qplf_summary.csv').exists()

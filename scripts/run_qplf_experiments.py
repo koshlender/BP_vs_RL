@@ -38,10 +38,10 @@ def policy_state(policy: str, queues: list[float], previous_action: int) -> list
         return [queues[0] + queues[1], queues[2] + queues[3]]
     if policy == "semi_coordinated_pwl_qplf":
         # Semi-coordinated learner sees local queues plus a neighbouring/previous action signal.
-        return list(queues) + [float(previous_action)]
+        return list(queues) + [float(previous_action if isinstance(previous_action, (int, float)) else 0)]
     if policy == "centralized_pwl_qplf":
         # Centralized learner sees the full network queue state and previous network action.
-        return list(queues) + [float(previous_action), float(sum(queues)), float(max(queues) if queues else 0.0)]
+        return list(queues) + [float(previous_action if isinstance(previous_action, (int, float)) else 0), float(sum(queues)), float(max(queues) if queues else 0.0)]
     raise ValueError(policy)
 
 def run_episode(policy: str, demand: list[float], seed: int, agent: PiecewiseLinearQAgent | None, train: bool, duration: int = 600) -> dict:
@@ -102,7 +102,7 @@ def main() -> None:
     outdir = Path("results/raw")
     outdir.mkdir(parents=True, exist_ok=True)
     for scenario, demand in SCENARIOS.items():
-        agents = {policy: PiecewiseLinearQAgent(alpha=0.05, epsilon=0.35) for policy in policies if policy != "cyclic_queue_backpressure"}
+        agents = {policy: PiecewiseLinearQAgent(actions=(0, 1), alpha=0.05, epsilon=0.35) for policy in policies if policy != "cyclic_queue_backpressure"}
         for policy, agent in agents.items():
             random.seed(base_seed)
             for episode in range(train_episodes):
