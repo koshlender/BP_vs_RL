@@ -1,0 +1,91 @@
+seed: 7
+sumo:
+  step_length: 1.0
+  binary: sumo
+  network: sumo/nine_intersection.net.xml
+  route: sumo/scenario1.rou.xml
+simulation:
+  duration_seconds: 600
+  warmup_seconds: 0
+  action_duration_seconds: 10
+signals:
+  yellow_duration_seconds: 3
+  min_green_seconds: 10
+  max_green_seconds: 60
+  actions:
+    0: north_south
+    1: east_west
+  cooperative_nine: [J11, J01, J10, J12, J21]
+  non_cooperative_nine: [J00, J02, J20, J22]
+rl:
+  episodes: 2
+  gamma: 0.95
+  learning_rate: 0.1
+  epsilon_start: 0.3
+  epsilon_end: 0.05
+  epsilon_decay: 0.98
+  state_bins: [0, 2, 5, 10, 20, 40]
+backpressure:
+  eta: 0.05
+  cycle_time_seconds: 60
+metrics:
+  stop_speed_threshold: 0.1
+  minimum_stop_duration: 2.0
+  reset_speed_threshold: 1.0
+  platoon:
+    first_intersection_id: J10
+    second_intersection_id: J11
+    eligible_routes: [W2_E2]
+    eligible_movements: [through]
+    count_second_signal_stop_as_failure: true
+    max_corridor_travel_time: 300
+    measurement_start: 0
+    measurement_end: 3600
+networks:
+  two_intersection:
+    roads_500m: [d, e]
+    roads_3000m: [a, b, c, f, g, h, i, k, l, n]
+    cooperative_signals: [right]
+    non_cooperative_signals: [left]
+    routes:
+      b-g: [60, 30, 40]
+      b-e: [80, 400, 40]
+      i-n: [40, 40, 40]
+      f-c: [60, 600, 300]
+      h-e-l: [80, 1000, 20]
+      e-l: [30, 600, 60]
+      d-a: [20, 200, 20]
+      k-d: [60, 10, 60]
+  nine_intersection:
+    cooperative_signals: [J11, J01, J10, J12, J21]
+    scenario1_intervals:
+      N1: [40, 160]
+      N2: [null, 140]
+      N3: [null, null]
+      E1: [50, 130]
+      E2: [10, 200]
+      E3: [50, 100]
+      S1: [100, 170]
+      S2: [100, 700]
+      S3: [null, null]
+      W1: [100, 100]
+      W2: [100, 90]
+      W3: [10, 150]
+    scenario2_intervals:
+      N1: 10
+      N2: 100
+      N3: null
+      E1: 20
+      E2: 10
+      E3: 40
+      S1: 10
+      S2: 30
+      S3: null
+      W1: 10
+      W2: 50
+      W3: 5
+thesis_reported:
+  average_travel_time_seconds:
+    queue_backpressure_best_eta: {scenario1: 280, scenario2: 345}
+    semi_coordinated_rl_200_episodes: {scenario1: 262, scenario2: 335}
+    independent_rl_200_episodes: {scenario1: 395, scenario2: 397}

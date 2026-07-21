@@ -1,0 +1,7 @@
+scenario,policy,eval_episodes,platoon_progression_percentage,platoon_progression_note,mean_average_travel_time_seconds,mean_total_stop_events,mean_observed_vehicles,mean_completed_vehicles,mean_average_stops_per_observed_vehicle,mean_reward,mean_mean_queue
+scenario1_low_demand,semi_coordinated_rl,10,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",121.0,21.4,4.0,314.8,5.35,-173.4,0.289
+scenario1_low_demand,independent_fixed_ns,10,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",575.25,2.0,4.0,133.1,0.5,-54539.4,90.899
+scenario1_low_demand,cyclic_queue_backpressure,10,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",121.25,25.2,4.0,314.7,6.3,-208.5,0.3475
+scenario2_high_demand,semi_coordinated_rl,10,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",125.75,131.0,4.0,818.3,32.75,-1599.0,2.665
+scenario2_high_demand,independent_fixed_ns,10,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",1220.25,2.0,4.0,380.5,0.5,-132026.7,220.0445
+scenario2_high_demand,cyclic_queue_backpressure,10,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",124.5,130.8,4.0,818.8,32.7,-1056.4,1.760667
