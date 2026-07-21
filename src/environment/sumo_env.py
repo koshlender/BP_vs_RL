@@ -86,6 +86,53 @@ def write_sumo_config(net_file: Path, route_file: Path, config_file: Path, end_t
     )
 
 
+class SumoPlatoonTracker:
+    """Vehicle-ID platoon progression tracker for real TraCI runs.
+
+    A vehicle is eligible once its routed edge list has at least two normal edges. The
+    first two route edges are treated as a corridor smoke-test pair unless a thesis
+    corridor-specific integration supplies different edge IDs in future work.
+    """
+    def __init__(self, stop_speed_threshold: float = 0.1):
+        self.stop_speed_threshold = stop_speed_threshold
+        self.records: dict[str, dict] = {}
+
+    def observe_vehicle(self, traci_module, veh_id: str, now: float) -> None:
+        road_id = traci_module.vehicle.getRoadID(veh_id)
+        route = [edge for edge in traci_module.vehicle.getRoute(veh_id) if edge and not edge.startswith(":" )]
+        if len(route) < 2:
+            return
+        rec = self.records.setdefault(veh_id, {
+            "first_edge": route[0],
+            "second_edge": route[1],
+            "first_seen_time": None,
+            "second_seen_time": None,
+            "stopped_between": False,
+            "cleared_second": False,
+        })
+        if road_id == rec["first_edge"] and rec["first_seen_time"] is None:
+            rec["first_seen_time"] = now
+        if rec["first_seen_time"] is not None and rec["second_seen_time"] is None:
+            if traci_module.vehicle.getSpeed(veh_id) <= self.stop_speed_threshold:
+                rec["stopped_between"] = True
+        if road_id == rec["second_edge"] and rec["first_seen_time"] is not None:
+            rec["second_seen_time"] = now
+        if rec["second_seen_time"] is not None and road_id != rec["second_edge"]:
+            rec["cleared_second"] = True
+
+    def mark_arrived(self, veh_id: str) -> None:
+        if veh_id in self.records and self.records[veh_id]["second_seen_time"] is not None:
+            self.records[veh_id]["cleared_second"] = True
+
+    def summary(self) -> dict:
+        eligible = [rec for rec in self.records.values() if rec["first_seen_time"] is not None]
+        progressed = [rec for rec in eligible if rec["cleared_second"] and not rec["stopped_between"]]
+        return {
+            "platoon_eligible_vehicles": len(eligible),
+            "platoon_progressed_vehicles": len(progressed),
+            "platoon_progression_percentage": None if not eligible else 100.0 * len(progressed) / len(eligible),
+        }
+
 def run_sumo_policy(config_file: Path, policy: str, duration: int = 600) -> dict:
     availability = require_sumo()
     import traci
@@ -95,6 +142,7 @@ def run_sumo_policy(config_file: Path, policy: str, duration: int = 600) -> dict
     stop_state: dict[str, bool] = {}
     total_stops = 0
     arrived_travel_times: list[float] = []
+    platoon = SumoPlatoonTracker()
     try:
         tls_ids = list(traci.trafficlight.getIDList())
         for step in range(duration):
@@ -115,6 +163,7 @@ def run_sumo_policy(config_file: Path, policy: str, duration: int = 600) -> dict
                 departed[veh_id] = now
                 stop_state[veh_id] = False
             for veh_id in traci.vehicle.getIDList():
+                platoon.observe_vehicle(traci, veh_id, now)
                 speed = traci.vehicle.getSpeed(veh_id)
                 if speed <= 0.1 and not stop_state.get(veh_id, False):
                     total_stops += 1
@@ -122,15 +171,18 @@ def run_sumo_policy(config_file: Path, policy: str, duration: int = 600) -> dict
                 elif speed >= 1.0:
                     stop_state[veh_id] = False
             for veh_id in traci.simulation.getArrivedIDList():
+                platoon.mark_arrived(veh_id)
                 if veh_id in departed:
                     arrived_travel_times.append(now - departed[veh_id])
         completed = len(arrived_travel_times)
-        return {
+        result = {
             "policy": policy,
             "completed_vehicles": completed,
             "mean_travel_time_seconds": None if completed == 0 else sum(arrived_travel_times) / completed,
             "total_stop_events": total_stops,
             "average_stops_per_completed_vehicle": None if completed == 0 else total_stops / completed,
         }
+        result.update(platoon.summary())
+        return result
     finally:
         traci.close(False)

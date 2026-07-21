@@ -57,3 +57,7 @@ Status: blocked in this container. The command intentionally avoids the determin
 Command: `python scripts/run_experiments.py`
 
 Result: the fallback experiment now includes `independent_rl_local`, which is a tabular RL controller trained with only its own local queue state and no neighbouring action/state field. This replaces using only `independent_fixed_ns` when comparing learned controllers. The fixed controller is retained only as a starvation sanity baseline.
+
+## Real SUMO platoon progression support
+
+The real SUMO runner now includes a TraCI vehicle-ID platoon progression tracker. In a SUMO-enabled environment such as Google Colab, `python scripts/run_sumo_experiments.py` will output `platoon_eligible_vehicles`, `platoon_progressed_vehicles`, and `platoon_progression_percentage`. This cannot be computed in the current container because SUMO/TraCI are missing.
