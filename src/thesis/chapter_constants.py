@@ -2,33 +2,27 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-# Thesis Chapter 3, Simulation / Isolated Signal: cycle length T=80 seconds and
-# total yellow time Y=16 seconds. No LaTeX source files are present in this repo;
-# Chapter 4 says sum_j g_j(t)=T-Y but does not restate numeric values in the
-# provided text, so Chapter 4 imports these shared thesis-cycle constants instead
-# of defining divergent defaults.
+# Chapter 3 supplies the numeric cycle/yellow values used by Chapter 4's
+# equation sum_j g_j(t)=T-Y; Chapter 4 itself changes the state bins, action
+# candidates, and reward definition.
 THESIS_CYCLE_TIME_SECONDS = 80
 THESIS_TOTAL_YELLOW_TIME_SECONDS = 16
+THESIS_YELLOW_TIME_PER_APPROACH_SECONDS = 4
 THESIS_AVAILABLE_GREEN_TIME_SECONDS = THESIS_CYCLE_TIME_SECONDS - THESIS_TOTAL_YELLOW_TIME_SECONDS
 
-# Thesis Chapter 3, Simulation: a,b,c are fixed as 0.0005, 0.001, 0.002.
+# Chapter 3 isolated-signal constants retained for the Chapter 3 agents.
 CH3_QUEUE_LEVEL_VALUES = (0.0005, 0.001, 0.002)
+CH3_QUEUE_LEVEL_LABELS = ("a", "b", "c")
+CH3_QUEUE_THRESHOLDS = (25, 50)
 CH3_GREEN_TIMES_SECONDS = (8, 16, 24, 32)
 
-# Thesis Chapter 4, Non Cooperative Signal: green times are selected from this set.
+# Chapter 4 non-cooperative/cooperative signal action candidates.
 CH4_GREEN_TIMES_SECONDS = (4, 8, 12, 16, 20, 24, 28, 32)
 
 
 @dataclass(frozen=True)
 class QueueCategory:
-    """Symbolic Chapter 4 queue-state category.
-
-    The thesis defines six symbolic queue categories k,l,m,n,o,p but does not
-    assign independent numeric queue values to those symbols in the available
-    repository/prompt sources. The numeric id is only a categorical state id for
-    algorithms that require numeric feature vectors; it is not a physical queue
-    length and it is not a thesis claim that k=0, l=1, ..., p=5.
-    """
+    """Symbolic Chapter 4 queue-state category k,l,m,n,o,p."""
 
     label: str
     category_id: int
@@ -36,6 +30,9 @@ class QueueCategory:
     upper_inclusive: int | None
 
 
+# Chapter 4 writes strict lower bounds such as 11<q'<=20, which leaves integer
+# boundary gaps at 11,21,31,41. For integer queue lengths we use the consecutive
+# partition implied by the text's 10-vehicle buckets.
 CH4_QUEUE_CATEGORIES = (
     QueueCategory("k", 0, 0, 10),
     QueueCategory("l", 1, 11, 20),
