@@ -6,13 +6,13 @@ from src.thesis.chapter_constants import CH4_QUEUE_CATEGORIES, CH4_QUEUE_ID_TO_L
 
 
 def chapter4_queue_category(queue: float):
-    """Return the symbolic Chapter 4 queue category for q_i'(t).
+    """Return the Chapter 4 symbolic queue category for q_i'(t).
 
-    Thesis Chapter 4 lists six symbolic categories k,l,m,n,o,p. Its strict
-    lower-bound notation creates gaps at 11,21,31,41 for integer queue lengths;
-    this implementation uses the only consecutive integer partition consistent
-    with the stated 10-vehicle buckets and upper limits:
-    0..10, 11..20, 21..30, 31..40, 41..50, and >50.
+    Chapter 4 quantizes each incoming-road queue as k,l,m,n,o,p using 10-vehicle
+    buckets up to 50 and p for queues greater than 50. The thesis notation uses
+    strict lower bounds that omit exact integer boundaries 11,21,31,41; this
+    implementation assigns those integers to the next bucket to form a complete
+    integer partition: 0..10, 11..20, 21..30, 31..40, 41..50, and >50.
     """
     q = float(queue)
     if q < 0 or int(q) != q:
@@ -27,7 +27,7 @@ def chapter4_queue_category(queue: float):
 
 
 def chapter4_quantize_queue(queue: float) -> int:
-    """Chapter 4 categorical state id for q_i(t), not a physical queue value."""
+    """Chapter 4 categorical state id for symbolic q_i(t), not a raw queue."""
     return chapter4_queue_category(queue).category_id
 
 
@@ -41,7 +41,7 @@ def chapter4_category_label(category_id: int) -> str:
 
 
 def chapter4_local_state(queues: Iterable[float]) -> tuple[int, int, int, int]:
-    """Thesis Chapter 4 independent/non-cooperative state: local incoming queues."""
+    """Independent learner state: local incoming queues Q(t)=[q_N,q_S,q_E,q_W]."""
     values = tuple(chapter4_quantize_queue(q) for q in queues)
     if len(values) != 4:
         raise ValueError("Chapter 4 local state must contain four incoming queues ordered N,S,E,W")
@@ -56,12 +56,12 @@ class StateSpec:
 
 
 class StateBuilder:
-    """Builds Thesis Chapter 4 Eq. (4.1) cooperative state S(t)=[Q(t),Q'(t),a'(t)].
+    """Build Chapter 4 cooperative state S(t)=[Q(t),Q'(t),a'(t)].
 
-    Queue entries are Chapter 4 categorical state ids with an explicit mapping to
-    symbolic labels k,l,m,n,o,p; they are not raw queue lengths. Ordering is
-    exactly local queues Q(t), neighbouring queues Q'(t), then neighbouring
-    non-cooperative green allocations a'(t).
+    Q(t) contains all local incoming queues, Q'(t) contains queues at neighboring
+    non-cooperative intersections excluding connecting-road queues, and a'(t)
+    contains the neighboring non-cooperative green allocations to connecting
+    roads. Queue entries are Chapter 4 categorical ids for k,l,m,n,o,p.
     """
 
     def __init__(self, spec: StateSpec):
@@ -72,7 +72,6 @@ class StateBuilder:
         return len(self.spec.local_incoming) + len(self.spec.neighbour_incoming) + len(self.spec.neighbour_actions)
 
     def build(self, queues: dict[str, float], neighbour_actions: dict[str, int | float]) -> list[float]:
-        # Thesis Chapter 4, Eq. (4.1): S(t)=[Q(t),Q'(t),a'(t)].
         vals: list[float] = []
         for edge in self.spec.local_incoming:
             vals.append(chapter4_quantize_queue(queues.get(edge, 0.0)))

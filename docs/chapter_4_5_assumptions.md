@@ -14,16 +14,14 @@
 - Verification: Check original thesis/source files.
 
 ## RL method details
-- Missing: Chapter excerpt lacks neural architecture, reward equation, replay settings, and exploration schedule.
-- Assumption: A tabular Q-learning scaffold with configurable hyperparameters is used for executable short runs.
-- Effect: Short-run RL results must not be compared as faithful 200-episode reproduction.
-- Verification: Obtain Chapter 3 or original code if it defines QLF/QPLF and RL hyperparameters.
+- Specified by Chapter 4: the Independent Learner System uses only local traffic information, while the Semi-Coordinated System adds neighboring non-cooperative queues and actions.
+- Specified by Chapter 4: unless otherwise stated, agents use QPLF from Chapter 3 as the function approximator.
+- Remaining limitation: exact original learning rates/episode counts for every reported figure are not fully machine-readable in this repository.
 
 ## QLF/QPLF
-- Missing: Exact Chapter-4 QLF/QPLF definitions are not present in the supplied text.
-- Assumption: QLF is sum of squared queues; QPLF is squared positive pressure based on Equation 5.2.
-- Effect: Mathematical verification is limited to these explicit assumptions.
-- Verification: Compare against the thesis sections where QLF/QPLF are originally defined.
+- Chapter 4 uses QPLF as the underlying reinforcement-learning approximator; QPLF is not a reward function.
+- Implementation: independent QPLF receives local `Q(t)` only; semi-coordinated QPLF receives `S(t)=[Q(t),Q'(t),a'(t)]`.
+- Chapter 5 pressure helpers remain separate backpressure utilities, not the QPLF approximator.
 
 ## Reconstructed SUMO network assets from supplied figures
 - Missing: Exact SUMO node coordinates, lane counts, connections, and signal phase programs from the original thesis implementation.
@@ -33,8 +31,7 @@
 - Verification: Compare generated `.nod.xml`, `.edg.xml`, `.rou.xml`, and `netconvert` output against the original thesis SUMO files if they become available.
 
 ## QPLF terminology correction
-- Missing: The exact Chapter-4 RL reward remains unspecified in the supplied excerpts.
 - Correction: QPLF is treated as Q-learning with piecewise-linear/action-block function approximation, not as a reward function.
-- Assumption: Where a fallback learning reward is needed, the scripts use queue-pressure reduction as a documented reward assumption.
-- Effect: QPLF experiment outputs test the piecewise-linear Q-function update structure, but reward-dependent numerical results may change if the original thesis reward is supplied.
-- Verification: Compare against the full thesis section defining the RL reward and feature scaling.
+- Chapter 4 reward is `R(t)=1/sum_i Q_i(t+1)`.
+- Implementation: Fallback learning scripts use the Chapter 4 inverse-next-queue reward and make the undefined zero-queue case explicit with a finite default safeguard.
+- Effect: QPLF experiment outputs test the Chapter 4 semi-coordinated/independent learner structure; numerical values may still change with original SUMO files.

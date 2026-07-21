@@ -52,19 +52,36 @@ def require_sumo() -> SumoAvailability:
 
 
 def generate_grid_network(output_net: Path, grid_number: int = 3, lane_number: int = 1, length_m: int = 500) -> None:
+    """Generate a small SUMO grid network for smoke tests.
+
+    SUMO versions available in Colab reject the older `--default.length` option
+    for netgenerate grids. Use the grid-specific `--grid.length` option first,
+    and keep a minimal fallback without an explicit length so version-specific
+    command-line differences do not prevent the smoke experiment from running.
+    """
     availability = require_sumo()
     output_net.parent.mkdir(parents=True, exist_ok=True)
-    cmd = [
+    base_cmd = [
         availability.netgenerate or "netgenerate",
         "--grid",
         "--grid.number", str(grid_number),
         "--default.lanenumber", str(lane_number),
-        "--default.length", str(length_m),
         "--tls.guess", "true",
         "--tls.default-type", "static",
         "--output-file", str(output_net),
     ]
-    subprocess.check_call(cmd)
+    commands = [
+        base_cmd[:4] + ["--grid.length", str(length_m)] + base_cmd[4:],
+        base_cmd,
+    ]
+    errors: list[str] = []
+    for cmd in commands:
+        try:
+            subprocess.check_call(cmd)
+            return
+        except subprocess.CalledProcessError as exc:
+            errors.append(f"{cmd!r} exited with {exc.returncode}")
+    raise RuntimeError("Unable to generate SUMO grid network with netgenerate. Attempts:\n" + "\n".join(errors))
 
 
 def write_sumo_config(net_file: Path, route_file: Path, config_file: Path, end_time: int, step_length: float = 1.0) -> None:
