@@ -1,0 +1,4 @@
+total_stop_events,observed_vehicles,completed_vehicles,average_stops_per_observed_vehicle,average_stops_per_completed_vehicle,average_travel_time_seconds,policy,reward
+10,4,104,2.5,,120.0,semi_coordinated_rl_short,-76.0
+2,4,57,0.5,,237.5,independent_fixed,-3082.0
+9,4,104,2.25,,120.0,backpressure,-71.0

@@ -1,0 +1,1 @@
+<configuration><input><net-file value="nine_intersection.net.xml"/><route-files value="scenario1.rou.xml"/></input><time><step-length value="1"/></time></configuration>

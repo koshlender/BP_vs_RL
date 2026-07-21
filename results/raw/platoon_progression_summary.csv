@@ -1,0 +1,7 @@
+scenario,policy,platoon_progression_percentage,note
+scenario1_low_demand,semi_coordinated_rl,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+scenario1_low_demand,independent_fixed_ns,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+scenario1_low_demand,cyclic_queue_backpressure,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+scenario2_high_demand,semi_coordinated_rl,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+scenario2_high_demand,independent_fixed_ns,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
+scenario2_high_demand,cyclic_queue_backpressure,,"undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings"
