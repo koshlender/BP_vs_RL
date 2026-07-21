@@ -24,3 +24,10 @@
 - Assumption: QLF is sum of squared queues; QPLF is squared positive pressure based on Equation 5.2.
 - Effect: Mathematical verification is limited to these explicit assumptions.
 - Verification: Compare against the thesis sections where QLF/QPLF are originally defined.
+
+## Reconstructed SUMO network assets from supplied figures
+- Missing: Exact SUMO node coordinates, lane counts, connections, and signal phase programs from the original thesis implementation.
+- Assumption: `scripts/generate_thesis_sumo.py` reconstructs the two-intersection and nine-intersection layouts from the supplied figures using one lane per directed road, signalized internal intersections, 500 m two-signal connector roads `d/e`, and the table-provided traffic generation intervals.
+- Reasonable because: The figures identify road/entry labels and tables specify demand intervals, but they do not provide machine-readable SUMO files.
+- Effect: The generated SUMO files should match the high-level topology and demand tables, but microscopic results may differ from the thesis if original lane counts, turning priorities, or signal phases differ.
+- Verification: Compare generated `.nod.xml`, `.edg.xml`, `.rou.xml`, and `netconvert` output against the original thesis SUMO files if they become available.

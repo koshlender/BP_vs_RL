@@ -1,0 +1,34 @@
+<routes>
+  <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5" maxSpeed="13.9"/>
+  <route id="N1_S1" edges="N1_C1 C1_NC2 NC2_C4 C4_S1"/>
+  <route id="N2_S2" edges="N2_NC1 NC1_C3 C3_NC3 NC3_S2"/>
+  <route id="N3_S3" edges="N3_C2 C2_NC4 NC4_C5 C5_S3"/>
+  <route id="S1_N1" edges="S1_C4 C4_NC2 NC2_C1 C1_N1"/>
+  <route id="S2_N2" edges="S2_NC3 NC3_C3 C3_NC1 NC1_N2"/>
+  <route id="S3_N3" edges="S3_C5 C5_NC4 NC4_C2 C2_N3"/>
+  <route id="W1_E1" edges="W1_C1 C1_NC1 NC1_C2 C2_E1"/>
+  <route id="W2_E2" edges="W2_NC2 NC2_C3 C3_NC4 NC4_E2"/>
+  <route id="W3_E3" edges="W3_C4 C4_NC3 NC3_C5 C5_E3"/>
+  <route id="E1_W1" edges="E1_C2 C2_NC1 NC1_C1 C1_W1"/>
+  <route id="E2_W2" edges="E2_NC4 NC4_C3 C3_NC2 NC2_W2"/>
+  <route id="E3_W3" edges="E3_C5 C5_NC3 NC3_C4 C4_W3"/>
+  <flow id="N1_S1_0" type="car" route="N1_S1" begin="0" end="1800" period="40" departLane="best" departSpeed="max"/>
+  <flow id="N1_S1_1" type="car" route="N1_S1" begin="1800" end="3600" period="160" departLane="best" departSpeed="max"/>
+  <flow id="N2_S2_1" type="car" route="N2_S2" begin="1800" end="3600" period="140" departLane="best" departSpeed="max"/>
+  <flow id="E1_W1_0" type="car" route="E1_W1" begin="0" end="1800" period="50" departLane="best" departSpeed="max"/>
+  <flow id="E1_W1_1" type="car" route="E1_W1" begin="1800" end="3600" period="130" departLane="best" departSpeed="max"/>
+  <flow id="E2_W2_0" type="car" route="E2_W2" begin="0" end="1800" period="10" departLane="best" departSpeed="max"/>
+  <flow id="E2_W2_1" type="car" route="E2_W2" begin="1800" end="3600" period="200" departLane="best" departSpeed="max"/>
+  <flow id="E3_W3_0" type="car" route="E3_W3" begin="0" end="1800" period="50" departLane="best" departSpeed="max"/>
+  <flow id="E3_W3_1" type="car" route="E3_W3" begin="1800" end="3600" period="100" departLane="best" departSpeed="max"/>
+  <flow id="S1_N1_0" type="car" route="S1_N1" begin="0" end="1800" period="100" departLane="best" departSpeed="max"/>
+  <flow id="S1_N1_1" type="car" route="S1_N1" begin="1800" end="3600" period="170" departLane="best" departSpeed="max"/>
+  <flow id="S2_N2_0" type="car" route="S2_N2" begin="0" end="1800" period="100" departLane="best" departSpeed="max"/>
+  <flow id="S2_N2_1" type="car" route="S2_N2" begin="1800" end="3600" period="700" departLane="best" departSpeed="max"/>
+  <flow id="W1_E1_0" type="car" route="W1_E1" begin="0" end="1800" period="100" departLane="best" departSpeed="max"/>
+  <flow id="W1_E1_1" type="car" route="W1_E1" begin="1800" end="3600" period="100" departLane="best" departSpeed="max"/>
+  <flow id="W2_E2_0" type="car" route="W2_E2" begin="0" end="1800" period="100" departLane="best" departSpeed="max"/>
+  <flow id="W2_E2_1" type="car" route="W2_E2" begin="1800" end="3600" period="90" departLane="best" departSpeed="max"/>
+  <flow id="W3_E3_0" type="car" route="W3_E3" begin="0" end="1800" period="10" departLane="best" departSpeed="max"/>
+  <flow id="W3_E3_1" type="car" route="W3_E3" begin="1800" end="3600" period="150" departLane="best" departSpeed="max"/>
+</routes>

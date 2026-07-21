@@ -65,3 +65,10 @@ def test_real_sumo_availability_check_reports_status():
     assert isinstance(availability.traci_importable, bool)
     assert isinstance(availability.sumolib_importable, bool)
     assert isinstance(availability.errors, list)
+
+
+def test_generate_thesis_sumo_assets():
+    subprocess.check_call([sys.executable, 'scripts/generate_thesis_sumo.py'])
+    assert Path('sumo/thesis_ch4_ch5/two_intersection/two_intersection.rou.xml').exists()
+    nine = Path('sumo/thesis_ch4_ch5/nine_intersection/scenario1.rou.xml').read_text()
+    assert 'period="40"' in nine and 'period="700"' in nine and 'W3_E3' in nine

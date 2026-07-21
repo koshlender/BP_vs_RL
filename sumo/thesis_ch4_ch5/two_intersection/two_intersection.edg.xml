@@ -1,0 +1,16 @@
+<edges>
+  <edge id="h" from="W" to="L" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="a" from="L" to="W" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="b" from="N_L" to="L" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="c" from="L" to="N_L" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="f" from="S_L" to="L" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="g" from="L" to="S_L" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="e" from="L" to="R" priority="1" numLanes="1" speed="13.9" length="500"/>
+  <edge id="d" from="R" to="L" priority="1" numLanes="1" speed="13.9" length="500"/>
+  <edge id="k" from="E" to="R" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="l" from="R" to="E" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="i" from="N_R" to="R" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="j" from="R" to="N_R" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="m" from="S_R" to="R" priority="1" numLanes="1" speed="13.9" length="3000"/>
+  <edge id="n" from="R" to="S_R" priority="1" numLanes="1" speed="13.9" length="3000"/>
+</edges>

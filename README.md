@@ -54,3 +54,19 @@ python scripts/run_sumo_experiments.py
 This command intentionally does **not** use the deterministic fallback. It requires the `sumo`, `netgenerate`, and `duarouter` binaries plus Python `traci` and `sumolib` bindings. In this cloud container the command is currently blocked because those dependencies cannot be installed, but the script is ready to run in a SUMO-enabled environment. Replace the generated grid files with the original thesis SUMO network/routes for final Chapter 4/5 reproduction.
 
 When real SUMO/TraCI is available, `scripts/run_sumo_experiments.py` also reports a basic vehicle-ID platoon progression percentage from TraCI route/edge observations. This is a smoke-test corridor measure using the first two normal edges of each vehicle route; for thesis-quality platoon progression, configure the exact first/second intersection corridor edges from the original network.
+
+## Thesis diagram SUMO assets
+
+Generate the two-intersection and nine-intersection XML inputs from the thesis diagrams/tables with:
+
+```bash
+python scripts/generate_thesis_sumo.py
+```
+
+Then, in a SUMO-enabled environment, build `.net.xml` files with:
+
+```bash
+scripts/build_thesis_sumo_networks.sh
+```
+
+Generated assets are written under `sumo/thesis_ch4_ch5/`. The route files encode Table 4.1, Table 4.2 Scenario 1, and Table 5.1 Scenario 2 intervals supplied in the prompt. Geometry and turn movements are reconstructed from the supplied figures; exact lane counts/signal programs remain assumptions unless the original thesis SUMO files are provided.
