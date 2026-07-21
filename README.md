@@ -70,3 +70,7 @@ scripts/build_thesis_sumo_networks.sh
 ```
 
 Generated assets are written under `sumo/thesis_ch4_ch5/`. The route files encode Table 4.1, Table 4.2 Scenario 1, and Table 5.1 Scenario 2 intervals supplied in the prompt. Geometry and turn movements are reconstructed from the supplied figures; exact lane counts/signal programs remain assumptions unless the original thesis SUMO files are provided.
+
+## QPLF terminology correction
+
+In this repository, QPLF should be read according to the thesis definition: **Q-learning with piecewise-linear/action-block function approximation**. It is not a separate reward function. The piecewise-linear QPLF agent is implemented in `src/agents/pwl_q_learning.py`. Any queue-pressure reward used in fallback scripts is a documented reward assumption because the supplied Chapter 4/5 excerpt does not fully specify the RL reward.

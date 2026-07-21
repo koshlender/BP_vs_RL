@@ -31,3 +31,10 @@
 - Reasonable because: The figures identify road/entry labels and tables specify demand intervals, but they do not provide machine-readable SUMO files.
 - Effect: The generated SUMO files should match the high-level topology and demand tables, but microscopic results may differ from the thesis if original lane counts, turning priorities, or signal phases differ.
 - Verification: Compare generated `.nod.xml`, `.edg.xml`, `.rou.xml`, and `netconvert` output against the original thesis SUMO files if they become available.
+
+## QPLF terminology correction
+- Missing: The exact Chapter-4 RL reward remains unspecified in the supplied excerpts.
+- Correction: QPLF is treated as Q-learning with piecewise-linear/action-block function approximation, not as a reward function.
+- Assumption: Where a fallback learning reward is needed, the scripts use queue-pressure reduction as a documented reward assumption.
+- Effect: QPLF experiment outputs test the piecewise-linear Q-function update structure, but reward-dependent numerical results may change if the original thesis reward is supplied.
+- Verification: Compare against the full thesis section defining the RL reward and feature scaling.

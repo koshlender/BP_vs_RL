@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-"""Run QPLF-reward experiments with piecewise-linear Q-learning agents.
+"""Run thesis-QPLF experiments using piecewise-linear Q-learning agents.
 
-This is a deterministic fallback experiment. It evaluates the requested variants:
-independent, semi-coordinated, and centralized QPLF Q-learning with piecewise-linear
-approximation, plus a cyclic backpressure baseline.
+In the thesis excerpt, QPLF means Q-learning with piecewise-linear function
+approximation: action-wise blocks f'(x,a), not a separate reward function. This
+fallback script therefore labels QPLF as the Q-function approximator. The reward used
+for learning remains configurable/assumed from queue-pressure reduction because the
+provided excerpt does not define the exact Chapter-4 reward.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -23,7 +25,7 @@ PHASES = [[1, 1, 0, 0], [0, 0, 1, 1]]
 def qplf_score(queues: list[float]) -> float:
     return queue_pressure_lyapunov_function(queues, [0.0, 0.0, 0.0, 0.0])
 
-def qplf_reward(previous: list[float], current: list[float]) -> float:
+def queue_pressure_reward(previous: list[float], current: list[float]) -> float:
     return qplf_score(previous) - qplf_score(current)
 
 def backpressure_action(state: list[float]) -> int:
@@ -63,7 +65,7 @@ def run_episode(policy: str, demand: list[float], seed: int, agent: PiecewiseLin
             state = policy_state(policy, queues, previous_action)
             action = agent.act(state, evaluate=not train)
         queues, env_reward, done, info = env.step(action)
-        shaped_reward = qplf_reward(prev, queues)
+        shaped_reward = queue_pressure_reward(prev, queues)
         if policy != "cyclic_queue_backpressure":
             next_state = policy_state(policy, queues, action)
             if train:
@@ -111,7 +113,7 @@ def main() -> None:
         for policy in policies:
             agent = agents.get(policy)
             eval_rows = [run_episode(policy, demand, seed, agent, train=False) for seed in eval_seeds]
-            summary = {"scenario": scenario, "policy": policy, "eval_episodes": len(eval_rows), "uses_qplf_reward": policy != "cyclic_queue_backpressure", "uses_qplf_backpressure": policy == "cyclic_queue_backpressure"}
+            summary = {"scenario": scenario, "policy": policy, "eval_episodes": len(eval_rows), "uses_qplf_piecewise_linear_approximation": policy != "cyclic_queue_backpressure", "uses_backpressure_action": policy == "cyclic_queue_backpressure", "reward_signal": "queue_pressure_reduction_assumption" if policy != "cyclic_queue_backpressure" else "not_learned"}
             for key in ["travel_time_proxy_seconds", "mean_delay_seconds", "average_travel_time_seconds", "completed_vehicles", "total_stop_events", "average_stops_per_observed_vehicle", "env_reward", "qplf_reward", "mean_qplf", "mean_queue"]:
                 vals = [row[key] for row in eval_rows if row[key] is not None]
                 summary[f"mean_{key}"] = round(sum(vals) / len(vals), 6) if vals else None
@@ -123,7 +125,7 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=summary_rows[0].keys())
         writer.writeheader(); writer.writerows(summary_rows)
     with open(outdir / "qplf_summary.json", "w") as handle:
-        json.dump({"note": "QPLF piecewise-linear Q-learning fallback; not SUMO thesis reproduction.", "train_episodes": train_episodes, "summaries": summary_rows}, handle, indent=2)
+        json.dump({"note": "QPLF here means thesis piecewise-linear Q-function approximation; reward is a documented queue-pressure reduction assumption; not SUMO thesis reproduction.", "train_episodes": train_episodes, "summaries": summary_rows}, handle, indent=2)
     print(json.dumps(summary_rows, indent=2))
 
 if __name__ == "__main__":
