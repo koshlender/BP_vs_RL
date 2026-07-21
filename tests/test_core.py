@@ -44,6 +44,7 @@ def test_chapter4_state_action_reward_equations():
     assert one_vehicle.reward == 1.0 and one_vehicle.used_thesis_equation
     zero = chapter4_queue_reward_result([0, 0, 0, 0])
     assert zero.reward == 0.0 and not zero.used_thesis_equation and zero.zero_queue_policy_applied
+    assert chapter4_queue_reward_result([0, 0, 0, 0], zero_queue_policy="epsilon", epsilon=2).reward == 0.5
     zero_reward = chapter4_queue_reward([0, 0, 0, 0])
     td_target = zero_reward + 0.95 * 0.0
     assert math.isfinite(zero_reward) and math.isfinite(td_target)
@@ -55,7 +56,7 @@ def test_qlf_qplf():
     assert queue_length_function([0,0])==0; assert reward_from_qlf([2,0],[1,0])==1
     assert queue_pressure_lyapunov_function([5,1],[2,2])==9
     assert backpressure_weights([5,1],[2,2],[[1,0],[0,1]])==[3,-1]
-    assert math.isclose(sum(cyclic_green_times([1,2],60,6,.1)),54)
+    assert math.isclose(sum(cyclic_green_times([1,2],80,16,.1)),64)
 
 def test_chapter5_cyclic_backpressure_equations():
     turns = [[0.8, 0.2], [0.1, 0.9]]
