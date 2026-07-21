@@ -126,6 +126,18 @@ def test_piecewise_linear_agent_and_qplf_script(tmp_path):
     assert 'centralized_full_state_rl' in summary
     assert 'cyclic_queue_backpressure' in summary
 
+
+def test_generate_grid_network_uses_grid_length(monkeypatch, tmp_path):
+    from src.environment import sumo_env
+    monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
+    calls = []
+    def fake_check_call(cmd):
+        calls.append(cmd)
+    monkeypatch.setattr(sumo_env.subprocess, "check_call", fake_check_call)
+    sumo_env.generate_grid_network(tmp_path / "grid.net.xml")
+    assert calls and "--grid.length" in calls[0]
+    assert "--default.length" not in calls[0]
+
 def test_real_sumo_availability_check_reports_status():
     from src.environment.sumo_env import check_sumo_availability
     availability = check_sumo_availability()
