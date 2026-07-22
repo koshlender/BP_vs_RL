@@ -9,7 +9,8 @@ This script produces one place for the requested comparison artifacts:
 * queue-vs-time traces for the last RL training episode and best-eta backpressure.
 
 The implementation uses the repository's compact queue simulator and thesis-equation
-control APIs, so it is reproducible in Colab/CI without TraCI. Real SUMO static-network
+control APIs, so it is reproducible in Colab/CI without TraCI. Its delay values
+are queue-delay surrogates, not SUMO vehicle trip times. Real SUMO static-network
 metrics remain in ``scripts/run_thesis_sumo_experiments.py``.
 """
 from __future__ import annotations
@@ -29,6 +30,7 @@ from src.agents.pwl_q_learning import PiecewiseLinearQAgent
 from src.environment.simulated_env import QueueNetworkEnv
 from src.rewards.backpressure import cyclic_backpressure_decision
 from src.rewards.chapter4 import chapter4_queue_reward
+from src.state.state_builder import chapter4_quantize_queue
 from src.thesis.chapter_constants import THESIS_AVAILABLE_GREEN_TIME_SECONDS, THESIS_YELLOW_TIME_PER_APPROACH_SECONDS
 from src.utils.config import load_config, set_seed
 
@@ -68,7 +70,13 @@ class FlexibleTabularAgent:
         self.q: dict[tuple[float, ...], list[float]] = {}
 
     def _key(self, state: list[float]) -> tuple[float, ...]:
-        return tuple(round(float(x), 3) for x in state)
+        # Full-state RL is tabular, so use the Chapter 4 queue buckets instead
+        # of raw continuous queue values; otherwise the tabular learner sees
+        # almost every queue vector as a new state.
+        key: list[float] = []
+        for idx, value in enumerate(state):
+            key.append(float(chapter4_quantize_queue(value)) if idx < 4 else float(value))
+        return tuple(key)
 
     def values(self, state: list[float]) -> list[float]:
         key = self._key(state)
@@ -157,7 +165,7 @@ def run_rl_episode(policy: str, demand: list[float], seed: int, agent, train: bo
         "algorithm": POLICY_LABELS[policy],
         "seed": seed,
         "mean_delay_seconds": round(delay, 6),
-        "travel_time_proxy_seconds": round(120.0 + delay, 6),
+        "queue_delay_surrogate_seconds": round(delay, 6),
         "mean_queue": round(total_queue / max(step_count, 1), 6),
         "duration_seconds": duration,
     })
@@ -167,11 +175,11 @@ def run_rl_episode(policy: str, demand: list[float], seed: int, agent, train: bo
 def run_backpressure_episode(demand: list[float], seed: int, eta: float, duration: int, record_trace: bool = False) -> EpisodeResult:
     env = QueueNetworkEnv(duration=duration, seed=seed, demand=demand)
     queues = env.reset()
-    total_queue = 0.0
+    total_queue_area = 0.0
+    samples = 0
     cycles = 0
-    done = False
     trace: list[dict[str, object]] = []
-    while not done:
+    while env.t < duration:
         decision = cyclic_backpressure_decision(
             PHASES,
             queues,
@@ -180,38 +188,73 @@ def run_backpressure_episode(demand: list[float], seed: int, eta: float, duratio
             eta=eta,
             available_green_time=THESIS_AVAILABLE_GREEN_TIME_SECONDS,
         )
-        queues, env_reward, done, info = env.step_phase_schedule(
-            PHASES,
-            decision.executable_green_times,
-            yellow_duration_per_phase=THESIS_YELLOW_TIME_PER_APPROACH_SECONDS,
-        )
-        total_queue += info["queue_sum"]
         cycles += 1
-        if record_trace:
-            trace.append({
-                "time_seconds": env.t,
-                "queue_north": queues[0],
-                "queue_south": queues[1],
-                "queue_east": queues[2],
-                "queue_west": queues[3],
-                "total_queue": sum(queues),
-                "eta": eta,
-                "green_north": decision.executable_green_times[0],
-                "green_south": decision.executable_green_times[1],
-                "green_east": decision.executable_green_times[2],
-                "green_west": decision.executable_green_times[3],
-                "env_reward": env_reward,
-            })
+        green_times = list(decision.executable_green_times)
+        for phase, green_seconds in zip(PHASES, green_times):
+            for _ in range(int(green_seconds)):
+                if env.t >= duration:
+                    break
+                env._arrival_step()
+                departed = 0
+                for idx, sigma_i in enumerate(phase):
+                    if float(sigma_i) > 0:
+                        served = min(env.queues[idx], float(sigma_i))
+                        env.queues[idx] -= served
+                        departed += int(served)
+                env.completed += departed
+                env._record_stops()
+                env.t += 1
+                qsum = sum(env.queues)
+                total_queue_area += qsum
+                samples += 1
+                if record_trace:
+                    trace.append({
+                        "time_seconds": env.t,
+                        "queue_north": env.queues[0],
+                        "queue_south": env.queues[1],
+                        "queue_east": env.queues[2],
+                        "queue_west": env.queues[3],
+                        "total_queue": qsum,
+                        "eta": eta,
+                        "green_north": green_times[0],
+                        "green_south": green_times[1],
+                        "green_east": green_times[2],
+                        "green_west": green_times[3],
+                    })
+            for _ in range(int(THESIS_YELLOW_TIME_PER_APPROACH_SECONDS)):
+                if env.t >= duration:
+                    break
+                env._arrival_step()
+                env._record_stops()
+                env.t += 1
+                qsum = sum(env.queues)
+                total_queue_area += qsum
+                samples += 1
+                if record_trace:
+                    trace.append({
+                        "time_seconds": env.t,
+                        "queue_north": env.queues[0],
+                        "queue_south": env.queues[1],
+                        "queue_east": env.queues[2],
+                        "queue_west": env.queues[3],
+                        "total_queue": qsum,
+                        "eta": eta,
+                        "green_north": green_times[0],
+                        "green_south": green_times[1],
+                        "green_east": green_times[2],
+                        "green_west": green_times[3],
+                    })
+        queues = list(env.queues)
     metrics = env.metrics()
-    delay = mean_delay_from_queue(total_queue, metrics.get("completed_vehicles", 0))
+    delay = mean_delay_from_queue(total_queue_area, metrics.get("completed_vehicles", 0))
     metrics.update({
         "policy": BACKPRESSURE_POLICY,
         "algorithm": POLICY_LABELS[BACKPRESSURE_POLICY],
         "seed": seed,
         "eta": eta,
         "mean_delay_seconds": round(delay, 6),
-        "travel_time_proxy_seconds": round(120.0 + delay, 6),
-        "mean_queue": round(total_queue / max(cycles, 1), 6),
+        "queue_delay_surrogate_seconds": round(delay, 6),
+        "mean_queue": round(total_queue_area / max(samples, 1), 6),
         "cycles": cycles,
         "duration_seconds": duration,
     })
@@ -368,7 +411,7 @@ def main() -> None:
     # Final comparison: mean over the last 10 RL episodes plus best-eta backpressure.
     tail_window = min(10, args.episodes)
     tail_rows = [r for r in episode_rows if int(r["episode"]) >= args.episodes - tail_window]
-    rl_summary = summarize_rows(tail_rows, ("scenario", "policy", "policy_label"), ("mean_delay_seconds", "travel_time_proxy_seconds", "mean_queue", "total_stop_events", "completed_vehicles"))
+    rl_summary = summarize_rows(tail_rows, ("scenario", "policy", "policy_label"), ("mean_delay_seconds", "queue_delay_surrogate_seconds", "mean_queue", "total_stop_events", "completed_vehicles"))
     for row in rl_summary:
         row["summary_source"] = f"last_{tail_window}_training_episodes"
         summary_rows.append(row)
@@ -381,7 +424,7 @@ def main() -> None:
             "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY],
             "episodes": 1,
             "mean_mean_delay_seconds": bp_row["mean_delay_seconds"],
-            "mean_travel_time_proxy_seconds": bp_row["travel_time_proxy_seconds"],
+            "mean_queue_delay_surrogate_seconds": bp_row["queue_delay_surrogate_seconds"],
             "mean_mean_queue": bp_row["mean_queue"],
             "mean_total_stop_events": bp_row["total_stop_events"],
             "mean_completed_vehicles": bp_row["completed_vehicles"],
@@ -394,7 +437,7 @@ def main() -> None:
     write_csv(raw_dir / "thesis_queue_vs_time.csv", queue_rows)
     write_csv(raw_dir / "thesis_algorithm_summary.csv", summary_rows)
     (raw_dir / "thesis_algorithm_comparison.json").write_text(json.dumps({
-        "note": "Thesis-style comparison using the compact queue simulator: RL episode-wise delay, eta sweep 0.1..1.2, and queue traces for last RL episode / best-eta backpressure.",
+        "note": "Thesis-style comparison using the compact queue simulator: RL episode-wise queue-delay surrogate, eta sweep 0.1..1.2, and queue traces for last RL episode / best-eta backpressure. These are not SUMO trip-time measurements.",
         "episodes": args.episodes,
         "duration_seconds": args.duration,
         "etas": ETAS,
