@@ -138,6 +138,23 @@ def test_generate_grid_network_uses_grid_length(monkeypatch, tmp_path):
     assert calls and "--grid.length" in calls[0]
     assert "--default.length" not in calls[0]
 
+
+def test_generate_grid_network_falls_back_to_netconvert(monkeypatch, tmp_path):
+    from src.environment import sumo_env
+    monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
+    monkeypatch.setattr(sumo_env.shutil, "which", lambda name: "netconvert" if name == "netconvert" else None)
+    calls = []
+    def fake_check_call(cmd):
+        calls.append(cmd)
+        if cmd[0] == "netgenerate":
+            raise sumo_env.subprocess.CalledProcessError(-11, cmd)
+    monkeypatch.setattr(sumo_env.subprocess, "check_call", fake_check_call)
+    sumo_env.generate_grid_network(tmp_path / "grid.net.xml")
+    assert len(calls) == 3
+    assert calls[-1][0] == "netconvert"
+    assert (tmp_path / "grid.nod.xml").exists()
+    assert (tmp_path / "grid.edg.xml").exists()
+
 def test_real_sumo_availability_check_reports_status():
     from src.environment.sumo_env import check_sumo_availability
     availability = check_sumo_availability()
