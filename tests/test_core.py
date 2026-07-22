@@ -182,3 +182,21 @@ def test_generate_thesis_sumo_assets():
 def test_eta_sweep_script_outputs_best_eta():
     subprocess.check_call([sys.executable, 'scripts/run_eta_sweep.py'])
     assert Path('results/raw/eta_sweep_best.csv').exists()
+
+def test_thesis_sumo_metrics_are_thesis_named(tmp_path):
+    from scripts.run_thesis_sumo_experiments import summarize_tripinfo, SCENARIOS
+    tripinfo = tmp_path / "thesis_sample_tripinfo.xml"
+    tripinfo.write_text(
+        '<tripinfos>\n'
+        '  <tripinfo id="v0" duration="10.0" waitingTime="2.0" waitingCount="1"/>\n'
+        '  <tripinfo id="v1" duration="30.0" waitingTime="4.0" waitingCount="3"/>\n'
+        '</tripinfos>\n',
+        encoding="utf-8",
+    )
+    metrics = summarize_tripinfo(tripinfo)
+    assert metrics["completed_vehicles"] == 2
+    assert metrics["mean_travel_time_seconds"] == 20.0
+    assert metrics["mean_waiting_time_seconds"] == 3.0
+    assert metrics["total_stop_events"] == 4
+    assert metrics["average_stops_per_completed_vehicle"] == 2.0
+    assert all(str(item["scenario"]).startswith(("chapter4", "chapter5")) for item in SCENARIOS)
