@@ -22,11 +22,14 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import inspect
 import math
 import random
 import sys
 from pathlib import Path
 from typing import Iterable
+
+TRACI_START_RETRIES = 3
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -59,6 +62,15 @@ SCENARIOS = {
     "chapter5_nine_scenario2_high_demand": Path("sumo/thesis_ch4_ch5/nine_intersection/scenario2.sumocfg"),
 }
 
+
+def parse_eta_values(text: str) -> list[float]:
+    try:
+        values = [round(float(item.strip()), 3) for item in text.split(",") if item.strip()]
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("eta values must be numbers") from exc
+    if not values:
+        raise argparse.ArgumentTypeError("provide at least one eta value")
+    return values
 
 def softmax(values: list[float], eta: float) -> list[float]:
     if not values:
@@ -139,10 +151,8 @@ def phase_weight_for_queue(traci, tls_id: str, phase_idx: int) -> float:
     return total
 
 
-def simulation_metrics(traci, departed: dict[str, float], total_stops: int) -> dict[str, float | int | None]:
-    now = traci.simulation.getTime()
-    arrived = traci.simulation.getArrivedIDList()
-    durations = [now - departed[veh_id] for veh_id in arrived if veh_id in departed]
+def simulation_metrics(arrived_travel_times: list[float], total_stops: int) -> dict[str, float | int | None]:
+    durations = arrived_travel_times
     return {
         "completed_vehicles": len(durations),
         "mean_travel_time_seconds": None if not durations else sum(durations) / len(durations),
@@ -156,6 +166,7 @@ def run_rl_episode(traci, policy: str, agents: dict[str, object], duration: int,
     green_indices = {tls_id: green_phase_indices(traci, tls_id) for tls_id in tls_ids}
     previous_actions = {tls_id: 0 for tls_id in tls_ids}
     departed: dict[str, float] = {}
+    arrived_travel_times: list[float] = []
     stopped: dict[str, bool] = {}
     total_stops = 0
     queue_area = 0.0
@@ -177,6 +188,9 @@ def run_rl_episode(traci, policy: str, agents: dict[str, object], duration: int,
             for veh_id in traci.simulation.getDepartedIDList():
                 departed[veh_id] = now
                 stopped[veh_id] = False
+            for veh_id in traci.simulation.getArrivedIDList():
+                if veh_id in departed:
+                    arrived_travel_times.append(now - departed[veh_id])
             for veh_id in traci.vehicle.getIDList():
                 speed = traci.vehicle.getSpeed(veh_id)
                 if speed <= 0.1 and not stopped.get(veh_id, False):
@@ -194,7 +208,7 @@ def run_rl_episode(traci, policy: str, agents: dict[str, object], duration: int,
             if train:
                 agents[tls_id].update(states[tls_id], actions[tls_id], reward, next_state, False)
             previous_actions[tls_id] = actions[tls_id]
-    metrics = simulation_metrics(traci, departed, total_stops)
+    metrics = simulation_metrics(arrived_travel_times, total_stops)
     metrics.update({
         "policy": policy,
         "policy_label": POLICY_LABELS[policy],
@@ -208,6 +222,7 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
     tls_ids = list(traci.trafficlight.getIDList())
     green_indices = {tls_id: green_phase_indices(traci, tls_id) for tls_id in tls_ids}
     departed: dict[str, float] = {}
+    arrived_travel_times: list[float] = []
     stopped: dict[str, bool] = {}
     total_stops = 0
     queue_area = 0.0
@@ -235,6 +250,9 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
             for veh_id in traci.simulation.getDepartedIDList():
                 departed[veh_id] = now
                 stopped[veh_id] = False
+            for veh_id in traci.simulation.getArrivedIDList():
+                if veh_id in departed:
+                    arrived_travel_times.append(now - departed[veh_id])
             for veh_id in traci.vehicle.getIDList():
                 speed = traci.vehicle.getSpeed(veh_id)
                 if speed <= 0.1 and not stopped.get(veh_id, False):
@@ -246,7 +264,7 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
             queue_area += qsum
             if record_trace:
                 trace.append({"time_seconds": now, "policy": BACKPRESSURE_POLICY, "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY], "eta": eta, "total_queue": qsum})
-    metrics = simulation_metrics(traci, departed, total_stops)
+    metrics = simulation_metrics(arrived_travel_times, total_stops)
     metrics.update({
         "policy": BACKPRESSURE_POLICY,
         "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY],
@@ -256,6 +274,33 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
     })
     return metrics, trace
 
+
+
+def choose_best_eta(
+    current_eta: float | None,
+    current_delay: float | None,
+    current_queue: float | None,
+    candidate_metrics: dict[str, object],
+) -> tuple[float | None, float | None, float | None, str | None]:
+    """Prefer lowest travel time, falling back to lowest queue for short runs."""
+    eta = candidate_metrics.get("eta")
+    if eta is None:
+        return current_eta, current_delay, current_queue, None
+    delay = candidate_metrics.get("mean_travel_time_seconds")
+    if delay is not None:
+        delay_value = float(delay)
+        if current_delay is None or delay_value < current_delay:
+            return float(eta), delay_value, current_queue, "mean_travel_time_seconds"
+        return current_eta, current_delay, current_queue, "mean_travel_time_seconds" if current_delay is not None else "mean_network_queue"
+    if current_delay is not None:
+        return current_eta, current_delay, current_queue, "mean_travel_time_seconds"
+    queue = candidate_metrics.get("mean_network_queue")
+    if queue is None:
+        return current_eta, current_delay, current_queue, None
+    queue_value = float(queue)
+    if current_queue is None or queue_value < current_queue:
+        return float(eta), current_delay, queue_value, "mean_network_queue"
+    return current_eta, current_delay, current_queue, "mean_network_queue"
 
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -278,9 +323,57 @@ def write_simple_svg(path: Path, title: str) -> None:
     path.write_text(f'<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400"><rect width="100%" height="100%" fill="white"/><text x="30" y="45" font-family="sans-serif" font-size="22">{title}</text><text x="30" y="90" font-family="sans-serif" font-size="14">Use the matching real_sumo_*.csv file for plotted values.</text></svg>\n', encoding="utf-8")
 
 
+def sumo_command(sumo_binary: str, config: Path) -> list[str]:
+    return [sumo_binary, "-c", str(config), "--no-step-log", "true", "--no-warnings", "true"]
+
+
+def start_traci(traci, sumo_binary: str, config: Path, retries: int = TRACI_START_RETRIES) -> None:
+    """Start TraCI with bounded retries and a Colab-friendly failure message.
+
+    TraCI normally prints repeated `Retrying in 1 seconds` lines while it waits
+    for SUMO to open the TraCI port. In Colab, a broken SUMO install or a SUMO
+    startup crash can leave users watching those retries without the actionable
+    command/config context. Keep retries short and re-raise with the exact SUMO
+    command to run directly for diagnostics.
+    """
+    cmd = sumo_command(sumo_binary, config)
+    rendered = " ".join(cmd)
+    try:
+        start_parameters = inspect.signature(traci.start).parameters
+    except (TypeError, ValueError):
+        start_parameters = {}
+    if "numRetries" not in start_parameters:
+        raise RuntimeError(
+            "The imported TraCI module does not support bounded startup retries. "
+            "In Colab, remove mismatched TraCI packages and use SUMO's bundled "
+            "tools path first, for example:\n"
+            "  pip uninstall -y traci sumolib\n"
+            "  PYTHONPATH=/usr/share/sumo/tools:$PYTHONPATH python -c "
+            "'import traci; print(traci.__file__)'\n"
+            f"After fixing TraCI, rerun this SUMO command directly if startup "
+            f"still fails:\n{rendered}"
+        )
+    try:
+        traci.start(cmd, numRetries=retries)
+    except Exception as exc:
+        raise RuntimeError(
+            "TraCI could not connect to SUMO after "
+            f"{retries} retries. In Colab this usually means the SUMO process "
+            "crashed before opening its TraCI port or the installed SUMO/TraCI "
+            "versions are incompatible. First run this direct SUMO check in a "
+            f"notebook cell:\n{rendered} --end 1\n"
+            "If direct SUMO works, force Colab to use SUMO's bundled Python "
+            "tools before any pip-installed TraCI package:\n"
+            "  pip uninstall -y traci sumolib\n"
+            "  PYTHONPATH=.:/usr/share/sumo/tools:$PYTHONPATH python "
+            "scripts/run_real_sumo_algorithm_comparison.py --scenario "
+            "chapter5_nine_scenario2_high_demand --episodes 1 --duration 60"
+        ) from exc
+
+
 def run_one_config(sumo_binary: str, config: Path, policy: str, episode: int, duration: int, cycle_seconds: int, agents_by_tls: dict[str, object] | None = None, eta: float | None = None, record_trace: bool = False):
     import traci
-    traci.start([sumo_binary, "-c", str(config), "--no-step-log", "true", "--no-warnings", "true"])
+    start_traci(traci, sumo_binary, config)
     try:
         if policy == BACKPRESSURE_POLICY:
             assert eta is not None
@@ -296,6 +389,7 @@ def main() -> None:
     parser.add_argument("--episodes", type=int, default=20, help="RL training episodes; use 200 for thesis-length runs")
     parser.add_argument("--duration", type=int, default=3600, help="SUMO simulation duration in seconds")
     parser.add_argument("--cycle-seconds", type=int, default=80, help="Control cycle length")
+    parser.add_argument("--eta-values", type=parse_eta_values, default=ETAS, help="Comma-separated cyclic backpressure eta values; use one value for quick Colab smoke tests")
     parser.add_argument("--scenario", choices=sorted(SCENARIOS), default="chapter4_5_nine_scenario1_low_demand")
     args = parser.parse_args()
 
@@ -318,7 +412,7 @@ def main() -> None:
     summary_rows: list[dict[str, object]] = []
 
     # Create one persistent agent per TLS per RL policy after briefly opening SUMO to inspect TLS/action counts.
-    traci.start([availability.sumo, "-c", str(config), "--no-step-log", "true", "--no-warnings", "true"])
+    start_traci(traci, availability.sumo, config)
     try:
         tls_ids = list(traci.trafficlight.getIDList())
         green_counts = {tls_id: len(green_phase_indices(traci, tls_id)) for tls_id in tls_ids}
@@ -330,7 +424,9 @@ def main() -> None:
     }
 
     for policy in RL_POLICIES:
+        print(f"Starting {POLICY_LABELS[policy]} for {args.episodes} episode(s) at {args.duration}s each", flush=True)
         for episode in range(args.episodes):
+            print(f"  {POLICY_LABELS[policy]} episode {episode + 1}/{args.episodes}", flush=True)
             metrics, trace = run_one_config(availability.sumo, config, policy, episode, args.duration, args.cycle_seconds, agents_by_tls=policy_agents[policy], record_trace=episode == args.episodes - 1)
             metrics.update({"scenario": args.scenario, "episode": episode, "algorithm_type": "real_sumo_rl"})
             episode_rows.append(metrics)
@@ -352,14 +448,16 @@ def main() -> None:
 
     best_eta = None
     best_delay = None
-    for eta in ETAS:
+    best_queue = None
+    best_eta_selection_metric = None
+    for eta in args.eta_values:
+        print(f"Starting {POLICY_LABELS[BACKPRESSURE_POLICY]} eta={eta} at {args.duration}s", flush=True)
         metrics, _trace = run_one_config(availability.sumo, config, BACKPRESSURE_POLICY, 0, args.duration, args.cycle_seconds, eta=eta)
         metrics.update({"scenario": args.scenario, "algorithm_type": "real_sumo_backpressure"})
         eta_rows.append(metrics)
-        delay = metrics.get("mean_travel_time_seconds")
-        if delay is not None and (best_delay is None or float(delay) < best_delay):
-            best_delay = float(delay)
-            best_eta = eta
+        best_eta, best_delay, best_queue, best_eta_selection_metric = choose_best_eta(
+            best_eta, best_delay, best_queue, metrics
+        )
     if best_eta is not None:
         metrics, trace = run_one_config(availability.sumo, config, BACKPRESSURE_POLICY, 0, args.duration, args.cycle_seconds, eta=best_eta, record_trace=True)
         metrics.update({"scenario": args.scenario, "algorithm_type": "real_sumo_backpressure_best_eta"})
@@ -367,8 +465,9 @@ def main() -> None:
             "scenario": args.scenario,
             "policy": BACKPRESSURE_POLICY,
             "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY],
-            "summary_source": "best_real_sumo_eta",
+            "summary_source": f"best_real_sumo_eta_by_{best_eta_selection_metric}",
             "eta": best_eta,
+            "eta_selection_metric": best_eta_selection_metric,
             "mean_travel_time_seconds": metrics.get("mean_travel_time_seconds"),
         })
         for item in trace:
@@ -384,8 +483,9 @@ def main() -> None:
         "scenario": args.scenario,
         "episodes": args.episodes,
         "duration_seconds": args.duration,
-        "eta_values": ETAS,
+        "eta_values": args.eta_values,
         "best_eta": best_eta,
+        "best_eta_selection_metric": best_eta_selection_metric,
         "summary": summary_rows,
     }, indent=2), encoding="utf-8")
     write_simple_svg(plot_dir / "real_sumo_algorithm_comparison.svg", "Real SUMO algorithm comparison")
