@@ -13,13 +13,13 @@ Scope is restricted to the supplied Chapter 4 and Chapter 5 excerpts.
 | Simulation duration | Partially specified | Nine-intersection runs are one hour; two-intersection has three hourly intervals. Short cloud runs are reduced. |
 | Warm-up | Missing | No warm-up stated. |
 | SUMO step length | Missing | Configurable; default 1 s. |
-| Phases/actions | Partially specified | Two phases assumed: north-south and east-west. Exact SUMO phase strings absent. |
-| Yellow duration | Missing | Configurable; default 3 s. |
-| State | Partially specified | Implemented S(t)=[Q(t), Q'(t), a'(t)] with documented ordering per config/test. |
-| Reward | Missing in excerpt | Implemented configurable Lyapunov queue reduction assumption. |
-| QLF | Missing in excerpt | Implemented as sum of squared queues and documented as assumption. |
-| QPLF | Partially specified | Backpressure pressure equation is specified; QPLF squared positive pressure is an assumption. |
+| Phases/actions | Partially specified | Chapter 4 green vectors and eight cooperative phase sequences implemented; Chapter 5 fallback cyclic backpressure uses four single-approach phase vectors because exact SUMO phase strings are absent. |
+| Yellow duration | Partially specified | Chapter 5 says yellow is predefined after every phase and cyclic formula uses total `Y`; fallback uses Chapter 3 total `Y=16`, i.e. 4 s after each of four phases. |
+| State | Partially specified | Chapter 4 independent learner uses local `Q(t)`; semi-coordinated learner uses `S(t)=[Q(t), Q'(t), a'(t)]` with documented ordering per config/test. |
+| Reward | Fully specified for Chapter 4 RL | Implemented `R(t)=1/sum_i Q_i(t+1)` with explicit finite zero-queue simulation policy because the zero denominator case is not defined in the thesis text. |
+| QLF | Specified in Chapter 3 | QLF retained as linear function approximation terminology, not a reward. |
+| QPLF | Specified in Chapter 3 / used in Chapter 4 | QPLF is implemented as action-block piecewise-linear function approximation; backpressure pressure equations are separate Chapter 5 utilities. |
 | Learning algorithm | Partially specified | RL described as independent/semi-coordinated; exact neural architecture/hyperparameters missing, so tabular Q-learning is provided as executable baseline scaffold. |
-| Backpressure algorithm | Fully specified for equations | Equations 5.2-5.5 implemented for weights and cyclic green allocation. |
+| Backpressure algorithm | Fully specified for equations | Equations for queue dynamics, weights, max-pressure diagnostic, softmax proportions, and cyclic green allocation are implemented; fallback scripts execute every cyclic phase with its assigned green time. |
 | Metrics | Fully specified/extended | Cumulative stops, travel time, vehicles in network, plus requested average stops and platoon progression. |
 | Reported results | Fully specified for Table 5.2 | Thesis travel times: BP 280/345, semi-RL 262/335, independent 395/397 seconds. |

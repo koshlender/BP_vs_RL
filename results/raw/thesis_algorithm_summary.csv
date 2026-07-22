@@ -1,0 +1,11 @@
+scenario,policy,policy_label,episodes,mean_mean_delay_seconds,mean_travel_time_proxy_seconds,mean_mean_queue,mean_total_stop_events,mean_completed_vehicles,summary_source,eta
+scenario1_low_demand,independent_full_rl,Independent Learner - Full RL,10,2.486273,122.486273,1.2435,54.8,300.8,last_10_training_episodes,
+scenario1_low_demand,independent_qplf,Independent Learner - QPLF,10,25.102175,145.102175,11.366333,23.0,286.6,last_10_training_episodes,
+scenario1_low_demand,semi_coordinated_full_rl,Semi-Coordinated - Full RL,10,1.923389,121.923389,0.962,50.4,300.7,last_10_training_episodes,
+scenario1_low_demand,semi_coordinated_qplf,Semi-Coordinated - QPLF,10,9.310931,129.31093,4.595667,34.9,297.9,last_10_training_episodes,
+scenario2_high_demand,independent_full_rl,Independent Learner - Full RL,10,150.800353,270.800354,132.014167,18.6,529.8,last_10_training_episodes,
+scenario2_high_demand,independent_qplf,Independent Learner - QPLF,10,7.207752,127.207752,9.5105,97.2,803.0,last_10_training_episodes,
+scenario2_high_demand,semi_coordinated_full_rl,Semi-Coordinated - Full RL,10,160.33547,280.335471,140.231,17.4,528.1,last_10_training_episodes,
+scenario2_high_demand,semi_coordinated_qplf,Semi-Coordinated - QPLF,10,7.271358,127.271358,9.828833,97.7,809.1,last_10_training_episodes,
+scenario1_low_demand,cyclic_queue_backpressure,Cyclic Queue Backpressure,1,0.408669,120.408669,16.5,30,323,best_eta_backpressure,0.1
+scenario2_high_demand,cyclic_queue_backpressure,Cyclic Queue Backpressure,1,3.751012,123.751012,231.625,5,494,best_eta_backpressure,0.1

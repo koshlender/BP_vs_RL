@@ -45,13 +45,16 @@ def routes_xml(routes: dict[str, list[str]], interval_sets: dict[str, list[int |
     for rid, edges in routes.items():
         lines.append(f'  <route id="{rid}" edges="{" ".join(edges)}"/>')
     segment = horizon // split_count
+    flow_specs: list[tuple[int, str, int, int, int]] = []
     for rid, intervals in interval_sets.items():
         for idx, period in enumerate(intervals):
             if period is None:
                 continue
             begin = idx * segment
             end = (idx + 1) * segment
-            lines.append(f'  <flow id="{rid}_{idx}" type="car" route="{rid}" begin="{begin}" end="{end}" period="{period}" departLane="best" departSpeed="max"/>')
+            flow_specs.append((begin, rid, idx, end, int(period)))
+    for begin, rid, idx, end, period in sorted(flow_specs, key=lambda item: (item[0], item[1], item[2])):
+        lines.append(f'  <flow id="{rid}_{idx}" type="car" route="{rid}" begin="{begin}" end="{end}" period="{period}" departLane="best" departSpeed="max"/>')
     lines.append("</routes>")
     return "\n".join(lines) + "\n"
 

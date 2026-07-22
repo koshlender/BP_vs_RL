@@ -3,12 +3,12 @@
   "simulation": {
     "duration_seconds": 600,
     "warmup_seconds": 0,
-    "action_duration_seconds": 10
+    "action_duration_seconds": 80
   },
   "signals": {
-    "yellow_duration_seconds": 3,
-    "min_green_seconds": 10,
-    "max_green_seconds": 60,
+    "yellow_duration_seconds": 4,
+    "min_green_seconds": 4,
+    "max_green_seconds": 32,
     "actions": {
       "0": "north_south",
       "1": "east_west"
@@ -31,21 +31,20 @@
     "episodes": 2,
     "gamma": 0.95,
     "learning_rate": 0.1,
-    "epsilon_start": 0.3,
-    "epsilon_end": 0.05,
-    "epsilon_decay": 0.98,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.0,
+    "epsilon_decay": 0.05,
     "state_bins": [
-      0,
-      2,
-      5,
       10,
       20,
-      40
+      30,
+      40,
+      50
     ]
   },
   "backpressure": {
     "eta": 0.05,
-    "cycle_time_seconds": 60
+    "cycle_time_seconds": 80
   },
   "metrics": {
     "stop_speed_threshold": 0.1,
