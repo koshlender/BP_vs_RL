@@ -51,6 +51,25 @@ def require_sumo() -> SumoAvailability:
     return availability
 
 
+def _output_exists(path: Path) -> bool:
+    return path.exists() and path.stat().st_size > 0
+
+
+def _check_call_accepting_colab_sigsegv(cmd: list[str], expected_output: Path) -> None:
+    """Run a SUMO tool, accepting Colab SIGSEGV only if output was written.
+
+    Some Colab SUMO packages print `Success.` and create the requested output,
+    then exit with SIGSEGV (-11). For this smoke-test network generator, that is
+    usable as long as the expected `.net.xml` exists and is non-empty.
+    """
+    try:
+        subprocess.check_call(cmd)
+    except subprocess.CalledProcessError as exc:
+        if exc.returncode == -11 and _output_exists(expected_output):
+            return
+        raise
+
+
 def _write_manual_grid_xml(base: Path, grid_number: int, lane_number: int, length_m: int) -> tuple[Path, Path]:
     """Write simple node/edge XML files for a grid, avoiding netgenerate."""
     nodes_file = base.with_suffix(".nod.xml")
@@ -101,7 +120,7 @@ def generate_grid_network(output_net: Path, grid_number: int = 3, lane_number: i
     errors: list[str] = []
     for cmd in commands:
         try:
-            subprocess.check_call(cmd)
+            _check_call_accepting_colab_sigsegv(cmd, output_net)
             return
         except subprocess.CalledProcessError as exc:
             errors.append(f"{cmd!r} exited with {exc.returncode}")
@@ -118,7 +137,7 @@ def generate_grid_network(output_net: Path, grid_number: int = 3, lane_number: i
         "--output-file", str(output_net),
     ]
     try:
-        subprocess.check_call(netconvert_cmd)
+        _check_call_accepting_colab_sigsegv(netconvert_cmd, output_net)
     except subprocess.CalledProcessError as exc:
         errors.append(f"{netconvert_cmd!r} exited with {exc.returncode}")
         raise RuntimeError("Unable to generate SUMO grid network. Attempts:\n" + "\n".join(errors)) from exc

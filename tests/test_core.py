@@ -139,6 +139,16 @@ def test_generate_grid_network_uses_grid_length(monkeypatch, tmp_path):
     assert "--default.length" not in calls[0]
 
 
+
+def test_generate_grid_network_accepts_colab_sigsegv_when_output_exists(monkeypatch, tmp_path):
+    from src.environment import sumo_env
+    monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
+    def fake_check_call(cmd):
+        (tmp_path / "grid.net.xml").write_text("<net/>\n", encoding="utf-8")
+        raise sumo_env.subprocess.CalledProcessError(-11, cmd)
+    monkeypatch.setattr(sumo_env.subprocess, "check_call", fake_check_call)
+    sumo_env.generate_grid_network(tmp_path / "grid.net.xml")
+
 def test_generate_grid_network_falls_back_to_netconvert(monkeypatch, tmp_path):
     from src.environment import sumo_env
     monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
