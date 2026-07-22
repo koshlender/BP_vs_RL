@@ -63,6 +63,15 @@ SCENARIOS = {
 }
 
 
+def parse_eta_values(text: str) -> list[float]:
+    try:
+        values = [round(float(item.strip()), 3) for item in text.split(",") if item.strip()]
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("eta values must be numbers") from exc
+    if not values:
+        raise argparse.ArgumentTypeError("provide at least one eta value")
+    return values
+
 def softmax(values: list[float], eta: float) -> list[float]:
     if not values:
         return []
@@ -347,6 +356,7 @@ def main() -> None:
     parser.add_argument("--episodes", type=int, default=20, help="RL training episodes; use 200 for thesis-length runs")
     parser.add_argument("--duration", type=int, default=3600, help="SUMO simulation duration in seconds")
     parser.add_argument("--cycle-seconds", type=int, default=80, help="Control cycle length")
+    parser.add_argument("--eta-values", type=parse_eta_values, default=ETAS, help="Comma-separated cyclic backpressure eta values; use one value for quick Colab smoke tests")
     parser.add_argument("--scenario", choices=sorted(SCENARIOS), default="chapter4_5_nine_scenario1_low_demand")
     args = parser.parse_args()
 
@@ -381,7 +391,9 @@ def main() -> None:
     }
 
     for policy in RL_POLICIES:
+        print(f"Starting {POLICY_LABELS[policy]} for {args.episodes} episode(s) at {args.duration}s each", flush=True)
         for episode in range(args.episodes):
+            print(f"  {POLICY_LABELS[policy]} episode {episode + 1}/{args.episodes}", flush=True)
             metrics, trace = run_one_config(availability.sumo, config, policy, episode, args.duration, args.cycle_seconds, agents_by_tls=policy_agents[policy], record_trace=episode == args.episodes - 1)
             metrics.update({"scenario": args.scenario, "episode": episode, "algorithm_type": "real_sumo_rl"})
             episode_rows.append(metrics)
@@ -403,7 +415,8 @@ def main() -> None:
 
     best_eta = None
     best_delay = None
-    for eta in ETAS:
+    for eta in args.eta_values:
+        print(f"Starting {POLICY_LABELS[BACKPRESSURE_POLICY]} eta={eta} at {args.duration}s", flush=True)
         metrics, _trace = run_one_config(availability.sumo, config, BACKPRESSURE_POLICY, 0, args.duration, args.cycle_seconds, eta=eta)
         metrics.update({"scenario": args.scenario, "algorithm_type": "real_sumo_backpressure"})
         eta_rows.append(metrics)
@@ -435,7 +448,7 @@ def main() -> None:
         "scenario": args.scenario,
         "episodes": args.episodes,
         "duration_seconds": args.duration,
-        "eta_values": ETAS,
+        "eta_values": args.eta_values,
         "best_eta": best_eta,
         "summary": summary_rows,
     }, indent=2), encoding="utf-8")
