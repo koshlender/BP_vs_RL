@@ -226,7 +226,7 @@ def test_thesis_algorithm_comparison_outputs_requested_artifacts():
     assert ',0.1,' in eta_text and ',1.2,' in eta_text
 
 def test_real_sumo_algorithm_comparison_helpers():
-    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, softmax, integer_durations
+    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, TRACI_START_RETRIES, softmax, integer_durations, sumo_command
     assert ETAS[0] == 0.1 and ETAS[-1] == 1.2 and len(ETAS) == 12
     for label in ['Independent Learner - Full RL', 'Independent Learner - QPLF', 'Semi-Coordinated - Full RL', 'Semi-Coordinated - QPLF', 'Cyclic Queue Backpressure']:
         assert label in POLICY_LABELS.values()
@@ -235,3 +235,5 @@ def test_real_sumo_algorithm_comparison_helpers():
     durations = integer_durations(probs, 80)
     assert sum(durations) == 80 and len(durations) == 3
     assert set(ALL_POLICIES) == set(POLICY_LABELS)
+    assert TRACI_START_RETRIES == 3
+    assert sumo_command("sumo", Path("scenario.sumocfg")) == ["sumo", "-c", "scenario.sumocfg", "--no-step-log", "true", "--no-warnings", "true"]
