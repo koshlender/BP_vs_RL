@@ -7,13 +7,13 @@
       "eval_episodes": 10,
       "platoon_progression_percentage": null,
       "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",
-      "mean_average_travel_time_seconds": 121.0,
-      "mean_total_stop_events": 21.6,
+      "mean_average_travel_time_seconds": 121.25,
+      "mean_total_stop_events": 25.2,
       "mean_observed_vehicles": 4.0,
-      "mean_completed_vehicles": 314.8,
-      "mean_average_stops_per_observed_vehicle": 5.4,
-      "mean_reward": -174.0,
-      "mean_mean_queue": 0.29
+      "mean_completed_vehicles": 314.7,
+      "mean_average_stops_per_observed_vehicle": 6.3,
+      "mean_reward": -208.5,
+      "mean_mean_queue": 0.3475
     },
     {
       "scenario": "scenario1_low_demand",
@@ -21,13 +21,13 @@
       "eval_episodes": 10,
       "platoon_progression_percentage": null,
       "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",
-      "mean_average_travel_time_seconds": 153.5,
-      "mean_total_stop_events": 32.2,
+      "mean_average_travel_time_seconds": 121.25,
+      "mean_total_stop_events": 25.5,
       "mean_observed_vehicles": 4.0,
-      "mean_completed_vehicles": 301.8,
-      "mean_average_stops_per_observed_vehicle": 8.05,
-      "mean_reward": -2982.0,
-      "mean_mean_queue": 4.97
+      "mean_completed_vehicles": 314.7,
+      "mean_average_stops_per_observed_vehicle": 6.375,
+      "mean_reward": -208.6,
+      "mean_mean_queue": 0.347667
     },
     {
       "scenario": "scenario1_low_demand",
@@ -49,13 +49,13 @@
       "eval_episodes": 10,
       "platoon_progression_percentage": null,
       "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",
-      "mean_average_travel_time_seconds": 121.25,
-      "mean_total_stop_events": 25.2,
+      "mean_average_travel_time_seconds": 162.5,
+      "mean_total_stop_events": 31.3,
       "mean_observed_vehicles": 4.0,
-      "mean_completed_vehicles": 314.7,
-      "mean_average_stops_per_observed_vehicle": 6.3,
-      "mean_reward": -208.5,
-      "mean_mean_queue": 0.3475
+      "mean_completed_vehicles": 318.0,
+      "mean_average_stops_per_observed_vehicle": 7.825,
+      "mean_reward": -135.4,
+      "mean_mean_queue": 16.925
     },
     {
       "scenario": "scenario2_high_demand",
@@ -63,13 +63,13 @@
       "eval_episodes": 10,
       "platoon_progression_percentage": null,
       "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",
-      "mean_average_travel_time_seconds": 126.5,
-      "mean_total_stop_events": 136.2,
+      "mean_average_travel_time_seconds": 124.75,
+      "mean_total_stop_events": 125.4,
       "mean_observed_vehicles": 4.0,
-      "mean_completed_vehicles": 818.0,
-      "mean_average_stops_per_observed_vehicle": 34.05,
-      "mean_reward": -1347.0,
-      "mean_mean_queue": 2.245
+      "mean_completed_vehicles": 818.7,
+      "mean_average_stops_per_observed_vehicle": 31.35,
+      "mean_reward": -1068.4,
+      "mean_mean_queue": 1.780667
     },
     {
       "scenario": "scenario2_high_demand",
@@ -77,13 +77,13 @@
       "eval_episodes": 10,
       "platoon_progression_percentage": null,
       "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",
-      "mean_average_travel_time_seconds": 379.75,
-      "mean_total_stop_events": 107.4,
+      "mean_average_travel_time_seconds": 124.75,
+      "mean_total_stop_events": 133.7,
       "mean_observed_vehicles": 4.0,
-      "mean_completed_vehicles": 716.7,
-      "mean_average_stops_per_observed_vehicle": 26.85,
-      "mean_reward": -20619.3,
-      "mean_mean_queue": 34.3655
+      "mean_completed_vehicles": 818.7,
+      "mean_average_stops_per_observed_vehicle": 33.425,
+      "mean_reward": -1060.3,
+      "mean_mean_queue": 1.767167
     },
     {
       "scenario": "scenario2_high_demand",
@@ -105,13 +105,13 @@
       "eval_episodes": 10,
       "platoon_progression_percentage": null,
       "platoon_progression_note": "undefined: deterministic fallback has aggregate queues, not vehicle IDs/corridor crossings",
-      "mean_average_travel_time_seconds": 124.5,
-      "mean_total_stop_events": 130.8,
+      "mean_average_travel_time_seconds": 1075.5,
+      "mean_total_stop_events": 5.0,
       "mean_observed_vehicles": 4.0,
-      "mean_completed_vehicles": 818.8,
-      "mean_average_stops_per_observed_vehicle": 32.7,
-      "mean_reward": -1056.4,
-      "mean_mean_queue": 1.760667
+      "mean_completed_vehicles": 494.8,
+      "mean_average_stops_per_observed_vehicle": 1.25,
+      "mean_reward": -1779.2,
+      "mean_mean_queue": 222.4
     }
   ]
 }

@@ -8,28 +8,28 @@
   <route id="e-l" edges="e l"/>
   <route id="d-a" edges="d a"/>
   <route id="k-d" edges="k d"/>
-  <flow id="b-g_0" type="car" route="b-g" begin="0" end="3600" period="60" departLane="best" departSpeed="max"/>
-  <flow id="b-g_1" type="car" route="b-g" begin="3600" end="7200" period="30" departLane="best" departSpeed="max"/>
-  <flow id="b-g_2" type="car" route="b-g" begin="7200" end="10800" period="40" departLane="best" departSpeed="max"/>
   <flow id="b-e_0" type="car" route="b-e" begin="0" end="3600" period="80" departLane="best" departSpeed="max"/>
-  <flow id="b-e_1" type="car" route="b-e" begin="3600" end="7200" period="400" departLane="best" departSpeed="max"/>
-  <flow id="b-e_2" type="car" route="b-e" begin="7200" end="10800" period="40" departLane="best" departSpeed="max"/>
-  <flow id="i-n_0" type="car" route="i-n" begin="0" end="3600" period="40" departLane="best" departSpeed="max"/>
-  <flow id="i-n_1" type="car" route="i-n" begin="3600" end="7200" period="40" departLane="best" departSpeed="max"/>
-  <flow id="i-n_2" type="car" route="i-n" begin="7200" end="10800" period="40" departLane="best" departSpeed="max"/>
-  <flow id="f-c_0" type="car" route="f-c" begin="0" end="3600" period="60" departLane="best" departSpeed="max"/>
-  <flow id="f-c_1" type="car" route="f-c" begin="3600" end="7200" period="600" departLane="best" departSpeed="max"/>
-  <flow id="f-c_2" type="car" route="f-c" begin="7200" end="10800" period="300" departLane="best" departSpeed="max"/>
-  <flow id="h-e-l_0" type="car" route="h-e-l" begin="0" end="3600" period="80" departLane="best" departSpeed="max"/>
-  <flow id="h-e-l_1" type="car" route="h-e-l" begin="3600" end="7200" period="1000" departLane="best" departSpeed="max"/>
-  <flow id="h-e-l_2" type="car" route="h-e-l" begin="7200" end="10800" period="20" departLane="best" departSpeed="max"/>
-  <flow id="e-l_0" type="car" route="e-l" begin="0" end="3600" period="30" departLane="best" departSpeed="max"/>
-  <flow id="e-l_1" type="car" route="e-l" begin="3600" end="7200" period="600" departLane="best" departSpeed="max"/>
-  <flow id="e-l_2" type="car" route="e-l" begin="7200" end="10800" period="60" departLane="best" departSpeed="max"/>
+  <flow id="b-g_0" type="car" route="b-g" begin="0" end="3600" period="60" departLane="best" departSpeed="max"/>
   <flow id="d-a_0" type="car" route="d-a" begin="0" end="3600" period="20" departLane="best" departSpeed="max"/>
-  <flow id="d-a_1" type="car" route="d-a" begin="3600" end="7200" period="200" departLane="best" departSpeed="max"/>
-  <flow id="d-a_2" type="car" route="d-a" begin="7200" end="10800" period="20" departLane="best" departSpeed="max"/>
+  <flow id="e-l_0" type="car" route="e-l" begin="0" end="3600" period="30" departLane="best" departSpeed="max"/>
+  <flow id="f-c_0" type="car" route="f-c" begin="0" end="3600" period="60" departLane="best" departSpeed="max"/>
+  <flow id="h-e-l_0" type="car" route="h-e-l" begin="0" end="3600" period="80" departLane="best" departSpeed="max"/>
+  <flow id="i-n_0" type="car" route="i-n" begin="0" end="3600" period="40" departLane="best" departSpeed="max"/>
   <flow id="k-d_0" type="car" route="k-d" begin="0" end="3600" period="60" departLane="best" departSpeed="max"/>
+  <flow id="b-e_1" type="car" route="b-e" begin="3600" end="7200" period="400" departLane="best" departSpeed="max"/>
+  <flow id="b-g_1" type="car" route="b-g" begin="3600" end="7200" period="30" departLane="best" departSpeed="max"/>
+  <flow id="d-a_1" type="car" route="d-a" begin="3600" end="7200" period="200" departLane="best" departSpeed="max"/>
+  <flow id="e-l_1" type="car" route="e-l" begin="3600" end="7200" period="600" departLane="best" departSpeed="max"/>
+  <flow id="f-c_1" type="car" route="f-c" begin="3600" end="7200" period="600" departLane="best" departSpeed="max"/>
+  <flow id="h-e-l_1" type="car" route="h-e-l" begin="3600" end="7200" period="1000" departLane="best" departSpeed="max"/>
+  <flow id="i-n_1" type="car" route="i-n" begin="3600" end="7200" period="40" departLane="best" departSpeed="max"/>
   <flow id="k-d_1" type="car" route="k-d" begin="3600" end="7200" period="10" departLane="best" departSpeed="max"/>
+  <flow id="b-e_2" type="car" route="b-e" begin="7200" end="10800" period="40" departLane="best" departSpeed="max"/>
+  <flow id="b-g_2" type="car" route="b-g" begin="7200" end="10800" period="40" departLane="best" departSpeed="max"/>
+  <flow id="d-a_2" type="car" route="d-a" begin="7200" end="10800" period="20" departLane="best" departSpeed="max"/>
+  <flow id="e-l_2" type="car" route="e-l" begin="7200" end="10800" period="60" departLane="best" departSpeed="max"/>
+  <flow id="f-c_2" type="car" route="f-c" begin="7200" end="10800" period="300" departLane="best" departSpeed="max"/>
+  <flow id="h-e-l_2" type="car" route="h-e-l" begin="7200" end="10800" period="20" departLane="best" departSpeed="max"/>
+  <flow id="i-n_2" type="car" route="i-n" begin="7200" end="10800" period="40" departLane="best" departSpeed="max"/>
   <flow id="k-d_2" type="car" route="k-d" begin="7200" end="10800" period="60" departLane="best" departSpeed="max"/>
 </routes>

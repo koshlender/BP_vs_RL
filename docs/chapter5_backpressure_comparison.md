@@ -40,4 +40,4 @@ Yellow transition: the compact fallback executes `4` yellow seconds after each p
 | Thesis comparison policies | Independent learner RL, Semi-Coordinated RL, Cyclic Queue Backpressure | Thesis reproduction policies |
 | Additional comparison policies | Full-state independent RL and centralized full-state RL baseline | User-requested non-thesis baselines |
 
-The centralized full-state RL controller is a user-requested additional baseline; it is not claimed as a thesis-reported Chapter 5 result.
+The centralized full-state RL controller is a user-requested additional baseline; it is not claimed as a thesis-reported Chapter 5 result. The eta sweep and short comparison scripts now use the same cyclic phase execution path rather than sampling a two-action proxy.
