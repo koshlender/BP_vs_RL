@@ -275,6 +275,33 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
     return metrics, trace
 
 
+
+def choose_best_eta(
+    current_eta: float | None,
+    current_delay: float | None,
+    current_queue: float | None,
+    candidate_metrics: dict[str, object],
+) -> tuple[float | None, float | None, float | None, str | None]:
+    """Prefer lowest travel time, falling back to lowest queue for short runs."""
+    eta = candidate_metrics.get("eta")
+    if eta is None:
+        return current_eta, current_delay, current_queue, None
+    delay = candidate_metrics.get("mean_travel_time_seconds")
+    if delay is not None:
+        delay_value = float(delay)
+        if current_delay is None or delay_value < current_delay:
+            return float(eta), delay_value, current_queue, "mean_travel_time_seconds"
+        return current_eta, current_delay, current_queue, "mean_travel_time_seconds" if current_delay is not None else "mean_network_queue"
+    if current_delay is not None:
+        return current_eta, current_delay, current_queue, "mean_travel_time_seconds"
+    queue = candidate_metrics.get("mean_network_queue")
+    if queue is None:
+        return current_eta, current_delay, current_queue, None
+    queue_value = float(queue)
+    if current_queue is None or queue_value < current_queue:
+        return float(eta), current_delay, queue_value, "mean_network_queue"
+    return current_eta, current_delay, current_queue, "mean_network_queue"
+
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -421,15 +448,16 @@ def main() -> None:
 
     best_eta = None
     best_delay = None
+    best_queue = None
+    best_eta_selection_metric = None
     for eta in args.eta_values:
         print(f"Starting {POLICY_LABELS[BACKPRESSURE_POLICY]} eta={eta} at {args.duration}s", flush=True)
         metrics, _trace = run_one_config(availability.sumo, config, BACKPRESSURE_POLICY, 0, args.duration, args.cycle_seconds, eta=eta)
         metrics.update({"scenario": args.scenario, "algorithm_type": "real_sumo_backpressure"})
         eta_rows.append(metrics)
-        delay = metrics.get("mean_travel_time_seconds")
-        if delay is not None and (best_delay is None or float(delay) < best_delay):
-            best_delay = float(delay)
-            best_eta = eta
+        best_eta, best_delay, best_queue, best_eta_selection_metric = choose_best_eta(
+            best_eta, best_delay, best_queue, metrics
+        )
     if best_eta is not None:
         metrics, trace = run_one_config(availability.sumo, config, BACKPRESSURE_POLICY, 0, args.duration, args.cycle_seconds, eta=best_eta, record_trace=True)
         metrics.update({"scenario": args.scenario, "algorithm_type": "real_sumo_backpressure_best_eta"})
@@ -437,8 +465,9 @@ def main() -> None:
             "scenario": args.scenario,
             "policy": BACKPRESSURE_POLICY,
             "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY],
-            "summary_source": "best_real_sumo_eta",
+            "summary_source": f"best_real_sumo_eta_by_{best_eta_selection_metric}",
             "eta": best_eta,
+            "eta_selection_metric": best_eta_selection_metric,
             "mean_travel_time_seconds": metrics.get("mean_travel_time_seconds"),
         })
         for item in trace:
@@ -456,6 +485,7 @@ def main() -> None:
         "duration_seconds": args.duration,
         "eta_values": args.eta_values,
         "best_eta": best_eta,
+        "best_eta_selection_metric": best_eta_selection_metric,
         "summary": summary_rows,
     }, indent=2), encoding="utf-8")
     write_simple_svg(plot_dir / "real_sumo_algorithm_comparison.svg", "Real SUMO algorithm comparison")

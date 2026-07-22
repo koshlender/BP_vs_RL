@@ -226,7 +226,7 @@ def test_thesis_algorithm_comparison_outputs_requested_artifacts():
     assert ',0.1,' in eta_text and ',1.2,' in eta_text
 
 def test_real_sumo_algorithm_comparison_helpers():
-    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, TRACI_START_RETRIES, softmax, integer_durations, parse_eta_values, simulation_metrics, sumo_command
+    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, TRACI_START_RETRIES, softmax, integer_durations, choose_best_eta, parse_eta_values, simulation_metrics, sumo_command
     assert ETAS[0] == 0.1 and ETAS[-1] == 1.2 and len(ETAS) == 12
     for label in ['Independent Learner - Full RL', 'Independent Learner - QPLF', 'Semi-Coordinated - Full RL', 'Semi-Coordinated - QPLF', 'Cyclic Queue Backpressure']:
         assert label in POLICY_LABELS.values()
@@ -241,4 +241,8 @@ def test_real_sumo_algorithm_comparison_helpers():
     assert metrics["completed_vehicles"] == 2
     assert metrics["mean_travel_time_seconds"] == 12.0
     assert metrics["average_stops_per_completed_vehicle"] == 2.0
+    best = choose_best_eta(None, None, None, {"eta": 0.1, "mean_travel_time_seconds": None, "mean_network_queue": 8.0})
+    assert best == (0.1, None, 8.0, "mean_network_queue")
+    best = choose_best_eta(*best[:3], {"eta": 0.5, "mean_travel_time_seconds": 40.0, "mean_network_queue": 9.0})
+    assert best == (0.5, 40.0, 8.0, "mean_travel_time_seconds")
     assert sumo_command("sumo", Path("scenario.sumocfg")) == ["sumo", "-c", "scenario.sumocfg", "--no-step-log", "true", "--no-warnings", "true"]
