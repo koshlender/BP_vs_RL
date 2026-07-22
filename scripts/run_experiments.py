@@ -9,9 +9,10 @@ from __future__ import annotations
 from pathlib import Path
 import csv, json, random, sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from src.agents.q_learning import TabularQLearningAgent
+from src.agents.pwl_q_learning import PiecewiseLinearQAgent
 from src.environment.simulated_env import QueueNetworkEnv
-from src.rewards.qplf import backpressure_weights
+from src.rewards.backpressure import cyclic_backpressure_decision
+from src.thesis.chapter_constants import THESIS_AVAILABLE_GREEN_TIME_SECONDS, THESIS_YELLOW_TIME_PER_APPROACH_SECONDS
 from src.utils.config import load_config, set_seed
 
 SCENARIOS = {
@@ -20,20 +21,39 @@ SCENARIOS = {
 }
 
 
-def choose_backpressure_action(state: list[float]) -> int:
-    weights = backpressure_weights(state, [0, 0, 0, 0], [[1, 1, 0, 0], [0, 0, 1, 1]])
-    return 0 if weights[0] >= weights[1] else 1
+PHASES = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+IDENTITY_TURNS = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+OUTGOING_QUEUES = [0, 0, 0, 0]
 
+def choose_backpressure_decision(state: list[float], eta: float = 0.05):
+    return cyclic_backpressure_decision(
+        PHASES,
+        state,
+        OUTGOING_QUEUES,
+        IDENTITY_TURNS,
+        eta=eta,
+        available_green_time=THESIS_AVAILABLE_GREEN_TIME_SECONDS,
+    )
+
+
+def neighbouring_action_value(previous_action) -> float:
+    if previous_action is None:
+        return 0.0
+    if isinstance(previous_action, (int, float)):
+        return float(previous_action)
+    if isinstance(previous_action, (list, tuple)) and previous_action:
+        return float(previous_action[0])
+    return 0.0
 
 def policy_state(policy: str, queues: list[float], previous_action: int = 0) -> list[float]:
     if policy == "independent_rl_local":
         return [queues[0], queues[1], queues[2], queues[3]]
     if policy == "semi_coordinated_rl":
-        return list(queues) + [float(previous_action)]
+        return list(queues) + [neighbouring_action_value(previous_action)]
     return list(queues)
 
 
-def run_episode(policy: str, demand: list[float], seed: int, agent: TabularQLearningAgent | None = None, train: bool = False, duration: int = 600) -> dict:
+def run_episode(policy: str, demand: list[float], seed: int, agent: PiecewiseLinearQAgent | None = None, train: bool = False, duration: int = 600) -> dict:
     env = QueueNetworkEnv(duration=duration, seed=seed, demand=demand)
     queues = env.reset()
     previous_action = 0
@@ -49,15 +69,23 @@ def run_episode(policy: str, demand: list[float], seed: int, agent: TabularQLear
         elif policy == "independent_fixed_ns":
             action = 0
         elif policy == "cyclic_queue_backpressure":
-            action = choose_backpressure_action(queues)
+            action = None
         else:
             raise ValueError(policy)
-        next_queues, reward, done, info = env.step(action)
+        if policy == "cyclic_queue_backpressure":
+            decision = choose_backpressure_decision(queues)
+            next_queues, reward, done, info = env.step_phase_schedule(
+                PHASES,
+                decision.executable_green_times,
+                yellow_duration_per_phase=THESIS_YELLOW_TIME_PER_APPROACH_SECONDS,
+            )
+        else:
+            next_queues, reward, done, info = env.step(action)
         if train and agent is not None:
             next_state = policy_state(policy, next_queues, action)
             agent.update(state, action, reward, next_state, done)
         queues = next_queues
-        previous_action = action
+        previous_action = action if action is not None else previous_action
         total_reward += reward
         total_queue += info["queue_sum"]
         steps += 1
@@ -85,8 +113,8 @@ def main() -> None:
     for scenario, demand in SCENARIOS.items():
         random.seed(base_seed)
         agents = {
-            "semi_coordinated_rl": TabularQLearningAgent(alpha=0.12, gamma=0.95, epsilon=0.35),
-            "independent_rl_local": TabularQLearningAgent(alpha=0.12, gamma=0.95, epsilon=0.35),
+            "semi_coordinated_rl": PiecewiseLinearQAgent(actions=(0, 1), alpha=0.12, gamma=0.95, epsilon=0.35, state_dimension=5, use_chapter3_state_encoding=False),
+            "independent_rl_local": PiecewiseLinearQAgent(actions=(0, 1), alpha=0.12, gamma=0.95, epsilon=0.35, state_dimension=4, use_chapter3_state_encoding=False),
         }
         for policy, agent in agents.items():
             for ep in range(episodes):

@@ -52,32 +52,42 @@ class PiecewiseLinearQAgent:
 
     Thesis Chapter 3 QPLF in QLF form: Q_theta(x,a)=f'(x,a)^T theta,
     theta in R^(4n). For action a_j, only block j contains
-    [q_N,q_S,q_E,q_W]; all other action blocks are zero. No action features are
-    used in QPLF.
+    [q_N,q_S,q_E,q_W] in Chapter 3; for Chapter 4 cooperative states the same
+    action-block construction is applied to the larger S(t)=[Q(t),Q'(t),a'(t)]
+    vector. No action features are used in QPLF.
     """
 
     actions: tuple[tuple[int, int, int, int], ...] = THESIS_ACTIONS
     alpha: float = 0.05
     gamma: float = 0.95
     epsilon: float = 1.0
+    state_dimension: int = 4
+    use_chapter3_state_encoding: bool = True
     theta: list[float] = field(default_factory=list)
 
     def __post_init__(self) -> None:
+        if self.state_dimension <= 0:
+            raise ValueError("state_dimension must be positive")
         if not self.theta:
-            self.theta = [0.0] * (4 * len(self.actions))
+            self.theta = [0.0] * (self.state_dimension * len(self.actions))
 
     def state_features(self, state) -> list[float]:
-        values = list(state)[:4]
-        values.extend([0.0] * (4 - len(values)))
-        return list(thesis_state(values))
+        values = list(state)[: self.state_dimension]
+        values.extend([0.0] * (self.state_dimension - len(values)))
+        if self.use_chapter3_state_encoding:
+            values = list(thesis_state(values[:4])) + values[4:]
+        total = sum(abs(float(v)) for v in values)
+        if total > 1.0:
+            values = [float(v) / total for v in values]
+        return [float(v) for v in values]
 
     def features(self, state, action) -> list[float]:
         if action not in self.actions:
             raise ValueError(f"invalid Chapter 3 action {action}")
         # Thesis Chapter 3 formal QPLF feature definition y_{4j-3..4j}.
-        out = [0.0] * (4 * len(self.actions))
-        offset = self.actions.index(action) * 4
-        out[offset : offset + 4] = self.state_features(state)
+        out = [0.0] * (self.state_dimension * len(self.actions))
+        offset = self.actions.index(action) * self.state_dimension
+        out[offset : offset + self.state_dimension] = self.state_features(state)
         return out
 
     def q_value(self, state, action) -> float:
