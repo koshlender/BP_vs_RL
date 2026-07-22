@@ -2,13 +2,13 @@
   "reproduced_short_run": [
     {
       "average_stops_per_completed_vehicle": null,
-      "average_stops_per_observed_vehicle": 2.5,
-      "average_travel_time_seconds": 120.0,
-      "completed_vehicles": 104,
+      "average_stops_per_observed_vehicle": 0.5,
+      "average_travel_time_seconds": 262.5,
+      "completed_vehicles": 47,
       "observed_vehicles": 4,
       "policy": "semi_coordinated_rl_short",
-      "reward": -76.0,
-      "total_stop_events": 10
+      "reward": -3406.0,
+      "total_stop_events": 2
     },
     {
       "average_stops_per_completed_vehicle": null,
