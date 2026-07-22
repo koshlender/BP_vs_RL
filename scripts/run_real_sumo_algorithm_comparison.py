@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import inspect
 import math
 import random
 import sys
@@ -294,20 +295,37 @@ def start_traci(traci, sumo_binary: str, config: Path, retries: int = TRACI_STAR
     command to run directly for diagnostics.
     """
     cmd = sumo_command(sumo_binary, config)
+    rendered = " ".join(cmd)
+    try:
+        start_parameters = inspect.signature(traci.start).parameters
+    except (TypeError, ValueError):
+        start_parameters = {}
+    if "numRetries" not in start_parameters:
+        raise RuntimeError(
+            "The imported TraCI module does not support bounded startup retries. "
+            "In Colab, remove mismatched TraCI packages and use SUMO's bundled "
+            "tools path first, for example:\n"
+            "  pip uninstall -y traci sumolib\n"
+            "  PYTHONPATH=/usr/share/sumo/tools:$PYTHONPATH python -c "
+            "'import traci; print(traci.__file__)'\n"
+            f"After fixing TraCI, rerun this SUMO command directly if startup "
+            f"still fails:\n{rendered}"
+        )
     try:
         traci.start(cmd, numRetries=retries)
-    except TypeError:
-        # Older TraCI versions do not expose numRetries; fall back to their
-        # default behaviour rather than failing before SUMO starts.
-        traci.start(cmd)
     except Exception as exc:
-        rendered = " ".join(cmd)
         raise RuntimeError(
             "TraCI could not connect to SUMO after "
             f"{retries} retries. In Colab this usually means the SUMO process "
             "crashed before opening its TraCI port or the installed SUMO/TraCI "
-            "versions are incompatible. Run this command in a notebook cell to "
-            f"see SUMO startup errors directly:\n{rendered}"
+            "versions are incompatible. First run this direct SUMO check in a "
+            f"notebook cell:\n{rendered} --end 1\n"
+            "If direct SUMO works, force Colab to use SUMO's bundled Python "
+            "tools before any pip-installed TraCI package:\n"
+            "  pip uninstall -y traci sumolib\n"
+            "  PYTHONPATH=.:/usr/share/sumo/tools:$PYTHONPATH python "
+            "scripts/run_real_sumo_algorithm_comparison.py --scenario "
+            "chapter5_nine_scenario2_high_demand --episodes 1 --duration 60"
         ) from exc
 
 
