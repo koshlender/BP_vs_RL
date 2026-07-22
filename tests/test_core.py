@@ -44,6 +44,7 @@ def test_chapter4_state_action_reward_equations():
     assert one_vehicle.reward == 1.0 and one_vehicle.used_thesis_equation
     zero = chapter4_queue_reward_result([0, 0, 0, 0])
     assert zero.reward == 0.0 and not zero.used_thesis_equation and zero.zero_queue_policy_applied
+    assert chapter4_queue_reward_result([0, 0, 0, 0], zero_queue_policy="epsilon", epsilon=2).reward == 0.5
     zero_reward = chapter4_queue_reward([0, 0, 0, 0])
     td_target = zero_reward + 0.95 * 0.0
     assert math.isfinite(zero_reward) and math.isfinite(td_target)
@@ -55,7 +56,7 @@ def test_qlf_qplf():
     assert queue_length_function([0,0])==0; assert reward_from_qlf([2,0],[1,0])==1
     assert queue_pressure_lyapunov_function([5,1],[2,2])==9
     assert backpressure_weights([5,1],[2,2],[[1,0],[0,1]])==[3,-1]
-    assert math.isclose(sum(cyclic_green_times([1,2],60,6,.1)),54)
+    assert math.isclose(sum(cyclic_green_times([1,2],80,16,.1)),64)
 
 def test_chapter5_cyclic_backpressure_equations():
     turns = [[0.8, 0.2], [0.1, 0.9]]
@@ -125,6 +126,45 @@ def test_piecewise_linear_agent_and_qplf_script(tmp_path):
     assert 'centralized_full_state_rl' in summary
     assert 'cyclic_queue_backpressure' in summary
 
+
+def test_generate_grid_network_uses_grid_length(monkeypatch, tmp_path):
+    from src.environment import sumo_env
+    monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
+    calls = []
+    def fake_check_call(cmd):
+        calls.append(cmd)
+    monkeypatch.setattr(sumo_env.subprocess, "check_call", fake_check_call)
+    sumo_env.generate_grid_network(tmp_path / "grid.net.xml")
+    assert calls and "--grid.length" in calls[0]
+    assert "--default.length" not in calls[0]
+
+
+
+def test_generate_grid_network_accepts_colab_sigsegv_when_output_exists(monkeypatch, tmp_path):
+    from src.environment import sumo_env
+    monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
+    def fake_check_call(cmd):
+        (tmp_path / "grid.net.xml").write_text("<net/>\n", encoding="utf-8")
+        raise sumo_env.subprocess.CalledProcessError(-11, cmd)
+    monkeypatch.setattr(sumo_env.subprocess, "check_call", fake_check_call)
+    sumo_env.generate_grid_network(tmp_path / "grid.net.xml")
+
+def test_generate_grid_network_falls_back_to_netconvert(monkeypatch, tmp_path):
+    from src.environment import sumo_env
+    monkeypatch.setattr(sumo_env, "require_sumo", lambda: sumo_env.SumoAvailability("sumo", "netgenerate", True, True, []))
+    monkeypatch.setattr(sumo_env.shutil, "which", lambda name: "netconvert" if name == "netconvert" else None)
+    calls = []
+    def fake_check_call(cmd):
+        calls.append(cmd)
+        if cmd[0] == "netgenerate":
+            raise sumo_env.subprocess.CalledProcessError(-11, cmd)
+    monkeypatch.setattr(sumo_env.subprocess, "check_call", fake_check_call)
+    sumo_env.generate_grid_network(tmp_path / "grid.net.xml")
+    assert len(calls) == 3
+    assert calls[-1][0] == "netconvert"
+    assert (tmp_path / "grid.nod.xml").exists()
+    assert (tmp_path / "grid.edg.xml").exists()
+
 def test_real_sumo_availability_check_reports_status():
     from src.environment.sumo_env import check_sumo_availability
     availability = check_sumo_availability()
@@ -142,3 +182,56 @@ def test_generate_thesis_sumo_assets():
 def test_eta_sweep_script_outputs_best_eta():
     subprocess.check_call([sys.executable, 'scripts/run_eta_sweep.py'])
     assert Path('results/raw/eta_sweep_best.csv').exists()
+
+def test_thesis_sumo_metrics_are_thesis_named(tmp_path):
+    from scripts.run_thesis_sumo_experiments import summarize_tripinfo, SCENARIOS, CONTROL_ALGORITHM
+    tripinfo = tmp_path / "thesis_sample_tripinfo.xml"
+    tripinfo.write_text(
+        '<tripinfos>\n'
+        '  <tripinfo id="v0" duration="10.0" waitingTime="2.0" waitingCount="1"/>\n'
+        '  <tripinfo id="v1" duration="30.0" waitingTime="4.0" waitingCount="3"/>\n'
+        '</tripinfos>\n',
+        encoding="utf-8",
+    )
+    metrics = summarize_tripinfo(tripinfo)
+    assert metrics["completed_vehicles"] == 2
+    assert metrics["mean_travel_time_seconds"] == 20.0
+    assert metrics["mean_waiting_time_seconds"] == 3.0
+    assert metrics["total_stop_events"] == 4
+    assert metrics["average_stops_per_completed_vehicle"] == 2.0
+    assert all(str(item["scenario"]).startswith(("chapter4", "chapter5")) for item in SCENARIOS)
+    assert CONTROL_ALGORITHM == "sumo_static_tls_baseline"
+
+def test_thesis_algorithm_comparison_outputs_requested_artifacts():
+    subprocess.check_call([sys.executable, 'scripts/run_thesis_algorithm_comparison.py', '--episodes', '2', '--duration', '80'])
+    expected_raw = [
+        'results/raw/thesis_algorithm_episode_delay.csv',
+        'results/raw/thesis_eta_vs_delay.csv',
+        'results/raw/thesis_queue_vs_time.csv',
+        'results/raw/thesis_algorithm_summary.csv',
+        'results/raw/thesis_algorithm_comparison.json',
+    ]
+    expected_plots = [
+        'plots/thesis_episode_wise_delay.svg',
+        'plots/thesis_eta_vs_delay.svg',
+        'plots/thesis_queue_vs_time.svg',
+        'plots/thesis_algorithm_comparison.svg',
+    ]
+    for path in expected_raw + expected_plots:
+        assert Path(path).exists()
+    summary = Path('results/raw/thesis_algorithm_summary.csv').read_text()
+    for label in ['Independent Learner - Full RL', 'Independent Learner - QPLF', 'Semi-Coordinated - Full RL', 'Semi-Coordinated - QPLF', 'Cyclic Queue Backpressure']:
+        assert label in summary
+    eta_text = Path('results/raw/thesis_eta_vs_delay.csv').read_text()
+    assert ',0.1,' in eta_text and ',1.2,' in eta_text
+
+def test_real_sumo_algorithm_comparison_helpers():
+    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, softmax, integer_durations
+    assert ETAS[0] == 0.1 and ETAS[-1] == 1.2 and len(ETAS) == 12
+    for label in ['Independent Learner - Full RL', 'Independent Learner - QPLF', 'Semi-Coordinated - Full RL', 'Semi-Coordinated - QPLF', 'Cyclic Queue Backpressure']:
+        assert label in POLICY_LABELS.values()
+    probs = softmax([1.0, 2.0, 3.0], eta=0.5)
+    assert len(probs) == 3 and abs(sum(probs) - 1.0) < 1e-9
+    durations = integer_durations(probs, 80)
+    assert sum(durations) == 80 and len(durations) == 3
+    assert set(ALL_POLICIES) == set(POLICY_LABELS)

@@ -51,20 +51,96 @@ def require_sumo() -> SumoAvailability:
     return availability
 
 
+def _output_exists(path: Path) -> bool:
+    return path.exists() and path.stat().st_size > 0
+
+
+def _check_call_accepting_colab_sigsegv(cmd: list[str], expected_output: Path) -> None:
+    """Run a SUMO tool, accepting Colab SIGSEGV only if output was written.
+
+    Some Colab SUMO packages print `Success.` and create the requested output,
+    then exit with SIGSEGV (-11). For this smoke-test network generator, that is
+    usable as long as the expected `.net.xml` exists and is non-empty.
+    """
+    try:
+        subprocess.check_call(cmd)
+    except subprocess.CalledProcessError as exc:
+        if exc.returncode == -11 and _output_exists(expected_output):
+            return
+        raise
+
+
+def _write_manual_grid_xml(base: Path, grid_number: int, lane_number: int, length_m: int) -> tuple[Path, Path]:
+    """Write simple node/edge XML files for a grid, avoiding netgenerate."""
+    nodes_file = base.with_suffix(".nod.xml")
+    edges_file = base.with_suffix(".edg.xml")
+    node_lines = ["<nodes>"]
+    for x in range(grid_number):
+        for y in range(grid_number):
+            node_lines.append(f'  <node id="n{x}_{y}" x="{x * length_m}" y="{y * length_m}" type="traffic_light"/>')
+    node_lines.append("</nodes>")
+    edge_lines = ["<edges>"]
+    for x in range(grid_number):
+        for y in range(grid_number):
+            if x + 1 < grid_number:
+                edge_lines.append(f'  <edge id="e_n{x}_{y}_n{x+1}_{y}" from="n{x}_{y}" to="n{x+1}_{y}" priority="1" numLanes="{lane_number}" speed="13.9"/>')
+                edge_lines.append(f'  <edge id="e_n{x+1}_{y}_n{x}_{y}" from="n{x+1}_{y}" to="n{x}_{y}" priority="1" numLanes="{lane_number}" speed="13.9"/>')
+            if y + 1 < grid_number:
+                edge_lines.append(f'  <edge id="e_n{x}_{y}_n{x}_{y+1}" from="n{x}_{y}" to="n{x}_{y+1}" priority="1" numLanes="{lane_number}" speed="13.9"/>')
+                edge_lines.append(f'  <edge id="e_n{x}_{y+1}_n{x}_{y}" from="n{x}_{y+1}" to="n{x}_{y}" priority="1" numLanes="{lane_number}" speed="13.9"/>')
+    edge_lines.append("</edges>")
+    nodes_file.write_text("\n".join(node_lines) + "\n", encoding="utf-8")
+    edges_file.write_text("\n".join(edge_lines) + "\n", encoding="utf-8")
+    return nodes_file, edges_file
+
+
 def generate_grid_network(output_net: Path, grid_number: int = 3, lane_number: int = 1, length_m: int = 500) -> None:
+    """Generate a small SUMO grid network for smoke tests.
+
+    Prefer netgenerate with the current `--grid.length` option. Some Colab SUMO
+    packages still segfault in netgenerate after printing `Success`; if both
+    netgenerate attempts fail, write plain node/edge XML and build the network
+    with netconvert instead.
+    """
     availability = require_sumo()
     output_net.parent.mkdir(parents=True, exist_ok=True)
-    cmd = [
+    base_cmd = [
         availability.netgenerate or "netgenerate",
         "--grid",
         "--grid.number", str(grid_number),
         "--default.lanenumber", str(lane_number),
-        "--default.length", str(length_m),
         "--tls.guess", "true",
         "--tls.default-type", "static",
         "--output-file", str(output_net),
     ]
-    subprocess.check_call(cmd)
+    commands = [
+        base_cmd[:4] + ["--grid.length", str(length_m)] + base_cmd[4:],
+        base_cmd,
+    ]
+    errors: list[str] = []
+    for cmd in commands:
+        try:
+            _check_call_accepting_colab_sigsegv(cmd, output_net)
+            return
+        except subprocess.CalledProcessError as exc:
+            errors.append(f"{cmd!r} exited with {exc.returncode}")
+
+    netconvert = shutil.which("netconvert")
+    if not netconvert:
+        raise RuntimeError("Unable to generate SUMO grid network with netgenerate and netconvert is not on PATH. Attempts:\n" + "\n".join(errors))
+    nodes_file, edges_file = _write_manual_grid_xml(output_net.with_suffix(""), grid_number, lane_number, length_m)
+    netconvert_cmd = [
+        netconvert,
+        "--node-files", str(nodes_file),
+        "--edge-files", str(edges_file),
+        "--tls.guess", "true",
+        "--output-file", str(output_net),
+    ]
+    try:
+        _check_call_accepting_colab_sigsegv(netconvert_cmd, output_net)
+    except subprocess.CalledProcessError as exc:
+        errors.append(f"{netconvert_cmd!r} exited with {exc.returncode}")
+        raise RuntimeError("Unable to generate SUMO grid network. Attempts:\n" + "\n".join(errors)) from exc
 
 
 def write_sumo_config(net_file: Path, route_file: Path, config_file: Path, end_time: int, step_length: float = 1.0) -> None:

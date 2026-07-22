@@ -1,0 +1,25 @@
+total_stop_events,observed_vehicles,completed_vehicles,average_stops_per_observed_vehicle,average_stops_per_completed_vehicle,average_travel_time_seconds,policy,algorithm,seed,eta,mean_delay_seconds,queue_delay_surrogate_seconds,mean_queue,cycles,duration_seconds,scenario,policy_label
+28,4,302,7.0,,167.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.1,35.417219,35.417219,17.826667,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+24,4,297,6.0,,180.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.2,42.245791,42.245791,20.911667,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+20,4,289,5.0,,200.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.3,51.982699,51.982699,25.038333,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+20,4,285,5.0,,210.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.4,55.898246,55.898246,26.551667,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+15,4,276,3.75,,232.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.5,75.119565,75.119565,34.555,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+15,4,282,3.75,,217.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.6,80.031915,80.031915,37.615,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+16,4,265,4.0,,260.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.7,86.962264,86.962264,38.408333,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+16,4,265,4.0,,260.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.8,87.373585,87.373585,38.59,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+14,4,284,3.5,,212.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.9,83.640845,83.640845,39.59,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+15,4,260,3.75,,272.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,1.0,96.519231,96.519231,41.825,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+15,4,258,3.75,,277.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,1.1,100.620155,100.620155,43.266667,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+15,4,273,3.75,,240.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,1.2,87.263736,87.263736,39.705,8,600,scenario1_low_demand,Cyclic Queue Backpressure
+5,4,462,1.25,,1055.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.1,254.214286,254.214286,195.745,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,459,1.5,,1062.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.2,267.427015,267.427015,204.581667,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,453,1.5,,1077.5,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.3,277.068433,277.068433,209.186667,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,444,1.5,,1100.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.4,283.045045,283.045045,209.453333,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,444,1.5,,1100.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.5,283.513514,283.513514,209.8,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,444,1.5,,1100.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.6,283.81982,283.81982,210.026667,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,440,1.5,,1110.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.7,286.259091,286.259091,209.923333,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,440,1.5,,1110.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.8,286.304545,286.304545,209.956667,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,440,1.5,,1110.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,0.9,286.340909,286.340909,209.983333,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,440,1.5,,1110.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,1.0,286.340909,286.340909,209.983333,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,440,1.5,,1110.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,1.1,286.340909,286.340909,209.983333,8,600,scenario2_high_demand,Cyclic Queue Backpressure
+6,4,440,1.5,,1110.0,cyclic_queue_backpressure,Cyclic Queue Backpressure,1006,1.2,286.340909,286.340909,209.983333,8,600,scenario2_high_demand,Cyclic Queue Backpressure

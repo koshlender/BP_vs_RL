@@ -1,0 +1,147 @@
+{
+  "note": "Thesis-style comparison using the compact queue simulator: RL episode-wise queue-delay surrogate, eta sweep 0.1..1.2, and queue traces for last RL episode / best-eta backpressure. These are not SUMO trip-time measurements.",
+  "episodes": 60,
+  "duration_seconds": 600,
+  "etas": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0,
+    1.1,
+    1.2
+  ],
+  "best_eta_by_scenario": {
+    "scenario1_low_demand": 0.1,
+    "scenario2_high_demand": 0.1
+  },
+  "summary": [
+    {
+      "scenario": "scenario1_low_demand",
+      "policy": "independent_full_rl",
+      "policy_label": "Independent Learner - Full RL",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 15.330087,
+      "mean_queue_delay_surrogate_seconds": 15.330087,
+      "mean_mean_queue": 7.479667,
+      "mean_total_stop_events": 20.3,
+      "mean_completed_vehicles": 293.3,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "policy": "independent_qplf",
+      "policy_label": "Independent Learner - QPLF",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 25.102175,
+      "mean_queue_delay_surrogate_seconds": 25.102175,
+      "mean_mean_queue": 11.366333,
+      "mean_total_stop_events": 23.0,
+      "mean_completed_vehicles": 286.6,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "policy": "semi_coordinated_full_rl",
+      "policy_label": "Semi-Coordinated - Full RL",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 7.328933,
+      "mean_queue_delay_surrogate_seconds": 7.328933,
+      "mean_mean_queue": 3.2355,
+      "mean_total_stop_events": 22.1,
+      "mean_completed_vehicles": 290.6,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "policy": "semi_coordinated_qplf",
+      "policy_label": "Semi-Coordinated - QPLF",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 9.310931,
+      "mean_queue_delay_surrogate_seconds": 9.310931,
+      "mean_mean_queue": 4.595667,
+      "mean_total_stop_events": 34.9,
+      "mean_completed_vehicles": 297.9,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "policy": "independent_full_rl",
+      "policy_label": "Independent Learner - Full RL",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 10.413997,
+      "mean_queue_delay_surrogate_seconds": 10.413997,
+      "mean_mean_queue": 13.9785,
+      "mean_total_stop_events": 72.5,
+      "mean_completed_vehicles": 804.9,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "policy": "independent_qplf",
+      "policy_label": "Independent Learner - QPLF",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 7.207752,
+      "mean_queue_delay_surrogate_seconds": 7.207752,
+      "mean_mean_queue": 9.5105,
+      "mean_total_stop_events": 97.2,
+      "mean_completed_vehicles": 803.0,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "policy": "semi_coordinated_full_rl",
+      "policy_label": "Semi-Coordinated - Full RL",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 4.226546,
+      "mean_queue_delay_surrogate_seconds": 4.226546,
+      "mean_mean_queue": 5.575833,
+      "mean_total_stop_events": 101.3,
+      "mean_completed_vehicles": 813.1,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "policy": "semi_coordinated_qplf",
+      "policy_label": "Semi-Coordinated - QPLF",
+      "episodes": 10,
+      "mean_mean_delay_seconds": 7.271358,
+      "mean_queue_delay_surrogate_seconds": 7.271358,
+      "mean_mean_queue": 9.828833,
+      "mean_total_stop_events": 97.7,
+      "mean_completed_vehicles": 809.1,
+      "summary_source": "last_10_training_episodes"
+    },
+    {
+      "scenario": "scenario1_low_demand",
+      "policy": "cyclic_queue_backpressure",
+      "policy_label": "Cyclic Queue Backpressure",
+      "episodes": 1,
+      "mean_mean_delay_seconds": 35.417219,
+      "mean_queue_delay_surrogate_seconds": 35.417219,
+      "mean_mean_queue": 17.826667,
+      "mean_total_stop_events": 28,
+      "mean_completed_vehicles": 302,
+      "eta": 0.1,
+      "summary_source": "best_eta_backpressure"
+    },
+    {
+      "scenario": "scenario2_high_demand",
+      "policy": "cyclic_queue_backpressure",
+      "policy_label": "Cyclic Queue Backpressure",
+      "episodes": 1,
+      "mean_mean_delay_seconds": 254.214286,
+      "mean_queue_delay_surrogate_seconds": 254.214286,
+      "mean_mean_queue": 195.745,
+      "mean_total_stop_events": 5,
+      "mean_completed_vehicles": 462,
+      "eta": 0.1,
+      "summary_source": "best_eta_backpressure"
+    }
+  ]
+}
