@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="90" y="35" font-family="sans-serif" font-size="24">Comparative mean delay by algorithm</text>
+<line x1="90" y1="410" x2="950" y2="410" stroke="black"/>
+<line x1="90" y1="70" x2="90" y2="410" stroke="black"/>
+<rect x="105.0" y="404.7" width="59.5" height="5.3" fill="#1f77b4"/>
+<text x="105.0" y="399.7" font-family="sans-serif" font-size="11">2.49</text>
+<text x="134.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 134.8,428)">Independent Learner - Full RL</text>
+<rect x="190.0" y="356.8" width="59.5" height="53.2" fill="#1f77b4"/>
+<text x="190.0" y="351.8" font-family="sans-serif" font-size="11">25.10</text>
+<text x="219.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 219.8,428)">Independent Learner - QPLF</text>
+<rect x="275.0" y="405.9" width="59.5" height="4.1" fill="#1f77b4"/>
+<text x="275.0" y="400.9" font-family="sans-serif" font-size="11">1.92</text>
+<text x="304.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 304.8,428)">Semi-Coordinated - Full RL</text>
+<rect x="360.0" y="390.3" width="59.5" height="19.7" fill="#1f77b4"/>
+<text x="360.0" y="385.3" font-family="sans-serif" font-size="11">9.31</text>
+<text x="389.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 389.8,428)">Semi-Coordinated - QPLF</text>
+<rect x="445.0" y="90.2" width="59.5" height="319.8" fill="#1f77b4"/>
+<text x="445.0" y="85.2" font-family="sans-serif" font-size="11">150.80</text>
+<text x="474.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 474.8,428)">Independent Learner - Full RL</text>
+<rect x="530.0" y="394.7" width="59.5" height="15.3" fill="#1f77b4"/>
+<text x="530.0" y="389.7" font-family="sans-serif" font-size="11">7.21</text>
+<text x="559.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 559.8,428)">Independent Learner - QPLF</text>
+<rect x="615.0" y="70.0" width="59.5" height="340.0" fill="#1f77b4"/>
+<text x="615.0" y="65.0" font-family="sans-serif" font-size="11">160.34</text>
+<text x="644.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 644.8,428)">Semi-Coordinated - Full RL</text>
+<rect x="700.0" y="394.6" width="59.5" height="15.4" fill="#1f77b4"/>
+<text x="700.0" y="389.6" font-family="sans-serif" font-size="11">7.27</text>
+<text x="729.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 729.8,428)">Semi-Coordinated - QPLF</text>
+<rect x="785.0" y="409.1" width="59.5" height="0.9" fill="#1f77b4"/>
+<text x="785.0" y="404.1" font-family="sans-serif" font-size="11">0.41</text>
+<text x="814.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 814.8,428)">Cyclic Queue Backpressure</text>
+<rect x="870.0" y="402.0" width="59.5" height="8.0" fill="#1f77b4"/>
+<text x="870.0" y="397.0" font-family="sans-serif" font-size="11">3.75</text>
+<text x="899.8" y="428" font-family="sans-serif" font-size="11" text-anchor="end" transform="rotate(-35 899.8,428)">Cyclic Queue Backpressure</text>
+<text x="15" y="240.0" font-family="sans-serif" font-size="14" transform="rotate(-90 15,240.0)">mean_mean_delay_seconds</text>
+</svg>

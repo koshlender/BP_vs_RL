@@ -21,6 +21,13 @@ from scripts.build_thesis_sumo_networks import main as build_thesis_networks
 from src.environment.sumo_env import check_sumo_availability
 
 
+CONTROL_ALGORITHM = "sumo_static_tls_baseline"
+CONTROL_POLICY_DESCRIPTION = (
+    "SUMO static traffic-light program generated from the thesis network XML; "
+    "not the RL independent learner, semi-coordinated QPLF learner, or cyclic backpressure controller."
+)
+
+
 SCENARIOS = [
     {
         "network": "two_intersection",
@@ -102,7 +109,12 @@ def main() -> None:
     for item in SCENARIOS:
         prefix = outdir / f"thesis_{item['network']}_{item['scenario']}"
         row = run_sumo_config(availability.sumo, item["config"], prefix)
-        row.update({"network": item["network"], "scenario": item["scenario"]})
+        row.update({
+            "network": item["network"],
+            "scenario": item["scenario"],
+            "algorithm": CONTROL_ALGORITHM,
+            "control_policy_description": CONTROL_POLICY_DESCRIPTION,
+        })
         rows.append(row)
 
     csv_file = outdir / "thesis_sumo_metrics.csv"

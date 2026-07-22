@@ -184,7 +184,7 @@ def test_eta_sweep_script_outputs_best_eta():
     assert Path('results/raw/eta_sweep_best.csv').exists()
 
 def test_thesis_sumo_metrics_are_thesis_named(tmp_path):
-    from scripts.run_thesis_sumo_experiments import summarize_tripinfo, SCENARIOS
+    from scripts.run_thesis_sumo_experiments import summarize_tripinfo, SCENARIOS, CONTROL_ALGORITHM
     tripinfo = tmp_path / "thesis_sample_tripinfo.xml"
     tripinfo.write_text(
         '<tripinfos>\n'
@@ -200,3 +200,27 @@ def test_thesis_sumo_metrics_are_thesis_named(tmp_path):
     assert metrics["total_stop_events"] == 4
     assert metrics["average_stops_per_completed_vehicle"] == 2.0
     assert all(str(item["scenario"]).startswith(("chapter4", "chapter5")) for item in SCENARIOS)
+    assert CONTROL_ALGORITHM == "sumo_static_tls_baseline"
+
+def test_thesis_algorithm_comparison_outputs_requested_artifacts():
+    subprocess.check_call([sys.executable, 'scripts/run_thesis_algorithm_comparison.py', '--episodes', '2', '--duration', '80'])
+    expected_raw = [
+        'results/raw/thesis_algorithm_episode_delay.csv',
+        'results/raw/thesis_eta_vs_delay.csv',
+        'results/raw/thesis_queue_vs_time.csv',
+        'results/raw/thesis_algorithm_summary.csv',
+        'results/raw/thesis_algorithm_comparison.json',
+    ]
+    expected_plots = [
+        'plots/thesis_episode_wise_delay.svg',
+        'plots/thesis_eta_vs_delay.svg',
+        'plots/thesis_queue_vs_time.svg',
+        'plots/thesis_algorithm_comparison.svg',
+    ]
+    for path in expected_raw + expected_plots:
+        assert Path(path).exists()
+    summary = Path('results/raw/thesis_algorithm_summary.csv').read_text()
+    for label in ['Independent Learner - Full RL', 'Independent Learner - QPLF', 'Semi-Coordinated - Full RL', 'Semi-Coordinated - QPLF', 'Cyclic Queue Backpressure']:
+        assert label in summary
+    eta_text = Path('results/raw/thesis_eta_vs_delay.csv').read_text()
+    assert ',0.1,' in eta_text and ',1.2,' in eta_text

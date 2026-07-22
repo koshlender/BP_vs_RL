@@ -1,0 +1,481 @@
+total_stop_events,observed_vehicles,completed_vehicles,average_stops_per_observed_vehicle,average_stops_per_completed_vehicle,average_travel_time_seconds,policy,algorithm,seed,mean_delay_seconds,travel_time_proxy_seconds,mean_queue,duration_seconds,scenario,episode,policy_label
+55,4,331,13.75,,122.5,independent_full_rl,Independent Learner - Full RL,7,4.199396,124.199396,2.316667,600,scenario1_low_demand,0,Independent Learner - Full RL
+64,4,305,16.0,,122.5,independent_full_rl,Independent Learner - Full RL,8,2.95082,122.95082,1.5,600,scenario1_low_demand,1,Independent Learner - Full RL
+68,4,333,17.0,,122.5,independent_full_rl,Independent Learner - Full RL,9,1.546547,121.546547,0.858333,600,scenario1_low_demand,2,Independent Learner - Full RL
+62,4,302,15.5,,120.0,independent_full_rl,Independent Learner - Full RL,10,1.423841,121.423841,0.716667,600,scenario1_low_demand,3,Independent Learner - Full RL
+71,4,304,17.75,,122.5,independent_full_rl,Independent Learner - Full RL,11,1.578947,121.578947,0.8,600,scenario1_low_demand,4,Independent Learner - Full RL
+50,4,285,12.5,,120.0,independent_full_rl,Independent Learner - Full RL,12,1.761404,121.761404,0.836667,600,scenario1_low_demand,5,Independent Learner - Full RL
+63,4,291,15.75,,122.5,independent_full_rl,Independent Learner - Full RL,13,1.762887,121.762887,0.855,600,scenario1_low_demand,6,Independent Learner - Full RL
+74,4,317,18.5,,122.5,independent_full_rl,Independent Learner - Full RL,14,1.687697,121.687697,0.891667,600,scenario1_low_demand,7,Independent Learner - Full RL
+60,4,287,15.0,,122.5,independent_full_rl,Independent Learner - Full RL,15,1.439024,121.439024,0.688333,600,scenario1_low_demand,8,Independent Learner - Full RL
+65,4,315,16.25,,120.0,independent_full_rl,Independent Learner - Full RL,16,1.974603,121.974603,1.036667,600,scenario1_low_demand,9,Independent Learner - Full RL
+58,4,282,14.5,,125.0,independent_full_rl,Independent Learner - Full RL,17,1.765957,121.765957,0.83,600,scenario1_low_demand,10,Independent Learner - Full RL
+64,4,294,16.0,,122.5,independent_full_rl,Independent Learner - Full RL,18,1.571429,121.571429,0.77,600,scenario1_low_demand,11,Independent Learner - Full RL
+57,4,297,14.25,,122.5,independent_full_rl,Independent Learner - Full RL,19,1.902357,121.902357,0.941667,600,scenario1_low_demand,12,Independent Learner - Full RL
+61,4,360,15.25,,120.0,independent_full_rl,Independent Learner - Full RL,20,1.686111,121.686111,1.011667,600,scenario1_low_demand,13,Independent Learner - Full RL
+57,4,307,14.25,,122.5,independent_full_rl,Independent Learner - Full RL,21,1.710098,121.710098,0.875,600,scenario1_low_demand,14,Independent Learner - Full RL
+68,4,319,17.0,,120.0,independent_full_rl,Independent Learner - Full RL,22,1.855799,121.855799,0.986667,600,scenario1_low_demand,15,Independent Learner - Full RL
+57,4,319,14.25,,120.0,independent_full_rl,Independent Learner - Full RL,23,1.570533,121.570533,0.835,600,scenario1_low_demand,16,Independent Learner - Full RL
+56,4,301,14.0,,122.5,independent_full_rl,Independent Learner - Full RL,24,1.737542,121.737542,0.871667,600,scenario1_low_demand,17,Independent Learner - Full RL
+62,4,325,15.5,,122.5,independent_full_rl,Independent Learner - Full RL,25,1.556923,121.556923,0.843333,600,scenario1_low_demand,18,Independent Learner - Full RL
+72,4,323,18.0,,122.5,independent_full_rl,Independent Learner - Full RL,26,1.832817,121.832817,0.986667,600,scenario1_low_demand,19,Independent Learner - Full RL
+54,4,302,13.5,,120.0,independent_full_rl,Independent Learner - Full RL,27,1.721854,121.721854,0.866667,600,scenario1_low_demand,20,Independent Learner - Full RL
+52,4,312,13.0,,122.5,independent_full_rl,Independent Learner - Full RL,28,1.666667,121.666667,0.866667,600,scenario1_low_demand,21,Independent Learner - Full RL
+66,4,313,16.5,,122.5,independent_full_rl,Independent Learner - Full RL,29,1.763578,121.763578,0.92,600,scenario1_low_demand,22,Independent Learner - Full RL
+56,4,313,14.0,,125.0,independent_full_rl,Independent Learner - Full RL,30,2.054313,122.054313,1.071667,600,scenario1_low_demand,23,Independent Learner - Full RL
+58,4,290,14.5,,125.0,independent_full_rl,Independent Learner - Full RL,31,1.92069,121.92069,0.928333,600,scenario1_low_demand,24,Independent Learner - Full RL
+72,4,311,18.0,,122.5,independent_full_rl,Independent Learner - Full RL,32,1.765273,121.765273,0.915,600,scenario1_low_demand,25,Independent Learner - Full RL
+58,4,286,14.5,,125.0,independent_full_rl,Independent Learner - Full RL,33,1.867133,121.867133,0.89,600,scenario1_low_demand,26,Independent Learner - Full RL
+53,4,296,13.25,,122.5,independent_full_rl,Independent Learner - Full RL,34,1.989865,121.989865,0.981667,600,scenario1_low_demand,27,Independent Learner - Full RL
+71,4,323,17.75,,120.0,independent_full_rl,Independent Learner - Full RL,35,1.891641,121.891641,1.018333,600,scenario1_low_demand,28,Independent Learner - Full RL
+55,4,309,13.75,,122.5,independent_full_rl,Independent Learner - Full RL,36,1.915858,121.915858,0.986667,600,scenario1_low_demand,29,Independent Learner - Full RL
+61,4,296,15.25,,127.5,independent_full_rl,Independent Learner - Full RL,37,2.172297,122.172297,1.071667,600,scenario1_low_demand,30,Independent Learner - Full RL
+54,4,304,13.5,,120.0,independent_full_rl,Independent Learner - Full RL,38,1.611842,121.611842,0.816667,600,scenario1_low_demand,31,Independent Learner - Full RL
+67,4,343,16.75,,122.5,independent_full_rl,Independent Learner - Full RL,39,1.708455,121.708455,0.976667,600,scenario1_low_demand,32,Independent Learner - Full RL
+62,4,324,15.5,,125.0,independent_full_rl,Independent Learner - Full RL,40,1.867284,121.867284,1.008333,600,scenario1_low_demand,33,Independent Learner - Full RL
+64,4,312,16.0,,122.5,independent_full_rl,Independent Learner - Full RL,41,2.080128,122.080128,1.081667,600,scenario1_low_demand,34,Independent Learner - Full RL
+44,4,291,11.0,,122.5,independent_full_rl,Independent Learner - Full RL,42,1.996564,121.996564,0.968333,600,scenario1_low_demand,35,Independent Learner - Full RL
+53,4,317,13.25,,122.5,independent_full_rl,Independent Learner - Full RL,43,1.817035,121.817035,0.96,600,scenario1_low_demand,36,Independent Learner - Full RL
+47,4,330,11.75,,125.0,independent_full_rl,Independent Learner - Full RL,44,1.963636,121.963636,1.08,600,scenario1_low_demand,37,Independent Learner - Full RL
+43,4,307,10.75,,120.0,independent_full_rl,Independent Learner - Full RL,45,1.889251,121.889251,0.966667,600,scenario1_low_demand,38,Independent Learner - Full RL
+69,4,329,17.25,,122.5,independent_full_rl,Independent Learner - Full RL,46,1.826748,121.826748,1.001667,600,scenario1_low_demand,39,Independent Learner - Full RL
+41,4,306,10.25,,122.5,independent_full_rl,Independent Learner - Full RL,47,2.133987,122.133987,1.088333,600,scenario1_low_demand,40,Independent Learner - Full RL
+54,4,293,13.5,,122.5,independent_full_rl,Independent Learner - Full RL,48,2.017065,122.017065,0.985,600,scenario1_low_demand,41,Independent Learner - Full RL
+65,4,334,16.25,,122.5,independent_full_rl,Independent Learner - Full RL,49,1.841317,121.841317,1.025,600,scenario1_low_demand,42,Independent Learner - Full RL
+55,4,281,13.75,,122.5,independent_full_rl,Independent Learner - Full RL,50,2.128114,122.128114,0.996667,600,scenario1_low_demand,43,Independent Learner - Full RL
+55,4,300,13.75,,122.5,independent_full_rl,Independent Learner - Full RL,51,2.04,122.04,1.02,600,scenario1_low_demand,44,Independent Learner - Full RL
+52,4,306,13.0,,122.5,independent_full_rl,Independent Learner - Full RL,52,2.0,122.0,1.02,600,scenario1_low_demand,45,Independent Learner - Full RL
+47,4,304,11.75,,120.0,independent_full_rl,Independent Learner - Full RL,53,2.039474,122.039474,1.033333,600,scenario1_low_demand,46,Independent Learner - Full RL
+45,4,304,11.25,,125.0,independent_full_rl,Independent Learner - Full RL,54,1.953947,121.953947,0.99,600,scenario1_low_demand,47,Independent Learner - Full RL
+48,4,316,12.0,,122.5,independent_full_rl,Independent Learner - Full RL,55,1.927215,121.927215,1.015,600,scenario1_low_demand,48,Independent Learner - Full RL
+53,4,307,13.25,,122.5,independent_full_rl,Independent Learner - Full RL,56,2.459283,122.459283,1.258333,600,scenario1_low_demand,49,Independent Learner - Full RL
+51,4,308,12.75,,120.0,independent_full_rl,Independent Learner - Full RL,57,2.512987,122.512987,1.29,600,scenario1_low_demand,50,Independent Learner - Full RL
+50,4,287,12.5,,120.0,independent_full_rl,Independent Learner - Full RL,58,1.860627,121.860627,0.89,600,scenario1_low_demand,51,Independent Learner - Full RL
+49,4,275,12.25,,122.5,independent_full_rl,Independent Learner - Full RL,59,3.2,123.2,1.466667,600,scenario1_low_demand,52,Independent Learner - Full RL
+56,4,282,14.0,,122.5,independent_full_rl,Independent Learner - Full RL,60,3.163121,123.163121,1.486667,600,scenario1_low_demand,53,Independent Learner - Full RL
+64,4,321,16.0,,122.5,independent_full_rl,Independent Learner - Full RL,61,2.535826,122.535826,1.356667,600,scenario1_low_demand,54,Independent Learner - Full RL
+57,4,289,14.25,,125.0,independent_full_rl,Independent Learner - Full RL,62,1.927336,121.927336,0.928333,600,scenario1_low_demand,55,Independent Learner - Full RL
+60,4,308,15.0,,122.5,independent_full_rl,Independent Learner - Full RL,63,3.003247,123.003247,1.541667,600,scenario1_low_demand,56,Independent Learner - Full RL
+57,4,316,14.25,,127.5,independent_full_rl,Independent Learner - Full RL,64,3.047468,123.047468,1.605,600,scenario1_low_demand,57,Independent Learner - Full RL
+50,4,315,12.5,,125.0,independent_full_rl,Independent Learner - Full RL,65,1.634921,121.634921,0.858333,600,scenario1_low_demand,58,Independent Learner - Full RL
+54,4,307,13.5,,120.0,independent_full_rl,Independent Learner - Full RL,66,1.977199,121.977199,1.011667,600,scenario1_low_demand,59,Independent Learner - Full RL
+24,4,321,6.0,,147.5,independent_qplf,Independent Learner - QPLF,7,16.330218,136.330218,8.736667,600,scenario1_low_demand,0,Independent Learner - QPLF
+54,4,304,13.5,,125.0,independent_qplf,Independent Learner - QPLF,8,5.680921,125.680921,2.878333,600,scenario1_low_demand,1,Independent Learner - QPLF
+20,4,309,5.0,,182.5,independent_qplf,Independent Learner - QPLF,9,22.954693,142.954693,11.821667,600,scenario1_low_demand,2,Independent Learner - QPLF
+36,4,296,9.0,,135.0,independent_qplf,Independent Learner - QPLF,10,15.283784,135.283784,7.54,600,scenario1_low_demand,3,Independent Learner - QPLF
+31,4,296,7.75,,142.5,independent_qplf,Independent Learner - QPLF,11,12.594595,132.594595,6.213333,600,scenario1_low_demand,4,Independent Learner - QPLF
+25,4,285,6.25,,120.0,independent_qplf,Independent Learner - QPLF,12,19.768421,139.768421,9.39,600,scenario1_low_demand,5,Independent Learner - QPLF
+21,4,285,5.25,,137.5,independent_qplf,Independent Learner - QPLF,13,19.115789,139.115789,9.08,600,scenario1_low_demand,6,Independent Learner - QPLF
+20,4,308,5.0,,145.0,independent_qplf,Independent Learner - QPLF,14,17.487013,137.487013,8.976667,600,scenario1_low_demand,7,Independent Learner - QPLF
+23,4,277,5.75,,147.5,independent_qplf,Independent Learner - QPLF,15,20.245487,140.245487,9.346667,600,scenario1_low_demand,8,Independent Learner - QPLF
+19,4,308,4.75,,137.5,independent_qplf,Independent Learner - QPLF,16,25.347403,145.347403,13.011667,600,scenario1_low_demand,9,Independent Learner - QPLF
+18,4,275,4.5,,142.5,independent_qplf,Independent Learner - QPLF,17,26.967273,146.967273,12.36,600,scenario1_low_demand,10,Independent Learner - QPLF
+19,4,276,4.75,,167.5,independent_qplf,Independent Learner - QPLF,18,23.257246,143.257246,10.698333,600,scenario1_low_demand,11,Independent Learner - QPLF
+15,4,298,3.75,,120.0,independent_qplf,Independent Learner - QPLF,19,17.550336,137.550336,8.716667,600,scenario1_low_demand,12,Independent Learner - QPLF
+14,4,334,3.5,,185.0,independent_qplf,Independent Learner - QPLF,20,26.973054,146.973054,15.015,600,scenario1_low_demand,13,Independent Learner - QPLF
+18,4,282,4.5,,185.0,independent_qplf,Independent Learner - QPLF,21,24.971631,144.971631,11.736667,600,scenario1_low_demand,14,Independent Learner - QPLF
+18,4,303,4.5,,160.0,independent_qplf,Independent Learner - QPLF,22,34.706271,154.706271,17.526667,600,scenario1_low_demand,15,Independent Learner - QPLF
+12,4,311,3.0,,140.0,independent_qplf,Independent Learner - QPLF,23,27.102894,147.102894,14.048333,600,scenario1_low_demand,16,Independent Learner - QPLF
+12,4,296,3.0,,135.0,independent_qplf,Independent Learner - QPLF,24,21.581081,141.581081,10.646667,600,scenario1_low_demand,17,Independent Learner - QPLF
+20,4,294,5.0,,200.0,independent_qplf,Independent Learner - QPLF,25,25.129252,145.129252,12.313333,600,scenario1_low_demand,18,Independent Learner - QPLF
+16,4,282,4.0,,225.0,independent_qplf,Independent Learner - QPLF,26,39.20922,159.20922,18.428333,600,scenario1_low_demand,19,Independent Learner - QPLF
+14,4,276,3.5,,185.0,independent_qplf,Independent Learner - QPLF,27,32.442029,152.442029,14.923333,600,scenario1_low_demand,20,Independent Learner - QPLF
+15,4,303,3.75,,145.0,independent_qplf,Independent Learner - QPLF,28,21.874587,141.874587,11.046667,600,scenario1_low_demand,21,Independent Learner - QPLF
+15,4,296,3.75,,165.0,independent_qplf,Independent Learner - QPLF,29,50.462838,170.462838,24.895,600,scenario1_low_demand,22,Independent Learner - QPLF
+8,4,257,2.0,,265.0,independent_qplf,Independent Learner - QPLF,30,59.548638,179.548638,25.506667,600,scenario1_low_demand,23,Independent Learner - QPLF
+18,4,260,4.5,,200.0,independent_qplf,Independent Learner - QPLF,31,34.992308,154.992308,15.163333,600,scenario1_low_demand,24,Independent Learner - QPLF
+13,4,296,3.25,,160.0,independent_qplf,Independent Learner - QPLF,32,17.206081,137.206081,8.488333,600,scenario1_low_demand,25,Independent Learner - QPLF
+17,4,245,4.25,,227.5,independent_qplf,Independent Learner - QPLF,33,31.804082,151.804082,12.986667,600,scenario1_low_demand,26,Independent Learner - QPLF
+20,4,282,5.0,,157.5,independent_qplf,Independent Learner - QPLF,34,19.72695,139.72695,9.271667,600,scenario1_low_demand,27,Independent Learner - QPLF
+11,4,322,2.75,,122.5,independent_qplf,Independent Learner - QPLF,35,28.127329,148.127329,15.095,600,scenario1_low_demand,28,Independent Learner - QPLF
+19,4,298,4.75,,150.0,independent_qplf,Independent Learner - QPLF,36,25.550336,145.550336,12.69,600,scenario1_low_demand,29,Independent Learner - QPLF
+30,4,297,7.5,,125.0,independent_qplf,Independent Learner - QPLF,37,21.023569,141.023569,10.406667,600,scenario1_low_demand,30,Independent Learner - QPLF
+17,4,297,4.25,,137.5,independent_qplf,Independent Learner - QPLF,38,45.289562,165.289562,22.418333,600,scenario1_low_demand,31,Independent Learner - QPLF
+13,4,344,3.25,,120.0,independent_qplf,Independent Learner - QPLF,39,38.09593,158.09593,21.841667,600,scenario1_low_demand,32,Independent Learner - QPLF
+27,4,323,6.75,,127.5,independent_qplf,Independent Learner - QPLF,40,27.089783,147.089783,14.583333,600,scenario1_low_demand,33,Independent Learner - QPLF
+31,4,280,7.75,,202.5,independent_qplf,Independent Learner - QPLF,41,21.017857,141.017857,9.808333,600,scenario1_low_demand,34,Independent Learner - QPLF
+30,4,290,7.5,,125.0,independent_qplf,Independent Learner - QPLF,42,13.489655,133.489655,6.52,600,scenario1_low_demand,35,Independent Learner - QPLF
+31,4,314,7.75,,130.0,independent_qplf,Independent Learner - QPLF,43,30.019108,150.019108,15.71,600,scenario1_low_demand,36,Independent Learner - QPLF
+18,4,284,4.5,,240.0,independent_qplf,Independent Learner - QPLF,44,36.669014,156.669014,17.356667,600,scenario1_low_demand,37,Independent Learner - QPLF
+35,4,300,8.75,,137.5,independent_qplf,Independent Learner - QPLF,45,17.716667,137.716667,8.858333,600,scenario1_low_demand,38,Independent Learner - QPLF
+8,4,319,2.0,,147.5,independent_qplf,Independent Learner - QPLF,46,59.532915,179.532915,31.651667,600,scenario1_low_demand,39,Independent Learner - QPLF
+24,4,281,6.0,,185.0,independent_qplf,Independent Learner - QPLF,47,14.483986,134.483986,6.783333,600,scenario1_low_demand,40,Independent Learner - QPLF
+22,4,280,5.5,,155.0,independent_qplf,Independent Learner - QPLF,48,28.992857,148.992857,13.53,600,scenario1_low_demand,41,Independent Learner - QPLF
+24,4,333,6.0,,125.0,independent_qplf,Independent Learner - QPLF,49,38.531532,158.531532,21.385,600,scenario1_low_demand,42,Independent Learner - QPLF
+25,4,264,6.25,,165.0,independent_qplf,Independent Learner - QPLF,50,23.943182,143.943182,10.535,600,scenario1_low_demand,43,Independent Learner - QPLF
+15,4,277,3.75,,180.0,independent_qplf,Independent Learner - QPLF,51,34.963899,154.963899,16.141667,600,scenario1_low_demand,44,Independent Learner - QPLF
+31,4,287,7.75,,170.0,independent_qplf,Independent Learner - QPLF,52,17.254355,137.254355,8.253333,600,scenario1_low_demand,45,Independent Learner - QPLF
+8,4,304,2.0,,120.0,independent_qplf,Independent Learner - QPLF,53,55.236842,175.236842,27.986667,600,scenario1_low_demand,46,Independent Learner - QPLF
+8,4,246,2.0,,270.0,independent_qplf,Independent Learner - QPLF,54,63.349593,183.349593,25.973333,600,scenario1_low_demand,47,Independent Learner - QPLF
+17,4,304,4.25,,152.5,independent_qplf,Independent Learner - QPLF,55,40.269737,160.269737,20.403333,600,scenario1_low_demand,48,Independent Learner - QPLF
+21,4,298,5.25,,145.0,independent_qplf,Independent Learner - QPLF,56,26.483221,146.483221,13.153333,600,scenario1_low_demand,49,Independent Learner - QPLF
+24,4,304,6.0,,130.0,independent_qplf,Independent Learner - QPLF,57,22.684211,142.684211,11.493333,600,scenario1_low_demand,50,Independent Learner - QPLF
+8,4,233,2.0,,255.0,independent_qplf,Independent Learner - QPLF,58,77.575107,197.575107,30.125,600,scenario1_low_demand,51,Independent Learner - QPLF
+23,4,264,5.75,,150.0,independent_qplf,Independent Learner - QPLF,59,19.018939,139.018939,8.368333,600,scenario1_low_demand,52,Independent Learner - QPLF
+19,4,271,4.75,,150.0,independent_qplf,Independent Learner - QPLF,60,33.649446,153.649446,15.198333,600,scenario1_low_demand,53,Independent Learner - QPLF
+20,4,296,5.0,,185.0,independent_qplf,Independent Learner - QPLF,61,26.043919,146.043919,12.848333,600,scenario1_low_demand,54,Independent Learner - QPLF
+28,4,277,7.0,,155.0,independent_qplf,Independent Learner - QPLF,62,14.931408,134.931408,6.893333,600,scenario1_low_demand,55,Independent Learner - QPLF
+25,4,295,6.25,,155.0,independent_qplf,Independent Learner - QPLF,63,22.664407,142.664407,11.143333,600,scenario1_low_demand,56,Independent Learner - QPLF
+38,4,317,9.5,,125.0,independent_qplf,Independent Learner - QPLF,64,5.299685,125.299685,2.8,600,scenario1_low_demand,57,Independent Learner - QPLF
+25,4,306,6.25,,147.5,independent_qplf,Independent Learner - QPLF,65,14.04902,134.04902,7.165,600,scenario1_low_demand,58,Independent Learner - QPLF
+20,4,303,5.0,,130.0,independent_qplf,Independent Learner - QPLF,66,15.105611,135.105611,7.628333,600,scenario1_low_demand,59,Independent Learner - QPLF
+30,4,331,7.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,7,8.897281,128.897281,4.908333,600,scenario1_low_demand,0,Semi-Coordinated - Full RL
+47,4,306,11.75,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,8,2.892157,122.892157,1.475,600,scenario1_low_demand,1,Semi-Coordinated - Full RL
+61,4,333,15.25,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,9,5.384384,125.384384,2.988333,600,scenario1_low_demand,2,Semi-Coordinated - Full RL
+67,4,301,16.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,10,1.734219,121.734219,0.87,600,scenario1_low_demand,3,Semi-Coordinated - Full RL
+70,4,303,17.5,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,11,1.590759,121.590759,0.803333,600,scenario1_low_demand,4,Semi-Coordinated - Full RL
+66,4,285,16.5,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,12,1.729825,121.729825,0.821667,600,scenario1_low_demand,5,Semi-Coordinated - Full RL
+69,4,292,17.25,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,13,1.75,121.75,0.851667,600,scenario1_low_demand,6,Semi-Coordinated - Full RL
+59,4,317,14.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,14,1.634069,121.634069,0.863333,600,scenario1_low_demand,7,Semi-Coordinated - Full RL
+52,4,286,13.0,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,15,1.622378,121.622378,0.773333,600,scenario1_low_demand,8,Semi-Coordinated - Full RL
+64,4,315,16.0,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,16,1.834921,121.834921,0.963333,600,scenario1_low_demand,9,Semi-Coordinated - Full RL
+53,4,282,13.25,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,17,1.670213,121.670213,0.785,600,scenario1_low_demand,10,Semi-Coordinated - Full RL
+63,4,294,15.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,18,1.714286,121.714286,0.84,600,scenario1_low_demand,11,Semi-Coordinated - Full RL
+62,4,298,15.5,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,19,1.728188,121.728188,0.858333,600,scenario1_low_demand,12,Semi-Coordinated - Full RL
+60,4,359,15.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,20,1.693593,121.693593,1.013333,600,scenario1_low_demand,13,Semi-Coordinated - Full RL
+56,4,307,14.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,21,1.859935,121.859935,0.951667,600,scenario1_low_demand,14,Semi-Coordinated - Full RL
+63,4,319,15.75,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,22,1.821317,121.821317,0.968333,600,scenario1_low_demand,15,Semi-Coordinated - Full RL
+48,4,318,12.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,23,1.694969,121.694969,0.898333,600,scenario1_low_demand,16,Semi-Coordinated - Full RL
+59,4,301,14.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,24,1.820598,121.820598,0.913333,600,scenario1_low_demand,17,Semi-Coordinated - Full RL
+56,4,326,14.0,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,25,1.592025,121.592025,0.865,600,scenario1_low_demand,18,Semi-Coordinated - Full RL
+55,4,322,13.75,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,26,1.835404,121.835404,0.985,600,scenario1_low_demand,19,Semi-Coordinated - Full RL
+58,4,302,14.5,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,27,1.599338,121.599338,0.805,600,scenario1_low_demand,20,Semi-Coordinated - Full RL
+50,4,312,12.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,28,1.544872,121.544872,0.803333,600,scenario1_low_demand,21,Semi-Coordinated - Full RL
+63,4,313,15.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,29,1.56869,121.56869,0.818333,600,scenario1_low_demand,22,Semi-Coordinated - Full RL
+55,4,313,13.75,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,30,1.811502,121.811502,0.945,600,scenario1_low_demand,23,Semi-Coordinated - Full RL
+54,4,290,13.5,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,31,2.006897,122.006897,0.97,600,scenario1_low_demand,24,Semi-Coordinated - Full RL
+58,4,312,14.5,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,32,1.810897,121.810897,0.941667,600,scenario1_low_demand,25,Semi-Coordinated - Full RL
+55,4,286,13.75,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,33,1.958042,121.958042,0.933333,600,scenario1_low_demand,26,Semi-Coordinated - Full RL
+46,4,296,11.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,34,1.800676,121.800676,0.888333,600,scenario1_low_demand,27,Semi-Coordinated - Full RL
+10,4,248,2.5,,307.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,35,80.173387,200.173387,33.138333,600,scenario1_low_demand,28,Semi-Coordinated - Full RL
+57,4,310,14.25,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,36,1.874194,121.874194,0.968333,600,scenario1_low_demand,29,Semi-Coordinated - Full RL
+44,4,298,11.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,37,2.026846,122.026846,1.006667,600,scenario1_low_demand,30,Semi-Coordinated - Full RL
+60,4,303,15.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,38,1.719472,121.719472,0.868333,600,scenario1_low_demand,31,Semi-Coordinated - Full RL
+63,4,343,15.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,39,1.816327,121.816327,1.038333,600,scenario1_low_demand,32,Semi-Coordinated - Full RL
+51,4,325,12.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,40,1.803077,121.803077,0.976667,600,scenario1_low_demand,33,Semi-Coordinated - Full RL
+57,4,312,14.25,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,41,2.009615,122.009615,1.045,600,scenario1_low_demand,34,Semi-Coordinated - Full RL
+41,4,291,10.25,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,42,2.013746,122.013746,0.976667,600,scenario1_low_demand,35,Semi-Coordinated - Full RL
+55,4,318,13.75,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,43,1.858491,121.858491,0.985,600,scenario1_low_demand,36,Semi-Coordinated - Full RL
+57,4,330,14.25,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,44,1.751515,121.751515,0.963333,600,scenario1_low_demand,37,Semi-Coordinated - Full RL
+49,4,307,12.25,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,45,1.941368,121.941368,0.993333,600,scenario1_low_demand,38,Semi-Coordinated - Full RL
+55,4,330,13.75,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,46,1.921212,121.921212,1.056667,600,scenario1_low_demand,39,Semi-Coordinated - Full RL
+59,4,305,14.75,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,47,2.396721,122.396721,1.218333,600,scenario1_low_demand,40,Semi-Coordinated - Full RL
+53,4,293,13.25,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,48,1.972696,121.972696,0.963333,600,scenario1_low_demand,41,Semi-Coordinated - Full RL
+60,4,334,15.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,49,1.946108,121.946108,1.083333,600,scenario1_low_demand,42,Semi-Coordinated - Full RL
+52,4,281,13.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,50,1.97153,121.97153,0.923333,600,scenario1_low_demand,43,Semi-Coordinated - Full RL
+48,4,300,12.0,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,51,1.896667,121.896667,0.948333,600,scenario1_low_demand,44,Semi-Coordinated - Full RL
+42,4,306,10.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,52,1.986928,121.986928,1.013333,600,scenario1_low_demand,45,Semi-Coordinated - Full RL
+44,4,304,11.0,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,53,2.075658,122.075658,1.051667,600,scenario1_low_demand,46,Semi-Coordinated - Full RL
+42,4,304,10.5,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,54,1.914474,121.914474,0.97,600,scenario1_low_demand,47,Semi-Coordinated - Full RL
+39,4,316,9.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,55,1.832278,121.832278,0.965,600,scenario1_low_demand,48,Semi-Coordinated - Full RL
+38,4,308,9.5,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,56,1.808442,121.808442,0.928333,600,scenario1_low_demand,49,Semi-Coordinated - Full RL
+57,4,307,14.25,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,57,1.967427,121.967427,1.006667,600,scenario1_low_demand,50,Semi-Coordinated - Full RL
+43,4,287,10.75,,120.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,58,1.982578,121.982578,0.948333,600,scenario1_low_demand,51,Semi-Coordinated - Full RL
+50,4,275,12.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,59,2.112727,122.112727,0.968333,600,scenario1_low_demand,52,Semi-Coordinated - Full RL
+43,4,282,10.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,60,2.109929,122.109929,0.991667,600,scenario1_low_demand,53,Semi-Coordinated - Full RL
+55,4,321,13.75,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,61,1.922118,121.922118,1.028333,600,scenario1_low_demand,54,Semi-Coordinated - Full RL
+52,4,289,13.0,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,62,1.743945,121.743945,0.84,600,scenario1_low_demand,55,Semi-Coordinated - Full RL
+59,4,307,14.75,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,63,1.876221,121.876221,0.96,600,scenario1_low_demand,56,Semi-Coordinated - Full RL
+46,4,318,11.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,64,1.902516,121.902516,1.008333,600,scenario1_low_demand,57,Semi-Coordinated - Full RL
+49,4,315,12.25,,125.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,65,1.596825,121.596825,0.838333,600,scenario1_low_demand,58,Semi-Coordinated - Full RL
+50,4,306,12.5,,122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,66,2.019608,122.019608,1.03,600,scenario1_low_demand,59,Semi-Coordinated - Full RL
+26,4,324,6.5,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,7,17.469136,137.469136,9.433333,600,scenario1_low_demand,0,Semi-Coordinated - QPLF
+28,4,299,7.0,,137.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,8,10.83612,130.83612,5.4,600,scenario1_low_demand,1,Semi-Coordinated - QPLF
+40,4,329,10.0,,132.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,9,12.06079,132.06079,6.613333,600,scenario1_low_demand,2,Semi-Coordinated - QPLF
+24,4,289,6.0,,152.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,10,17.512111,137.512111,8.435,600,scenario1_low_demand,3,Semi-Coordinated - QPLF
+18,4,296,4.5,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,11,27.898649,147.898649,13.763333,600,scenario1_low_demand,4,Semi-Coordinated - QPLF
+22,4,283,5.5,,125.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,12,25.176678,145.176678,11.875,600,scenario1_low_demand,5,Semi-Coordinated - QPLF
+15,4,289,3.75,,127.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,13,25.595156,145.595156,12.328333,600,scenario1_low_demand,6,Semi-Coordinated - QPLF
+30,4,316,7.5,,125.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,14,10.892405,130.892405,5.736667,600,scenario1_low_demand,7,Semi-Coordinated - QPLF
+23,4,248,5.75,,220.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,15,27.520161,147.520161,11.375,600,scenario1_low_demand,8,Semi-Coordinated - QPLF
+15,4,303,3.75,,150.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,16,21.293729,141.293729,10.753333,600,scenario1_low_demand,9,Semi-Coordinated - QPLF
+19,4,270,4.75,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,17,28.951852,148.951852,13.028333,600,scenario1_low_demand,10,Semi-Coordinated - QPLF
+22,4,286,5.5,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,18,20.426573,140.426573,9.736667,600,scenario1_low_demand,11,Semi-Coordinated - QPLF
+22,4,292,5.5,,135.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,19,25.657534,145.657534,12.486667,600,scenario1_low_demand,12,Semi-Coordinated - QPLF
+19,4,348,4.75,,150.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,20,21.356322,141.356322,12.386667,600,scenario1_low_demand,13,Semi-Coordinated - QPLF
+24,4,293,6.0,,157.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,21,27.83959,147.83959,13.595,600,scenario1_low_demand,14,Semi-Coordinated - QPLF
+12,4,309,3.0,,145.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,22,24.239482,144.239482,12.483333,600,scenario1_low_demand,15,Semi-Coordinated - QPLF
+26,4,310,6.5,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,23,19.474194,139.474194,10.061667,600,scenario1_low_demand,16,Semi-Coordinated - QPLF
+18,4,290,4.5,,150.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,24,29.475862,149.475862,14.246667,600,scenario1_low_demand,17,Semi-Coordinated - QPLF
+15,4,302,3.75,,180.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,25,27.844371,147.844371,14.015,600,scenario1_low_demand,18,Semi-Coordinated - QPLF
+5,4,292,1.25,,200.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,26,36.589041,156.589041,17.806667,600,scenario1_low_demand,19,Semi-Coordinated - QPLF
+23,4,299,5.75,,127.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,27,31.672241,151.672241,15.783333,600,scenario1_low_demand,20,Semi-Coordinated - QPLF
+18,4,292,4.5,,172.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,28,26.746575,146.746575,13.016667,600,scenario1_low_demand,21,Semi-Coordinated - QPLF
+14,4,313,3.5,,122.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,29,27.530351,147.530351,14.361667,600,scenario1_low_demand,22,Semi-Coordinated - QPLF
+11,4,291,2.75,,180.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,30,40.003436,160.003436,19.401667,600,scenario1_low_demand,23,Semi-Coordinated - QPLF
+14,4,258,3.5,,205.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,31,35.864341,155.864341,15.421667,600,scenario1_low_demand,24,Semi-Coordinated - QPLF
+38,4,304,9.5,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,32,15.809211,135.809211,8.01,600,scenario1_low_demand,25,Semi-Coordinated - QPLF
+29,4,272,7.25,,160.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,33,20.172794,140.172794,9.145,600,scenario1_low_demand,26,Semi-Coordinated - QPLF
+35,4,276,8.75,,172.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,34,12.057971,132.057971,5.546667,600,scenario1_low_demand,27,Semi-Coordinated - QPLF
+14,4,309,3.5,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,35,34.880259,154.880259,17.963333,600,scenario1_low_demand,28,Semi-Coordinated - QPLF
+13,4,283,3.25,,187.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,36,39.985866,159.985866,18.86,600,scenario1_low_demand,29,Semi-Coordinated - QPLF
+13,4,283,3.25,,160.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,37,27.717314,147.717314,13.073333,600,scenario1_low_demand,30,Semi-Coordinated - QPLF
+28,4,269,7.0,,207.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,38,22.687732,142.687732,10.171667,600,scenario1_low_demand,31,Semi-Coordinated - QPLF
+21,4,337,5.25,,137.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,39,21.195846,141.195846,11.905,600,scenario1_low_demand,32,Semi-Coordinated - QPLF
+36,4,299,9.0,,187.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,40,16.434783,136.434783,8.19,600,scenario1_low_demand,33,Semi-Coordinated - QPLF
+21,4,295,5.25,,165.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,41,19.308475,139.308475,9.493333,600,scenario1_low_demand,34,Semi-Coordinated - QPLF
+31,4,266,7.75,,185.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,42,16.898496,136.898496,7.491667,600,scenario1_low_demand,35,Semi-Coordinated - QPLF
+39,4,318,9.75,,120.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,43,13.421384,133.421384,7.113333,600,scenario1_low_demand,36,Semi-Coordinated - QPLF
+26,4,331,6.5,,122.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,44,19.694864,139.694864,10.865,600,scenario1_low_demand,37,Semi-Coordinated - QPLF
+37,4,302,9.25,,132.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,45,7.496689,127.496689,3.773333,600,scenario1_low_demand,38,Semi-Coordinated - QPLF
+25,4,324,6.25,,135.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,46,11.75,131.75,6.345,600,scenario1_low_demand,39,Semi-Coordinated - QPLF
+38,4,306,9.5,,122.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,47,12.434641,132.434641,6.341667,600,scenario1_low_demand,40,Semi-Coordinated - QPLF
+30,4,289,7.5,,132.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,48,21.311419,141.311419,10.265,600,scenario1_low_demand,41,Semi-Coordinated - QPLF
+40,4,325,10.0,,145.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,49,8.753846,128.753846,4.741667,600,scenario1_low_demand,42,Semi-Coordinated - QPLF
+39,4,281,9.75,,122.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,50,7.94306,127.94306,3.72,600,scenario1_low_demand,43,Semi-Coordinated - QPLF
+24,4,293,6.0,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,51,15.351536,135.351536,7.496667,600,scenario1_low_demand,44,Semi-Coordinated - QPLF
+30,4,289,7.5,,165.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,52,12.446367,132.446367,5.995,600,scenario1_low_demand,45,Semi-Coordinated - QPLF
+30,4,298,7.5,,135.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,53,15.520134,135.520134,7.708333,600,scenario1_low_demand,46,Semi-Coordinated - QPLF
+44,4,305,11.0,,122.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,54,6.737705,126.737705,3.425,600,scenario1_low_demand,47,Semi-Coordinated - QPLF
+34,4,311,8.5,,135.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,55,8.282958,128.282958,4.293333,600,scenario1_low_demand,48,Semi-Coordinated - QPLF
+35,4,293,8.75,,157.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,56,9.552901,129.552901,4.665,600,scenario1_low_demand,49,Semi-Coordinated - QPLF
+32,4,308,8.0,,120.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,57,9.694805,129.694805,4.976667,600,scenario1_low_demand,50,Semi-Coordinated - QPLF
+37,4,283,9.25,,130.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,58,9.04947,129.04947,4.268333,600,scenario1_low_demand,51,Semi-Coordinated - QPLF
+34,4,272,8.5,,130.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,59,11.580882,131.580882,5.25,600,scenario1_low_demand,52,Semi-Coordinated - QPLF
+27,4,279,6.75,,130.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,60,11.075269,131.075269,5.15,600,scenario1_low_demand,53,Semi-Coordinated - QPLF
+28,4,321,7.0,,122.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,61,9.800623,129.800623,5.243333,600,scenario1_low_demand,54,Semi-Coordinated - QPLF
+29,4,286,7.25,,132.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,62,10.867133,130.867133,5.18,600,scenario1_low_demand,55,Semi-Coordinated - QPLF
+39,4,299,9.75,,145.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,63,8.210702,128.210702,4.091667,600,scenario1_low_demand,56,Semi-Coordinated - QPLF
+49,4,315,12.25,,130.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,64,6.212698,126.212698,3.261667,600,scenario1_low_demand,57,Semi-Coordinated - QPLF
+32,4,309,8.0,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,65,9.679612,129.679612,4.985,600,scenario1_low_demand,58,Semi-Coordinated - QPLF
+42,4,307,10.5,,120.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,66,6.938111,126.938111,3.55,600,scenario1_low_demand,59,Semi-Coordinated - QPLF
+40,4,680,10.0,,612.5,independent_full_rl,Independent Learner - Full RL,7,81.930882,201.930882,92.855,600,scenario2_high_demand,0,Independent Learner - Full RL
+30,4,602,7.5,,682.5,independent_full_rl,Independent Learner - Full RL,8,107.302326,227.302326,107.66,600,scenario2_high_demand,1,Independent Learner - Full RL
+42,4,689,10.5,,457.5,independent_full_rl,Independent Learner - Full RL,9,63.856313,183.856313,73.328333,600,scenario2_high_demand,2,Independent Learner - Full RL
+53,4,660,13.25,,487.5,independent_full_rl,Independent Learner - Full RL,10,55.224242,175.224242,60.746667,600,scenario2_high_demand,3,Independent Learner - Full RL
+38,4,647,9.5,,595.0,independent_full_rl,Independent Learner - Full RL,11,71.554869,191.554869,77.16,600,scenario2_high_demand,4,Independent Learner - Full RL
+29,4,618,7.25,,685.0,independent_full_rl,Independent Learner - Full RL,12,111.131068,231.131068,114.465,600,scenario2_high_demand,5,Independent Learner - Full RL
+31,4,656,7.75,,502.5,independent_full_rl,Independent Learner - Full RL,13,67.615854,187.615854,73.926667,600,scenario2_high_demand,6,Independent Learner - Full RL
+51,4,691,12.75,,562.5,independent_full_rl,Independent Learner - Full RL,14,74.960926,194.960926,86.33,600,scenario2_high_demand,7,Independent Learner - Full RL
+29,4,662,7.25,,525.0,independent_full_rl,Independent Learner - Full RL,15,67.598187,187.598187,74.583333,600,scenario2_high_demand,8,Independent Learner - Full RL
+29,4,638,7.25,,572.5,independent_full_rl,Independent Learner - Full RL,16,97.269592,217.269592,103.43,600,scenario2_high_demand,9,Independent Learner - Full RL
+34,4,640,8.5,,555.0,independent_full_rl,Independent Learner - Full RL,17,85.471875,205.471875,91.17,600,scenario2_high_demand,10,Independent Learner - Full RL
+39,4,670,9.75,,542.5,independent_full_rl,Independent Learner - Full RL,18,67.714925,187.714925,75.615,600,scenario2_high_demand,11,Independent Learner - Full RL
+43,4,636,10.75,,625.0,independent_full_rl,Independent Learner - Full RL,19,79.13522,199.13522,83.883333,600,scenario2_high_demand,12,Independent Learner - Full RL
+33,4,615,8.25,,732.5,independent_full_rl,Independent Learner - Full RL,20,120.173984,240.173984,123.178333,600,scenario2_high_demand,13,Independent Learner - Full RL
+32,4,587,8.0,,672.5,independent_full_rl,Independent Learner - Full RL,21,102.393526,222.393526,100.175,600,scenario2_high_demand,14,Independent Learner - Full RL
+33,4,599,8.25,,697.5,independent_full_rl,Independent Learner - Full RL,22,114.48581,234.48581,114.295,600,scenario2_high_demand,15,Independent Learner - Full RL
+26,4,637,6.5,,650.0,independent_full_rl,Independent Learner - Full RL,23,91.037677,211.037677,96.651667,600,scenario2_high_demand,16,Independent Learner - Full RL
+40,4,608,10.0,,587.5,independent_full_rl,Independent Learner - Full RL,24,95.776316,215.776316,97.053333,600,scenario2_high_demand,17,Independent Learner - Full RL
+38,4,628,9.5,,657.5,independent_full_rl,Independent Learner - Full RL,25,105.33121,225.33121,110.246667,600,scenario2_high_demand,18,Independent Learner - Full RL
+28,4,620,7.0,,685.0,independent_full_rl,Independent Learner - Full RL,26,102.15,222.15,105.555,600,scenario2_high_demand,19,Independent Learner - Full RL
+33,4,574,8.25,,660.0,independent_full_rl,Independent Learner - Full RL,27,85.158537,205.158537,81.468333,600,scenario2_high_demand,20,Independent Learner - Full RL
+32,4,588,8.0,,755.0,independent_full_rl,Independent Learner - Full RL,28,120.454082,240.454082,118.045,600,scenario2_high_demand,21,Independent Learner - Full RL
+30,4,588,7.5,,790.0,independent_full_rl,Independent Learner - Full RL,29,136.176871,256.176871,133.453333,600,scenario2_high_demand,22,Independent Learner - Full RL
+27,4,607,6.75,,662.5,independent_full_rl,Independent Learner - Full RL,30,99.354201,219.354201,100.513333,600,scenario2_high_demand,23,Independent Learner - Full RL
+25,4,542,6.25,,752.5,independent_full_rl,Independent Learner - Full RL,31,129.583026,249.583026,117.056667,600,scenario2_high_demand,24,Independent Learner - Full RL
+30,4,585,7.5,,750.0,independent_full_rl,Independent Learner - Full RL,32,123.08547,243.08547,120.008333,600,scenario2_high_demand,25,Independent Learner - Full RL
+22,4,517,5.5,,882.5,independent_full_rl,Independent Learner - Full RL,33,167.644101,287.644101,144.453333,600,scenario2_high_demand,26,Independent Learner - Full RL
+27,4,543,6.75,,790.0,independent_full_rl,Independent Learner - Full RL,34,121.917127,241.917127,110.335,600,scenario2_high_demand,27,Independent Learner - Full RL
+13,4,551,3.25,,917.5,independent_full_rl,Independent Learner - Full RL,35,171.967332,291.967332,157.923333,600,scenario2_high_demand,28,Independent Learner - Full RL
+16,4,553,4.0,,792.5,independent_full_rl,Independent Learner - Full RL,36,141.108499,261.108499,130.055,600,scenario2_high_demand,29,Independent Learner - Full RL
+22,4,545,5.5,,847.5,independent_full_rl,Independent Learner - Full RL,37,139.856881,259.856881,127.036667,600,scenario2_high_demand,30,Independent Learner - Full RL
+22,4,554,5.5,,695.0,independent_full_rl,Independent Learner - Full RL,38,122.990975,242.990975,113.561667,600,scenario2_high_demand,31,Independent Learner - Full RL
+36,4,617,9.0,,725.0,independent_full_rl,Independent Learner - Full RL,39,111.546191,231.546191,114.706667,600,scenario2_high_demand,32,Independent Learner - Full RL
+33,4,605,8.25,,665.0,independent_full_rl,Independent Learner - Full RL,40,107.213223,227.213223,108.106667,600,scenario2_high_demand,33,Independent Learner - Full RL
+43,4,640,10.75,,525.0,independent_full_rl,Independent Learner - Full RL,41,61.526562,181.526563,65.628333,600,scenario2_high_demand,34,Independent Learner - Full RL
+26,4,600,6.5,,625.0,independent_full_rl,Independent Learner - Full RL,42,96.098333,216.098333,96.098333,600,scenario2_high_demand,35,Independent Learner - Full RL
+22,4,532,5.5,,850.0,independent_full_rl,Independent Learner - Full RL,43,146.026316,266.026316,129.476667,600,scenario2_high_demand,36,Independent Learner - Full RL
+31,4,616,7.75,,747.5,independent_full_rl,Independent Learner - Full RL,44,109.665584,229.665584,112.59,600,scenario2_high_demand,37,Independent Learner - Full RL
+24,4,540,6.0,,842.5,independent_full_rl,Independent Learner - Full RL,45,152.416667,272.416667,137.175,600,scenario2_high_demand,38,Independent Learner - Full RL
+22,4,585,5.5,,842.5,independent_full_rl,Independent Learner - Full RL,46,144.321368,264.321368,140.713333,600,scenario2_high_demand,39,Independent Learner - Full RL
+16,4,446,4.0,,1045.0,independent_full_rl,Independent Learner - Full RL,47,220.087444,340.087444,163.598333,600,scenario2_high_demand,40,Independent Learner - Full RL
+45,4,618,11.25,,567.5,independent_full_rl,Independent Learner - Full RL,48,62.399676,182.399676,64.271667,600,scenario2_high_demand,41,Independent Learner - Full RL
+20,4,525,5.0,,932.5,independent_full_rl,Independent Learner - Full RL,49,163.813333,283.813333,143.336667,600,scenario2_high_demand,42,Independent Learner - Full RL
+28,4,600,7.0,,595.0,independent_full_rl,Independent Learner - Full RL,50,93.123333,213.123333,93.123333,600,scenario2_high_demand,43,Independent Learner - Full RL
+25,4,585,6.25,,695.0,independent_full_rl,Independent Learner - Full RL,51,105.562393,225.562393,102.923333,600,scenario2_high_demand,44,Independent Learner - Full RL
+20,4,534,5.0,,867.5,independent_full_rl,Independent Learner - Full RL,52,151.501873,271.501873,134.836667,600,scenario2_high_demand,45,Independent Learner - Full RL
+16,4,568,4.0,,645.0,independent_full_rl,Independent Learner - Full RL,53,93.424296,213.424296,88.441667,600,scenario2_high_demand,46,Independent Learner - Full RL
+14,4,492,3.5,,922.5,independent_full_rl,Independent Learner - Full RL,54,173.542683,293.542683,142.305,600,scenario2_high_demand,47,Independent Learner - Full RL
+18,4,475,4.5,,997.5,independent_full_rl,Independent Learner - Full RL,55,208.473684,328.473684,165.041667,600,scenario2_high_demand,48,Independent Learner - Full RL
+26,4,566,6.5,,740.0,independent_full_rl,Independent Learner - Full RL,56,119.157244,239.157244,112.405,600,scenario2_high_demand,49,Independent Learner - Full RL
+26,4,565,6.5,,745.0,independent_full_rl,Independent Learner - Full RL,57,117.049558,237.049558,110.221667,600,scenario2_high_demand,50,Independent Learner - Full RL
+13,4,459,3.25,,952.5,independent_full_rl,Independent Learner - Full RL,58,193.453159,313.453159,147.991667,600,scenario2_high_demand,51,Independent Learner - Full RL
+19,4,562,4.75,,695.0,independent_full_rl,Independent Learner - Full RL,59,112.209964,232.209964,105.103333,600,scenario2_high_demand,52,Independent Learner - Full RL
+15,4,496,3.75,,850.0,independent_full_rl,Independent Learner - Full RL,60,156.024194,276.024194,128.98,600,scenario2_high_demand,53,Independent Learner - Full RL
+21,4,547,5.25,,890.0,independent_full_rl,Independent Learner - Full RL,61,146.639854,266.639854,133.686667,600,scenario2_high_demand,54,Independent Learner - Full RL
+20,4,565,5.0,,890.0,independent_full_rl,Independent Learner - Full RL,62,151.316814,271.316814,142.49,600,scenario2_high_demand,55,Independent Learner - Full RL
+14,4,545,3.5,,792.5,independent_full_rl,Independent Learner - Full RL,63,155.638532,275.638532,141.371667,600,scenario2_high_demand,56,Independent Learner - Full RL
+19,4,545,4.75,,820.0,independent_full_rl,Independent Learner - Full RL,64,131.899083,251.899083,119.808333,600,scenario2_high_demand,57,Independent Learner - Full RL
+17,4,506,4.25,,912.5,independent_full_rl,Independent Learner - Full RL,65,171.683794,291.683794,144.786667,600,scenario2_high_demand,58,Independent Learner - Full RL
+22,4,508,5.5,,850.0,independent_full_rl,Independent Learner - Full RL,66,172.088583,292.088583,145.701667,600,scenario2_high_demand,59,Independent Learner - Full RL
+30,4,593,7.5,,830.0,independent_qplf,Independent Learner - QPLF,7,141.915683,261.915683,140.26,600,scenario2_high_demand,0,Independent Learner - QPLF
+30,4,595,7.5,,700.0,independent_qplf,Independent Learner - QPLF,8,137.89916,257.89916,136.75,600,scenario2_high_demand,1,Independent Learner - QPLF
+47,4,751,11.75,,302.5,independent_qplf,Independent Learner - QPLF,9,30.270306,150.270306,37.888333,600,scenario2_high_demand,2,Independent Learner - QPLF
+50,4,705,12.5,,375.0,independent_qplf,Independent Learner - QPLF,10,64.465248,184.465248,75.746667,600,scenario2_high_demand,3,Independent Learner - QPLF
+52,4,736,13.0,,372.5,independent_qplf,Independent Learner - QPLF,11,58.61413,178.61413,71.9,600,scenario2_high_demand,4,Independent Learner - QPLF
+59,4,796,14.75,,240.0,independent_qplf,Independent Learner - QPLF,12,19.501256,139.501256,25.871667,600,scenario2_high_demand,5,Independent Learner - QPLF
+46,4,753,11.5,,260.0,independent_qplf,Independent Learner - QPLF,13,36.446215,156.446215,45.74,600,scenario2_high_demand,6,Independent Learner - QPLF
+75,4,837,18.75,,197.5,independent_qplf,Independent Learner - QPLF,14,19.493429,139.493429,27.193333,600,scenario2_high_demand,7,Independent Learner - QPLF
+51,4,771,12.75,,252.5,independent_qplf,Independent Learner - QPLF,15,29.044099,149.044099,37.321667,600,scenario2_high_demand,8,Independent Learner - QPLF
+106,4,802,26.5,,162.5,independent_qplf,Independent Learner - QPLF,16,13.812968,133.812968,18.463333,600,scenario2_high_demand,9,Independent Learner - QPLF
+103,4,802,25.75,,150.0,independent_qplf,Independent Learner - QPLF,17,5.315461,125.315461,7.105,600,scenario2_high_demand,10,Independent Learner - QPLF
+98,4,827,24.5,,150.0,independent_qplf,Independent Learner - QPLF,18,13.135429,133.135429,18.105,600,scenario2_high_demand,11,Independent Learner - QPLF
+70,4,817,17.5,,172.5,independent_qplf,Independent Learner - QPLF,19,7.925337,127.925337,10.791667,600,scenario2_high_demand,12,Independent Learner - QPLF
+105,4,837,26.25,,177.5,independent_qplf,Independent Learner - QPLF,20,7.304659,127.304659,10.19,600,scenario2_high_demand,13,Independent Learner - QPLF
+86,4,796,21.5,,150.0,independent_qplf,Independent Learner - QPLF,21,12.493719,132.493719,16.575,600,scenario2_high_demand,14,Independent Learner - QPLF
+71,4,809,17.75,,172.5,independent_qplf,Independent Learner - QPLF,22,14.679852,134.679852,19.793333,600,scenario2_high_demand,15,Independent Learner - QPLF
+82,4,825,20.5,,180.0,independent_qplf,Independent Learner - QPLF,23,11.042424,131.042424,15.183333,600,scenario2_high_demand,16,Independent Learner - QPLF
+79,4,782,19.75,,152.5,independent_qplf,Independent Learner - QPLF,24,15.028133,135.028133,19.586667,600,scenario2_high_demand,17,Independent Learner - QPLF
+104,4,830,26.0,,152.5,independent_qplf,Independent Learner - QPLF,25,5.839759,125.839759,8.078333,600,scenario2_high_demand,18,Independent Learner - QPLF
+81,4,843,20.25,,127.5,independent_qplf,Independent Learner - QPLF,26,10.225386,130.225386,14.366667,600,scenario2_high_demand,19,Independent Learner - QPLF
+89,4,779,22.25,,147.5,independent_qplf,Independent Learner - QPLF,27,10.422336,130.422336,13.531667,600,scenario2_high_demand,20,Independent Learner - QPLF
+81,4,839,20.25,,127.5,independent_qplf,Independent Learner - QPLF,28,12.134684,132.134684,16.968333,600,scenario2_high_demand,21,Independent Learner - QPLF
+79,4,852,19.75,,130.0,independent_qplf,Independent Learner - QPLF,29,7.089202,127.089202,10.066667,600,scenario2_high_demand,22,Independent Learner - QPLF
+80,4,800,20.0,,180.0,independent_qplf,Independent Learner - QPLF,30,10.59625,130.59625,14.128333,600,scenario2_high_demand,23,Independent Learner - QPLF
+81,4,794,20.25,,122.5,independent_qplf,Independent Learner - QPLF,31,7.580605,127.580605,10.031667,600,scenario2_high_demand,24,Independent Learner - QPLF
+83,4,827,20.75,,145.0,independent_qplf,Independent Learner - QPLF,32,6.740024,126.740024,9.29,600,scenario2_high_demand,25,Independent Learner - QPLF
+85,4,821,21.25,,122.5,independent_qplf,Independent Learner - QPLF,33,12.473812,132.473812,17.068333,600,scenario2_high_demand,26,Independent Learner - QPLF
+95,4,801,23.75,,145.0,independent_qplf,Independent Learner - QPLF,34,6.44819,126.44819,8.608333,600,scenario2_high_demand,27,Independent Learner - QPLF
+84,4,859,21.0,,147.5,independent_qplf,Independent Learner - QPLF,35,8.450524,128.450524,12.098333,600,scenario2_high_demand,28,Independent Learner - QPLF
+76,4,820,19.0,,125.0,independent_qplf,Independent Learner - QPLF,36,12.486585,132.486585,17.065,600,scenario2_high_demand,29,Independent Learner - QPLF
+89,4,834,22.25,,125.0,independent_qplf,Independent Learner - QPLF,37,7.015588,127.015588,9.751667,600,scenario2_high_demand,30,Independent Learner - QPLF
+83,4,784,20.75,,120.0,independent_qplf,Independent Learner - QPLF,38,11.609694,131.609694,15.17,600,scenario2_high_demand,31,Independent Learner - QPLF
+90,4,854,22.5,,132.5,independent_qplf,Independent Learner - QPLF,39,8.855972,128.855972,12.605,600,scenario2_high_demand,32,Independent Learner - QPLF
+62,4,796,15.5,,187.5,independent_qplf,Independent Learner - QPLF,40,15.63191,135.63191,20.738333,600,scenario2_high_demand,33,Independent Learner - QPLF
+52,4,795,13.0,,137.5,independent_qplf,Independent Learner - QPLF,41,11.759748,131.759748,15.581667,600,scenario2_high_demand,34,Independent Learner - QPLF
+81,4,794,20.25,,140.0,independent_qplf,Independent Learner - QPLF,42,8.251889,128.251889,10.92,600,scenario2_high_demand,35,Independent Learner - QPLF
+91,4,820,22.75,,130.0,independent_qplf,Independent Learner - QPLF,43,7.260976,127.260976,9.923333,600,scenario2_high_demand,36,Independent Learner - QPLF
+86,4,845,21.5,,175.0,independent_qplf,Independent Learner - QPLF,44,7.416568,127.416568,10.445,600,scenario2_high_demand,37,Independent Learner - QPLF
+70,4,819,17.5,,145.0,independent_qplf,Independent Learner - QPLF,45,14.139194,134.139194,19.3,600,scenario2_high_demand,38,Independent Learner - QPLF
+86,4,871,21.5,,127.5,independent_qplf,Independent Learner - QPLF,46,6.649828,126.649828,9.653333,600,scenario2_high_demand,39,Independent Learner - QPLF
+66,4,776,16.5,,220.0,independent_qplf,Independent Learner - QPLF,47,17.118557,137.118557,22.14,600,scenario2_high_demand,40,Independent Learner - QPLF
+58,4,748,14.5,,242.5,independent_qplf,Independent Learner - QPLF,48,15.716578,135.716578,19.593333,600,scenario2_high_demand,41,Independent Learner - QPLF
+103,4,839,25.75,,147.5,independent_qplf,Independent Learner - QPLF,49,4.489869,124.489869,6.278333,600,scenario2_high_demand,42,Independent Learner - QPLF
+77,4,787,19.25,,127.5,independent_qplf,Independent Learner - QPLF,50,12.828463,132.828463,16.826667,600,scenario2_high_demand,43,Independent Learner - QPLF
+72,4,737,18.0,,315.0,independent_qplf,Independent Learner - QPLF,51,16.234735,136.234735,19.941667,600,scenario2_high_demand,44,Independent Learner - QPLF
+112,4,814,28.0,,167.5,independent_qplf,Independent Learner - QPLF,52,6.378378,126.378378,8.653333,600,scenario2_high_demand,45,Independent Learner - QPLF
+84,4,771,21.0,,137.5,independent_qplf,Independent Learner - QPLF,53,10.841764,130.841764,13.931667,600,scenario2_high_demand,46,Independent Learner - QPLF
+84,4,792,21.0,,172.5,independent_qplf,Independent Learner - QPLF,54,10.349747,130.349747,13.661667,600,scenario2_high_demand,47,Independent Learner - QPLF
+77,4,799,19.25,,187.5,independent_qplf,Independent Learner - QPLF,55,10.742178,130.742178,14.305,600,scenario2_high_demand,48,Independent Learner - QPLF
+93,4,809,23.25,,132.5,independent_qplf,Independent Learner - QPLF,56,5.76885,125.76885,7.778333,600,scenario2_high_demand,49,Independent Learner - QPLF
+62,4,815,15.5,,120.0,independent_qplf,Independent Learner - QPLF,57,10.201227,130.201227,13.856667,600,scenario2_high_demand,50,Independent Learner - QPLF
+72,4,763,18.0,,192.5,independent_qplf,Independent Learner - QPLF,58,8.376147,128.376147,10.651667,600,scenario2_high_demand,51,Independent Learner - QPLF
+87,4,788,21.75,,130.0,independent_qplf,Independent Learner - QPLF,59,7.340102,127.340102,9.64,600,scenario2_high_demand,52,Independent Learner - QPLF
+74,4,761,18.5,,187.5,independent_qplf,Independent Learner - QPLF,60,10.717477,130.717477,13.593333,600,scenario2_high_demand,53,Independent Learner - QPLF
+124,4,852,31.0,,127.5,independent_qplf,Independent Learner - QPLF,61,3.0223,123.0223,4.291667,600,scenario2_high_demand,54,Independent Learner - QPLF
+131,4,864,32.75,,142.5,independent_qplf,Independent Learner - QPLF,62,3.0625,123.0625,4.41,600,scenario2_high_demand,55,Independent Learner - QPLF
+124,4,810,31.0,,130.0,independent_qplf,Independent Learner - QPLF,63,3.465432,123.465432,4.678333,600,scenario2_high_demand,56,Independent Learner - QPLF
+114,4,800,28.5,,182.5,independent_qplf,Independent Learner - QPLF,64,7.18625,127.18625,9.581667,600,scenario2_high_demand,57,Independent Learner - QPLF
+94,4,807,23.5,,160.0,independent_qplf,Independent Learner - QPLF,65,6.413879,126.413879,8.626667,600,scenario2_high_demand,58,Independent Learner - QPLF
+90,4,770,22.5,,195.0,independent_qplf,Independent Learner - QPLF,66,12.292208,132.292208,15.775,600,scenario2_high_demand,59,Independent Learner - QPLF
+33,4,656,8.25,,672.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,7,91.356707,211.356707,99.883333,600,scenario2_high_demand,0,Semi-Coordinated - Full RL
+23,4,609,5.75,,665.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,8,106.359606,226.359606,107.955,600,scenario2_high_demand,1,Semi-Coordinated - Full RL
+35,4,640,8.75,,580.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,9,84.632812,204.632812,90.275,600,scenario2_high_demand,2,Semi-Coordinated - Full RL
+35,4,606,8.75,,622.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,10,105.523102,225.523102,106.578333,600,scenario2_high_demand,3,Semi-Coordinated - Full RL
+32,4,605,8.0,,700.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,11,102.254545,222.254545,103.106667,600,scenario2_high_demand,4,Semi-Coordinated - Full RL
+36,4,609,9.0,,707.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,12,117.714286,237.714286,119.48,600,scenario2_high_demand,5,Semi-Coordinated - Full RL
+28,4,574,7.0,,707.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,13,130.412892,250.412892,124.761667,600,scenario2_high_demand,6,Semi-Coordinated - Full RL
+35,4,605,8.75,,777.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,14,143.505785,263.505785,144.701667,600,scenario2_high_demand,7,Semi-Coordinated - Full RL
+37,4,572,9.25,,750.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,15,115.868881,235.868881,110.461667,600,scenario2_high_demand,8,Semi-Coordinated - Full RL
+35,4,614,8.75,,632.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,16,104.40228,224.40228,106.838333,600,scenario2_high_demand,9,Semi-Coordinated - Full RL
+32,4,592,8.0,,675.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,17,106.192568,226.192568,104.776667,600,scenario2_high_demand,10,Semi-Coordinated - Full RL
+29,4,569,7.25,,795.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,18,145.949033,265.949033,138.408333,600,scenario2_high_demand,11,Semi-Coordinated - Full RL
+35,4,657,8.75,,572.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,19,91.458143,211.458143,100.146667,600,scenario2_high_demand,12,Semi-Coordinated - Full RL
+36,4,646,9.0,,655.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,20,94.26161,214.26161,101.488333,600,scenario2_high_demand,13,Semi-Coordinated - Full RL
+34,4,603,8.5,,632.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,21,109.655058,229.655058,110.203333,600,scenario2_high_demand,14,Semi-Coordinated - Full RL
+25,4,621,6.25,,642.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,22,111.037037,231.037037,114.923333,600,scenario2_high_demand,15,Semi-Coordinated - Full RL
+25,4,591,6.25,,765.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,23,135.815567,255.815567,133.778333,600,scenario2_high_demand,16,Semi-Coordinated - Full RL
+35,4,573,8.75,,675.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,24,122.458988,242.458988,116.948333,600,scenario2_high_demand,17,Semi-Coordinated - Full RL
+31,4,604,7.75,,717.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,25,121.071192,241.071192,121.878333,600,scenario2_high_demand,18,Semi-Coordinated - Full RL
+23,4,552,5.75,,855.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,26,148.320652,268.320652,136.455,600,scenario2_high_demand,19,Semi-Coordinated - Full RL
+29,4,565,7.25,,682.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,27,101.320354,221.320354,95.41,600,scenario2_high_demand,20,Semi-Coordinated - Full RL
+26,4,575,6.5,,787.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,28,125.987826,245.987826,120.738333,600,scenario2_high_demand,21,Semi-Coordinated - Full RL
+35,4,622,8.75,,705.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,29,110.946945,230.946945,115.015,600,scenario2_high_demand,22,Semi-Coordinated - Full RL
+22,4,556,5.5,,790.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,30,136.766187,256.766187,126.736667,600,scenario2_high_demand,23,Semi-Coordinated - Full RL
+19,4,483,4.75,,900.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,31,201.101449,321.101449,161.886667,600,scenario2_high_demand,24,Semi-Coordinated - Full RL
+29,4,576,7.25,,772.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,32,137.619792,257.619792,132.115,600,scenario2_high_demand,25,Semi-Coordinated - Full RL
+13,4,510,3.25,,900.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,33,167.547059,287.547059,142.415,600,scenario2_high_demand,26,Semi-Coordinated - Full RL
+14,4,524,3.5,,837.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,34,162.146947,282.146947,141.608333,600,scenario2_high_demand,27,Semi-Coordinated - Full RL
+11,4,469,2.75,,1122.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,35,251.240938,371.240938,196.386667,600,scenario2_high_demand,28,Semi-Coordinated - Full RL
+11,4,517,2.75,,882.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,36,170.709865,290.709865,147.095,600,scenario2_high_demand,29,Semi-Coordinated - Full RL
+23,4,529,5.75,,887.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,37,162.967864,282.967864,143.683333,600,scenario2_high_demand,30,Semi-Coordinated - Full RL
+19,4,560,4.75,,680.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,38,120.669643,240.669643,112.625,600,scenario2_high_demand,31,Semi-Coordinated - Full RL
+13,4,539,3.25,,920.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,39,176.992579,296.992579,158.998333,600,scenario2_high_demand,32,Semi-Coordinated - Full RL
+26,4,526,6.5,,862.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,40,159.574144,279.574144,139.893333,600,scenario2_high_demand,33,Semi-Coordinated - Full RL
+22,4,506,5.5,,860.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,41,166.881423,286.881423,140.736667,600,scenario2_high_demand,34,Semi-Coordinated - Full RL
+16,4,540,4.0,,775.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,42,165.794444,285.794444,149.215,600,scenario2_high_demand,35,Semi-Coordinated - Full RL
+19,4,521,4.75,,877.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,43,157.598848,277.598848,136.848333,600,scenario2_high_demand,36,Semi-Coordinated - Full RL
+14,4,510,3.5,,1012.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,44,202.556863,322.556863,172.173333,600,scenario2_high_demand,37,Semi-Coordinated - Full RL
+14,4,546,3.5,,827.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,45,162.478022,282.478022,147.855,600,scenario2_high_demand,38,Semi-Coordinated - Full RL
+17,4,525,4.25,,992.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,46,196.558095,316.558095,171.988333,600,scenario2_high_demand,39,Semi-Coordinated - Full RL
+10,4,440,2.5,,1060.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,47,232.779545,352.779545,170.705,600,scenario2_high_demand,40,Semi-Coordinated - Full RL
+20,4,521,5.0,,810.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,48,149.408829,269.408829,129.736667,600,scenario2_high_demand,41,Semi-Coordinated - Full RL
+20,4,540,5.0,,895.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,49,155.272222,275.272222,139.745,600,scenario2_high_demand,42,Semi-Coordinated - Full RL
+26,4,494,6.5,,860.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,50,165.910931,285.910931,136.6,600,scenario2_high_demand,43,Semi-Coordinated - Full RL
+22,4,557,5.5,,765.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,51,133.384201,253.384201,123.825,600,scenario2_high_demand,44,Semi-Coordinated - Full RL
+19,4,500,4.75,,952.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,52,195.226,315.226,162.688333,600,scenario2_high_demand,45,Semi-Coordinated - Full RL
+14,4,508,3.5,,795.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,53,159.11811,279.11811,134.72,600,scenario2_high_demand,46,Semi-Coordinated - Full RL
+17,4,491,4.25,,925.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,54,193.668024,313.668024,158.485,600,scenario2_high_demand,47,Semi-Coordinated - Full RL
+18,4,513,4.5,,902.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,55,175.929825,295.929825,150.42,600,scenario2_high_demand,48,Semi-Coordinated - Full RL
+13,4,513,3.25,,872.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,56,173.025341,293.025341,147.936667,600,scenario2_high_demand,49,Semi-Coordinated - Full RL
+20,4,528,5.0,,837.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,57,149.589015,269.589015,131.638333,600,scenario2_high_demand,50,Semi-Coordinated - Full RL
+15,4,495,3.75,,862.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,58,170.593939,290.593939,140.74,600,scenario2_high_demand,51,Semi-Coordinated - Full RL
+23,4,552,5.75,,720.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,59,132.63587,252.63587,122.025,600,scenario2_high_demand,52,Semi-Coordinated - Full RL
+14,4,513,3.5,,807.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,60,160.341131,280.341131,137.091667,600,scenario2_high_demand,53,Semi-Coordinated - Full RL
+14,4,535,3.5,,920.0,semi_coordinated_full_rl,Semi-Coordinated - Full RL,61,177.396262,297.396262,158.178333,600,scenario2_high_demand,54,Semi-Coordinated - Full RL
+16,4,542,4.0,,947.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,62,181.261993,301.261993,163.74,600,scenario2_high_demand,55,Semi-Coordinated - Full RL
+14,4,481,3.5,,952.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,63,201.022869,321.022869,161.153333,600,scenario2_high_demand,56,Semi-Coordinated - Full RL
+19,4,532,4.75,,852.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,64,157.212406,277.212406,139.395,600,scenario2_high_demand,57,Semi-Coordinated - Full RL
+16,4,514,4.0,,892.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,65,159.538911,279.538911,136.671667,600,scenario2_high_demand,58,Semi-Coordinated - Full RL
+23,4,589,5.75,,647.5,semi_coordinated_full_rl,Semi-Coordinated - Full RL,66,113.762309,233.762309,111.676667,600,scenario2_high_demand,59,Semi-Coordinated - Full RL
+28,4,600,7.0,,812.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,7,133.238333,253.238333,133.238333,600,scenario2_high_demand,0,Semi-Coordinated - QPLF
+28,4,603,7.0,,680.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,8,128.922056,248.922056,129.566667,600,scenario2_high_demand,1,Semi-Coordinated - QPLF
+38,4,647,9.5,,562.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,9,99.270479,219.270479,107.046667,600,scenario2_high_demand,2,Semi-Coordinated - QPLF
+32,4,612,8.0,,607.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,10,93.872549,213.872549,95.75,600,scenario2_high_demand,3,Semi-Coordinated - QPLF
+33,4,757,8.25,,320.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,11,68.179657,188.179657,86.02,600,scenario2_high_demand,4,Semi-Coordinated - QPLF
+46,4,791,11.5,,252.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,12,57.446271,177.446271,75.733333,600,scenario2_high_demand,5,Semi-Coordinated - QPLF
+56,4,807,14.0,,125.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,13,39.413879,159.413879,53.011667,600,scenario2_high_demand,6,Semi-Coordinated - QPLF
+60,4,826,15.0,,225.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,14,28.558111,148.558111,39.315,600,scenario2_high_demand,7,Semi-Coordinated - QPLF
+41,4,810,10.25,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,15,31.793827,151.793827,42.921667,600,scenario2_high_demand,8,Semi-Coordinated - QPLF
+66,4,812,16.5,,137.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,16,24.253695,144.253695,32.823333,600,scenario2_high_demand,9,Semi-Coordinated - QPLF
+39,4,773,9.75,,222.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,17,30.073739,150.073739,38.745,600,scenario2_high_demand,10,Semi-Coordinated - QPLF
+61,4,784,15.25,,257.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,18,27.294643,147.294643,35.665,600,scenario2_high_demand,11,Semi-Coordinated - QPLF
+45,4,804,11.25,,205.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,19,27.560945,147.560945,36.931667,600,scenario2_high_demand,12,Semi-Coordinated - QPLF
+84,4,844,21.0,,160.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,20,22.863744,142.863744,32.161667,600,scenario2_high_demand,13,Semi-Coordinated - QPLF
+60,4,783,15.0,,182.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,21,29.112388,149.112388,37.991667,600,scenario2_high_demand,14,Semi-Coordinated - QPLF
+52,4,789,13.0,,222.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,22,37.970849,157.970849,49.931667,600,scenario2_high_demand,15,Semi-Coordinated - QPLF
+75,4,835,18.75,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,23,22.074251,142.074251,30.72,600,scenario2_high_demand,16,Semi-Coordinated - QPLF
+81,4,764,20.25,,197.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,24,40.188482,160.188482,51.173333,600,scenario2_high_demand,17,Semi-Coordinated - QPLF
+95,4,824,23.75,,167.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,25,28.61165,148.61165,39.293333,600,scenario2_high_demand,18,Semi-Coordinated - QPLF
+81,4,830,20.25,,160.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,26,23.154217,143.154217,32.03,600,scenario2_high_demand,19,Semi-Coordinated - QPLF
+86,4,775,21.5,,157.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,27,17.472258,137.472258,22.568333,600,scenario2_high_demand,20,Semi-Coordinated - QPLF
+106,4,823,26.5,,167.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,28,24.065614,144.065614,33.01,600,scenario2_high_demand,21,Semi-Coordinated - QPLF
+72,4,807,18.0,,242.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,29,51.144981,171.144981,68.79,600,scenario2_high_demand,22,Semi-Coordinated - QPLF
+103,4,802,25.75,,175.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,30,18.794264,138.794264,25.121667,600,scenario2_high_demand,23,Semi-Coordinated - QPLF
+93,4,770,23.25,,182.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,31,31.550649,151.550649,40.49,600,scenario2_high_demand,24,Semi-Coordinated - QPLF
+73,4,805,18.25,,200.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,32,22.104348,142.104348,29.656667,600,scenario2_high_demand,25,Semi-Coordinated - QPLF
+94,4,798,23.5,,180.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,33,30.199248,150.199248,40.165,600,scenario2_high_demand,26,Semi-Coordinated - QPLF
+94,4,789,23.5,,175.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,34,35.147022,155.147022,46.218333,600,scenario2_high_demand,27,Semi-Coordinated - QPLF
+68,4,853,17.0,,162.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,35,29.264947,149.264947,41.605,600,scenario2_high_demand,28,Semi-Coordinated - QPLF
+74,4,785,18.5,,212.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,36,49.391083,169.391083,64.62,600,scenario2_high_demand,29,Semi-Coordinated - QPLF
+86,4,815,21.5,,172.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,37,33.327607,153.327607,45.27,600,scenario2_high_demand,30,Semi-Coordinated - QPLF
+71,4,762,17.75,,175.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,38,30.870079,150.870079,39.205,600,scenario2_high_demand,31,Semi-Coordinated - QPLF
+112,4,849,28.0,,145.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,39,20.176678,140.176678,28.55,600,scenario2_high_demand,32,Semi-Coordinated - QPLF
+86,4,783,21.5,,220.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,40,13.544061,133.544061,17.675,600,scenario2_high_demand,33,Semi-Coordinated - QPLF
+78,4,781,19.5,,172.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,41,25.06402,145.06402,32.625,600,scenario2_high_demand,34,Semi-Coordinated - QPLF
+93,4,787,23.25,,157.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,42,15.909784,135.909784,20.868333,600,scenario2_high_demand,35,Semi-Coordinated - QPLF
+110,4,811,27.5,,152.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,43,23.46979,143.46979,31.723333,600,scenario2_high_demand,36,Semi-Coordinated - QPLF
+92,4,853,23.0,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,44,19.205158,139.205158,27.303333,600,scenario2_high_demand,37,Semi-Coordinated - QPLF
+104,4,820,26.0,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,45,12.806098,132.806098,17.501667,600,scenario2_high_demand,38,Semi-Coordinated - QPLF
+104,4,861,26.0,,152.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,46,9.425087,129.425087,13.525,600,scenario2_high_demand,39,Semi-Coordinated - QPLF
+106,4,802,26.5,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,47,10.573566,130.573566,14.133333,600,scenario2_high_demand,40,Semi-Coordinated - QPLF
+91,4,785,22.75,,150.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,48,10.732484,130.732484,14.041667,600,scenario2_high_demand,41,Semi-Coordinated - QPLF
+111,4,836,27.75,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,49,14.555024,134.555024,20.28,600,scenario2_high_demand,42,Semi-Coordinated - QPLF
+102,4,779,25.5,,147.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,50,10.082157,130.082157,13.09,600,scenario2_high_demand,43,Semi-Coordinated - QPLF
+79,4,801,19.75,,155.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,51,32.35206,152.35206,43.19,600,scenario2_high_demand,44,Semi-Coordinated - QPLF
+95,4,824,23.75,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,52,7.671117,127.671117,10.535,600,scenario2_high_demand,45,Semi-Coordinated - QPLF
+94,4,769,23.5,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,53,8.79844,128.79844,11.276667,600,scenario2_high_demand,46,Semi-Coordinated - QPLF
+99,4,802,24.75,,147.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,54,9.220698,129.220698,12.325,600,scenario2_high_demand,47,Semi-Coordinated - QPLF
+111,4,818,27.75,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,55,6.650367,126.650367,9.066667,600,scenario2_high_demand,48,Semi-Coordinated - QPLF
+101,4,809,25.25,,132.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,56,8.990111,128.990111,12.121667,600,scenario2_high_demand,49,Semi-Coordinated - QPLF
+98,4,806,24.5,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,57,8.171216,128.171216,10.976667,600,scenario2_high_demand,50,Semi-Coordinated - QPLF
+88,4,781,22.0,,147.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,58,8.453265,128.453265,11.003333,600,scenario2_high_demand,51,Semi-Coordinated - QPLF
+98,4,783,24.5,,142.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,59,6.652618,126.652618,8.681667,600,scenario2_high_demand,52,Semi-Coordinated - QPLF
+88,4,783,22.0,,132.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,60,5.94636,125.94636,7.76,600,scenario2_high_demand,53,Semi-Coordinated - QPLF
+76,4,844,19.0,,147.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,61,7.874408,127.874408,11.076667,600,scenario2_high_demand,54,Semi-Coordinated - QPLF
+87,4,865,21.75,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,62,8.847399,128.847399,12.755,600,scenario2_high_demand,55,Semi-Coordinated - QPLF
+119,4,806,29.75,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,63,7.454094,127.454094,10.013333,600,scenario2_high_demand,56,Semi-Coordinated - QPLF
+115,4,815,28.75,,145.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,64,7.214724,127.214724,9.8,600,scenario2_high_demand,57,Semi-Coordinated - QPLF
+103,4,815,25.75,,140.0,semi_coordinated_qplf,Semi-Coordinated - QPLF,65,6.277301,126.277301,8.526667,600,scenario2_high_demand,58,Semi-Coordinated - QPLF
+105,4,793,26.25,,137.5,semi_coordinated_qplf,Semi-Coordinated - QPLF,66,5.822194,125.822194,7.695,600,scenario2_high_demand,59,Semi-Coordinated - QPLF
