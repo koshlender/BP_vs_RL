@@ -151,10 +151,8 @@ def phase_weight_for_queue(traci, tls_id: str, phase_idx: int) -> float:
     return total
 
 
-def simulation_metrics(traci, departed: dict[str, float], total_stops: int) -> dict[str, float | int | None]:
-    now = traci.simulation.getTime()
-    arrived = traci.simulation.getArrivedIDList()
-    durations = [now - departed[veh_id] for veh_id in arrived if veh_id in departed]
+def simulation_metrics(arrived_travel_times: list[float], total_stops: int) -> dict[str, float | int | None]:
+    durations = arrived_travel_times
     return {
         "completed_vehicles": len(durations),
         "mean_travel_time_seconds": None if not durations else sum(durations) / len(durations),
@@ -168,6 +166,7 @@ def run_rl_episode(traci, policy: str, agents: dict[str, object], duration: int,
     green_indices = {tls_id: green_phase_indices(traci, tls_id) for tls_id in tls_ids}
     previous_actions = {tls_id: 0 for tls_id in tls_ids}
     departed: dict[str, float] = {}
+    arrived_travel_times: list[float] = []
     stopped: dict[str, bool] = {}
     total_stops = 0
     queue_area = 0.0
@@ -189,6 +188,9 @@ def run_rl_episode(traci, policy: str, agents: dict[str, object], duration: int,
             for veh_id in traci.simulation.getDepartedIDList():
                 departed[veh_id] = now
                 stopped[veh_id] = False
+            for veh_id in traci.simulation.getArrivedIDList():
+                if veh_id in departed:
+                    arrived_travel_times.append(now - departed[veh_id])
             for veh_id in traci.vehicle.getIDList():
                 speed = traci.vehicle.getSpeed(veh_id)
                 if speed <= 0.1 and not stopped.get(veh_id, False):
@@ -206,7 +208,7 @@ def run_rl_episode(traci, policy: str, agents: dict[str, object], duration: int,
             if train:
                 agents[tls_id].update(states[tls_id], actions[tls_id], reward, next_state, False)
             previous_actions[tls_id] = actions[tls_id]
-    metrics = simulation_metrics(traci, departed, total_stops)
+    metrics = simulation_metrics(arrived_travel_times, total_stops)
     metrics.update({
         "policy": policy,
         "policy_label": POLICY_LABELS[policy],
@@ -220,6 +222,7 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
     tls_ids = list(traci.trafficlight.getIDList())
     green_indices = {tls_id: green_phase_indices(traci, tls_id) for tls_id in tls_ids}
     departed: dict[str, float] = {}
+    arrived_travel_times: list[float] = []
     stopped: dict[str, bool] = {}
     total_stops = 0
     queue_area = 0.0
@@ -247,6 +250,9 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
             for veh_id in traci.simulation.getDepartedIDList():
                 departed[veh_id] = now
                 stopped[veh_id] = False
+            for veh_id in traci.simulation.getArrivedIDList():
+                if veh_id in departed:
+                    arrived_travel_times.append(now - departed[veh_id])
             for veh_id in traci.vehicle.getIDList():
                 speed = traci.vehicle.getSpeed(veh_id)
                 if speed <= 0.1 and not stopped.get(veh_id, False):
@@ -258,7 +264,7 @@ def run_backpressure_episode(traci, eta: float, duration: int, cycle_seconds: in
             queue_area += qsum
             if record_trace:
                 trace.append({"time_seconds": now, "policy": BACKPRESSURE_POLICY, "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY], "eta": eta, "total_queue": qsum})
-    metrics = simulation_metrics(traci, departed, total_stops)
+    metrics = simulation_metrics(arrived_travel_times, total_stops)
     metrics.update({
         "policy": BACKPRESSURE_POLICY,
         "policy_label": POLICY_LABELS[BACKPRESSURE_POLICY],

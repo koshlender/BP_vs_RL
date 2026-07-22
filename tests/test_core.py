@@ -226,7 +226,7 @@ def test_thesis_algorithm_comparison_outputs_requested_artifacts():
     assert ',0.1,' in eta_text and ',1.2,' in eta_text
 
 def test_real_sumo_algorithm_comparison_helpers():
-    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, TRACI_START_RETRIES, softmax, integer_durations, parse_eta_values, sumo_command
+    from scripts.run_real_sumo_algorithm_comparison import ETAS, POLICY_LABELS, ALL_POLICIES, TRACI_START_RETRIES, softmax, integer_durations, parse_eta_values, simulation_metrics, sumo_command
     assert ETAS[0] == 0.1 and ETAS[-1] == 1.2 and len(ETAS) == 12
     for label in ['Independent Learner - Full RL', 'Independent Learner - QPLF', 'Semi-Coordinated - Full RL', 'Semi-Coordinated - QPLF', 'Cyclic Queue Backpressure']:
         assert label in POLICY_LABELS.values()
@@ -237,4 +237,8 @@ def test_real_sumo_algorithm_comparison_helpers():
     assert set(ALL_POLICIES) == set(POLICY_LABELS)
     assert TRACI_START_RETRIES == 3
     assert parse_eta_values("0.1, 0.5,1.2") == [0.1, 0.5, 1.2]
+    metrics = simulation_metrics([10.0, 14.0], total_stops=4)
+    assert metrics["completed_vehicles"] == 2
+    assert metrics["mean_travel_time_seconds"] == 12.0
+    assert metrics["average_stops_per_completed_vehicle"] == 2.0
     assert sumo_command("sumo", Path("scenario.sumocfg")) == ["sumo", "-c", "scenario.sumocfg", "--no-step-log", "true", "--no-warnings", "true"]
