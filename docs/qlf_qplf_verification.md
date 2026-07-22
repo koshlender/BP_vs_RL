@@ -20,11 +20,11 @@ Only the selected action block is active, and the update modifies only the selec
 
 ## Reward status
 
-The supplied Chapter 4/5 excerpts do not give the exact RL reward. The current fallback QPLF experiment uses a clearly documented **queue-pressure reduction assumption** as the reward signal:
+For Chapter 4 reconstructed experiments, QPLF remains the function approximator and the learning reward follows the Chapter 4 equation:
 
-`R_t = pressure_score(previous queues) - pressure_score(current queues)`
+`R_t = 1 / sum_i Q_i(t+1)`
 
-This reward is not claimed to be the thesis reward unless the missing reward definition is supplied.
+When `sum_i Q_i(t+1)=0`, the thesis text does not define a convention; the implementation uses an explicit finite zero-queue policy by default and can raise an error for strict equation checks.
 
 ## Backpressure utilities
 
